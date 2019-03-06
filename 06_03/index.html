@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="我们接着上一节，继续讲2张彩色照片马赛克。">
+<meta name="keywords" content="马赛克">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight入门到精通 第六章 马赛克 第三节 两张彩色图像的拼接(三)">
+<meta property="og:url" content="http://pi.bestxtech.com/06_03/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="我们接着上一节，继续讲2张彩色照片马赛克。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0001.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0003.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0005.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0006.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0007.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0008.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0009.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0011.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0013.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0014.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0015.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0016.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0017.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0018.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0019.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0022.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0023.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0024.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0025.png">
+<meta property="og:updated_time" content="2019-03-06T05:43:30.642Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight入门到精通 第六章 马赛克 第三节 两张彩色图像的拼接(三)">
+<meta name="twitter:description" content="我们接着上一节，继续讲2张彩色照片马赛克。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15401852477239/PI-7_Mosaics-3-0001.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/06_03/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>PixInsight入门到精通 第六章 马赛克 第三节 两张彩色图像的拼接(三) | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/06_03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PixInsight入门到精通 第六章 马赛克 第三节 两张彩色图像的拼接(三)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <a href="/about/">Terry</a>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-09 17:56:51" itemprop="dateCreated datePublished" datetime="2019-02-09T17:56:51+08:00">2019-02-09</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/img/15401852477239/PI-7_Mosaics-3-0001.png" alt="PI-7_Mosaics-3-0001-w512"><br>我们接着上一节，继续讲2张彩色照片马赛克。</p>
+<a id="more"></a>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0003.png" alt="PI-7_Mosaics-3-0003-w512"><br>虽然马赛克看起来很棒，但放大细看，两张图像接缝的地方却泄露了秘密。</p>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0005.png" alt="PI-7_Mosaics-3-0005-w512"><br>为了改进结果，我们需要采用不同的方法。这次，更改StarAlignment工作模式为Register/Union - Separate</p>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0006.png" alt="PI-7_Mosaics-3-0006-w512"><br>然后应用于目标图像</p>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0007.png" alt="PI-7_Mosaics-3-0007-w512"><br>同时保存对齐后的底部图像和参考图像到硬盘。</p>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0008.png" alt="PI-7_Mosaics-3-0008-w512"><br>GradientMergeMosaic位于GradientDomain子菜单，由PTeam的Georg Viehoever专门开发用于马赛克拼接。 </p>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0009.png" alt="PI-7_Mosaics-3-0009-w512"><br>GMM有个很棒的功能，它可以在不同图像交接的地方，创建一个平滑的过渡 - 换句话说，它可以使接缝检测不到。</p>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0011.png" alt="PI-7_Mosaics-3-0011-w512"><br>帮助文件充分的记录了整个过程，我们建议通读作为参考。</p>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0013.png" alt="PI-7_Mosaics-3-0013-w512"><br>由于 GMM 现在不提供View选项，使用 Add file（增加文件）加载我们存在硬盘里的两张图，并选择 Overlay作为合并类型。</p>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0014.png" alt="PI-7_Mosaics-3-0014-w512"><br>刚开始试着设置收缩半径（Shrink)为1，羽化半径为6到10。</p>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0015.png" alt="PI-7_Mosaics-3-0015-w512"><br>你可以再次生成推荐的参考蒙版。</p>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0016.png" alt="PI-7_Mosaics-3-0016-w512"><br>应用全局并评估结果。</p>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0017.png" alt="PI-7_Mosaics-3-0017-w512"><br>虽然GradientMergeMosaic在很少干预的情况下也运行工作良好，但是也有可能在重叠区域发生问题。</p>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0018.png" alt="PI-7_Mosaics-3-0018-w512"><br>很奇怪，围绕亮星的黑点是非常常见的，但是这些黑点可以通过增加shrink radisu(收缩半径)的值来消除。</p>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0019.png" alt="PI-7_Mosaics-3-0019-w512"><br>如果接缝仍然可见，可以增加羽化半径。当对齐低于理想情况时降低羽化半径。 在此示例中，Shrink 设置为10（不典型），Feather 值为20有最好的效果。</p>
+<p>如果效果不尽理想，将认为有问题的图像放置在叠加顺序的最后，这将允许较高质量的图像覆盖他们。</p>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0022.png" alt="PI-7_Mosaics-3-0022-w512"><br>如果还是不成功返回重新运行StarAlignment这次不要勾选Frame Adaption。如果所有<br>方法都失败，请使用非线性图像。</p>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0023.png" alt="PI-7_Mosaics-3-0023-w512"><br>将黑色带状物切走，我们的马赛克图像已经准备好下一步处理。</p>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0024.png" alt="PI-7_Mosaics-3-0024-w512"><br>这个时候开始，像处理单张图一样处理拼接出来的图像。</p>
+<p><img src="/img/15401852477239/PI-7_Mosaics-3-0025.png" alt="PI-7_Mosaics-3-0025-w512"><br>在做非线性转换之前, 你可能要考虑在其仍为线性状态时做一些额外调整。在下一节，我们继续学习单色图像马赛克，并增加拼接张数。我们将学习更多有用的技巧。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/马赛克/" rel="tag"># 马赛克</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/06_02/" rel="next" title="PixInsight入门到精通 第六章 马赛克 第二节 两张彩色图像的拼接(二)">
+                <i class="fa fa-chevron-left"></i> PixInsight入门到精通 第六章 马赛克 第二节 两张彩色图像的拼接(二)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/06_04/" rel="prev" title="PixInsight入门到精通 第六章 马赛克 第四节 四张单色图像的拼接(一)">
+                PixInsight入门到精通 第六章 马赛克 第四节 四张单色图像的拼接(一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

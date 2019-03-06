@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="整理 by Terry（关于Terry）  第三章 线性处理第一节 DynamicCrop &amp;amp; FastRotation &amp;amp; ChannelCombination &amp;amp; ChannelExtraction &amp;amp; RGBWorkingSpace恭喜你完成了PI课程基础和叠加部分的学习。我们接下来将进入一个新的旅程，探索PI的后期处理世界。 让我们先准备好主文件(mast">
+<meta name="keywords" content="PixInsight 入门到精通 教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight 入门到精通">
+<meta property="og:url" content="http://pi.bestxtech.com/03_01/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="整理 by Terry（关于Terry）  第三章 线性处理第一节 DynamicCrop &amp;amp; FastRotation &amp;amp; ChannelCombination &amp;amp; ChannelExtraction &amp;amp; RGBWorkingSpace恭喜你完成了PI课程基础和叠加部分的学习。我们接下来将进入一个新的旅程，探索PI的后期处理世界。 让我们先准备好主文件(mast">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0002.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0005.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0006.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0007.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0009.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0011.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0012.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0010.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0014.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0015.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0016.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0017.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0018.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0019.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0021.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0023.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0024.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0025.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0028.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0030.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0031.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0032.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0034.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0035.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0036.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0039.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0040.png">
+<meta property="og:updated_time" content="2019-03-06T03:30:17.388Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight 入门到精通">
+<meta name="twitter:description" content="整理 by Terry（关于Terry）  第三章 线性处理第一节 DynamicCrop &amp;amp; FastRotation &amp;amp; ChannelCombination &amp;amp; ChannelExtraction &amp;amp; RGBWorkingSpace恭喜你完成了PI课程基础和叠加部分的学习。我们接下来将进入一个新的旅程，探索PI的后期处理世界。 让我们先准备好主文件(mast">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0002.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/03_01/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/03_01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 18:17:14" itemprop="dateCreated datePublished" datetime="2019-03-05T18:17:14+08:00">2019-03-05</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
+</blockquote>
+<h1 id="第三章-线性处理"><a href="#第三章-线性处理" class="headerlink" title="第三章 线性处理"></a>第三章 线性处理</h1><h2 id="第一节-DynamicCrop-amp-FastRotation-amp-ChannelCombination-amp-ChannelExtraction-amp-RGBWorkingSpace"><a href="#第一节-DynamicCrop-amp-FastRotation-amp-ChannelCombination-amp-ChannelExtraction-amp-RGBWorkingSpace" class="headerlink" title="第一节 DynamicCrop &amp; FastRotation &amp; ChannelCombination &amp; ChannelExtraction &amp; RGBWorkingSpace"></a>第一节 DynamicCrop &amp; FastRotation &amp; ChannelCombination &amp; ChannelExtraction &amp; RGBWorkingSpace</h2><p>恭喜你完成了PI课程基础和叠加部分的学习。我们接下来将进入一个新的旅程，探索PI的后期处理世界。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0002.png" alt="PI-14_Linear-1-0002-w512"><br>让我们先准备好主文件(master file)，这里有一张彩色的，叠加好的NGC 7023（爱丽丝星云）。它保存在DVD的piximages文件夹里，或者也可以通过<a href="http://www.ip4ap.com/piximages.htm" target="_blank" rel="noopener">链接</a>下载。它由一个F9(焦比)的望远镜拍摄，单张15分钟，累计叠加15个小时。自动拉升后，可以看到一张很漂亮的图像</p>
+<a id="more"></a>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0005.png" alt="PI-14_Linear-1-0005-w512"><br>但是也有一些深空照片的通病。虽然它是在够黑的地方拍摄的，并做了平场校准，它还是有一些gradients，并且背景的噪声也比较大。如果你不是在很完美的环境下拍摄，也很难得到很完美的数据。</p>
+<p>多亏有了ScreenTransferFunction功能，我们能够在线性状态下，对图像进行初步修补和提升。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0006.png" alt="PI-14_Linear-1-0006-w512"><br>首先，我们要把图像中没用的部分裁了。只有在黑区和严重减光的区域去除后，直方图的计算和其它功能才更精准。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0007.png" alt="PI-14_Linear-1-0007-w512"><br>打开Geometry子目录下的DynamicCrop进程。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0009.png" alt="PI-14_Linear-1-0009-w512"><br>我先按住鼠标左键，然后拖动选定整副图像。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0011.png" alt="PI-14_Linear-1-0011-w512"><br>在方框里点击并按住鼠标，能拖动整个框。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0012.png" alt="PI-14_Linear-1-0012-w512"><br>你可以定义一个新的中心，然后把方框拖过去。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0010.png" alt="PI-14_Linear-1-0010-w512"><br>把鼠标移到边框或者角上，直到它变成一个小灰框，按下鼠标左键，把它拖动到你要的位置并放开。如果需要精准定位，可以把图像先放大再做这个操作。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0014.png" alt="PI-14_Linear-1-0014-w512"><br>如果你需要旋转方框，把鼠标放在方框外面，但必须在窗口的里面。看到旋转的图标了吗？</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0015.png" alt="PI-14_Linear-1-0015-w512"><br>你也可以在这里操作，或者重置角度为0。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0016.png" alt="PI-14_Linear-1-0016-w512"><br>记住，在这里可以把所有的参数都重置。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0017.png" alt="PI-14_Linear-1-0017-w512"><br>由于这是一个动态界面，你需要点这个红色的x才取消动态进程。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0018.png" alt="PI-14_Linear-1-0018-w512"><br>让我们把这些炫光都给裁了。满意之后，点击运行，按撤销可以再练习一遍。</p>
+<p>裁一个彩色图像相对简单，要是要裁黑白CCD拍摄的多个通道呢？在合成LRGB之前裁剪他们会不会影响他们的对齐呢？多亏我们有了新实例(New Instances)功能。再次强调，我们建议尽早剪裁。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0019.png" alt="PI-14_Linear-1-0019-w512"><br>让我们稍微往前看一点，这是NGC253的明度和颜色通道，在光盘里也可以找到，或者可以在网址：<a href="http://www.ip4ap.com/piximages.htm下载。" target="_blank" rel="noopener">http://www.ip4ap.com/piximages.htm下载。</a></p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0021.png" alt="PI-14_Linear-1-0021-w512"><br>由于颜色通道有很严重的无用死区，我们把颜色通道当做裁剪的基准。定义好我要裁剪的方框的大小和位置后</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0023.png" alt="PI-14_Linear-1-0023-w512"><br>我创建一个新实例(New Instance)。然后我才把DynamicCrop运用到颜色通道上。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0024.png" alt="PI-14_Linear-1-0024-w512"><br>接下来，我把这个新实例(New Instance)应用到明度通道上，裁剪的大小和尺寸和颜色通道一模一样，两张图像还是很精准地对齐。用同样的方法裁剪L,R,G,B都是一样的。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0025.png" alt="PI-14_Linear-1-0025-w512"><br>再讲讲Geometry下的FastRotation进程。它能很容易地镜像翻转或者旋转你的图像。</p>
+<p>虽然有时候我们会推荐迟点进行RGB颜色合成，但是你也许已经迫不及待地想知道怎么弄了。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0028.png" alt="PI-14_Linear-1-0028-w512"><br>ChannelCombination（通道合成）进程在ChannelManagement（通道管理）子目录下，用起来很简单。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0030.png" alt="PI-14_Linear-1-0030-w512"><br>它支持好几个不同的颜色空间，这里我们选择RGB</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0031.png" alt="PI-14_Linear-1-0031-w512"><br>根据通道选定合适的图像，点全局应用(Apply Global)按钮，就得到了我们RGB合成的彩色图像。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0032.png" alt="PI-14_Linear-1-0032-w512"><br>在自动拉升（Autostretch）里解除三个通道的绑定，也许看上去效果会好一些。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0034.png" alt="PI-14_Linear-1-0034-w512"><br>在ChannelManagement（通道管理）子目录下，还有ChannelExtraction（通道提取)进程。现在是介绍他的好时刻。ChannelExtraction（通道提取）看上去和ChannelCombination（通道管理)一样，但是它起到的功能是相反的。比如说，你想把图像分解成不同的部分。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0035.png" alt="PI-14_Linear-1-0035-w512"><br>简单地“应用”这个进程到图像上就好了。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0036.png" alt="PI-14_Linear-1-0036-w512"><br>不需要的通道就不要选上。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0039.png" alt="PI-14_Linear-1-0039-w512"><br>这是一个很好的从彩色图像提取伪明度(Pseudo-Luminance)的方法。</p>
+<p><img src="/img/15387505123888/PI-14_Linear-1-0040.png" alt="PI-14_Linear-1-0040-w512"><br>（视频上方字幕：使用RGBWorkingSpace进程，把R：G:B的比例调整成为1：1：1之后再进行L通道提取。Gamma2.2 sRGB默认或者调为1.)</p>
+<div style="text-align:center"><br>    <a style="float: left" href="/002_堆叠/008.ImageCalibration&BatchDebayer&StarAlignment">上一章</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/003_线性处理/002">下一节</a><br></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/02_09/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/03_02/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第三章-线性处理"><span class="nav-number">1.</span> <span class="nav-text">第三章 线性处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一节-DynamicCrop-amp-FastRotation-amp-ChannelCombination-amp-ChannelExtraction-amp-RGBWorkingSpace"><span class="nav-number">1.1.</span> <span class="nav-text">第一节 DynamicCrop &amp; FastRotation &amp; ChannelCombination &amp; ChannelExtraction &amp; RGBWorkingSpace</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

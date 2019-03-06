@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="整理 by Terry（关于Terry）  第四章 非线性处理第二十一节 形态变换（MorphologicalTransformation） —— 缩星在Process/Morphology子菜单下，可以找到MorphologicalTransformation（形态变换）进程。">
+<meta name="keywords" content="PixInsight 入门到精通 教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight 入门到精通">
+<meta property="og:url" content="http://pi.bestxtech.com/04_21/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第二十一节 形态变换（MorphologicalTransformation） —— 缩星在Process/Morphology子菜单下，可以找到MorphologicalTransformation（形态变换）进程。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0121.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0122.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0124.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0127.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0128.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0129.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0130.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0133.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0134.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0138.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0139.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0141.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0145.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0144.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0146.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0148.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0149.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0151.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0152.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0153.png">
+<meta property="og:updated_time" content="2019-03-06T03:32:24.932Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight 入门到精通">
+<meta name="twitter:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第二十一节 形态变换（MorphologicalTransformation） —— 缩星在Process/Morphology子菜单下，可以找到MorphologicalTransformation（形态变换）进程。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15401841108580/PI-21_Nonlinear-15-0121.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/04_21/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/04_21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 18:18:39" itemprop="dateCreated datePublished" datetime="2019-03-05T18:18:39+08:00">2019-03-05</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
+</blockquote>
+<h1 id="第四章-非线性处理"><a href="#第四章-非线性处理" class="headerlink" title="第四章 非线性处理"></a>第四章 非线性处理</h1><h2 id="第二十一节-形态变换（MorphologicalTransformation）-——-缩星"><a href="#第二十一节-形态变换（MorphologicalTransformation）-——-缩星" class="headerlink" title="第二十一节 形态变换（MorphologicalTransformation） —— 缩星"></a>第二十一节 形态变换（MorphologicalTransformation） —— 缩星</h2><p><img src="/img/15401841108580/PI-21_Nonlinear-15-0121.png" alt="PI-21_Nonlinear-15-0121-w512"><br>在Process/Morphology子菜单下，可以找到MorphologicalTransformation（形态变换）进程。</p>
+<a id="more"></a>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0122.png" alt="PI-21_Nonlinear-15-0122"><br>虽然MT是一个多用途的进程，但是它通常被用来缩星。</p>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0124.png" alt="PI-21_Nonlinear-15-0124-w512"><br>有经验的图片处理者都知道星点的质量会影响最终出图的美感。我们经常想缩小没有吸引力的，肥胖的星点。有时候，我们想减少星点视觉上在画面上的分量，让星云更突出一下。我们有时候也会把MT运用在单独的颜色通道，比如说减少没完全达到APO标准镜子拍出来的蓝边。</p>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0127.png" alt="PI-21_Nonlinear-15-0127-w512"><br>这个进程有几个参数，但是用起来也很容易。由于星点是圆的，一般推荐使用圆形的结构要素（Structure element）。你可以在上图这里快速地选择一个</p>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0128.png" alt="PI-21_Nonlinear-15-0128-w512"><br>或者通过Structure Manager（结构管理）选个一个更好的。</p>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0129.png" alt="PI-21_Nonlinear-15-0129-w512"><br>点击这里，选择一个 5x5 作为起点开始试。</p>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0130.png" alt="PI-21_Nonlinear-15-0130-w512"><br>然后选择点击Pick。</p>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0133.png" alt="PI-21_Nonlinear-15-0133-w512"><br>我们建议在你最喜欢的图标里保存一个新实例（New Instance），这样你的设置就被保存下来作为默认值了。</p>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0134.png" alt="PI-21_Nonlinear-15-0134-w512"><br>典型的缩星操作是 Erosion (Minimum，侵蚀，也就是最小值) 滤镜。可以调整 Amount（数量）到你喜欢的口味。我们前面讲过，多重复(Iterations)几次，每次的amount（量）小点，也许会取得更好的效果。</p>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0138.png" alt="PI-21_Nonlinear-15-0138-w512"></p>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0139.png" alt="PI-21_Nonlinear-15-0139-w512"><br>一个好的星点蒙版总是要和MorphologicalTransformation一起使用，以避免破坏图像非星点的部分。</p>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0141.png" alt="PI-21_Nonlinear-15-0141-w512"><br>这里我们重复2次，设每次的量（amount) 为0.18，这是一个温和的缩星。<br><img src="/img/15401841108580/PI-21_Nonlinear-15-0145.png" alt="PI-21_Nonlinear-15-0145-w512"><br>缩星前</p>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0144.png" alt="PI-21_Nonlinear-15-0144-w512"><br>缩星后</p>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0146.png" alt="PI-21_Nonlinear-15-0146-w512"><br>Rogelio偏好 Morphological Selection 运算，它觉得这个运算会产生过渡更平滑的结果。</p>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0148.png" alt="PI-21_Nonlinear-15-0148-w512"><br>选中以后，Selection（选择）滑块会出现，这个参数起到混合Erosion（侵蚀/最小值） 和 Dilation (膨胀/最大值)的作用。</p>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0149.png" alt="PI-21_Nonlinear-15-0149-w512"><br>数值比较小的Selection值，更倾向于最小值，</p>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0151.png" alt="PI-21_Nonlinear-15-0151-w512"><br>比较大的值，倾向于最大值。0.5 则是在最小化和最大化之间平均分配。</p>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0152.png" alt="PI-21_Nonlinear-15-0152-w512"><br>其它变换运算，像 Dilation, Opening 和 Closing 对于增加星点蒙版的保护也非常有用。请慢慢试验</p>
+<p><img src="/img/15401841108580/PI-21_Nonlinear-15-0153.png" alt="PI-21_Nonlinear-15-0153-w512"><br>想了解更多信息，也可以参考下面的链接：</p>
+<ul>
+<li><a href="http://www.deepskycolors.com/PixInsight/Morpgology.html" target="_blank" rel="noopener">http://www.deepskycolors.com/PixInsight/Morpgology.html</a></li>
+<li><a href="http://www.deepskycolors.com/archive/2011/09/08/star-size-reduction-via-Morpgological-.html" target="_blank" rel="noopener">http://www.deepskycolors.com/archive/2011/09/08/star-size-reduction-via-Morpgological-.html</a></li>
+</ul>
+<p>我们在后面还会再次讲到MT。</p>
+<div style="text-align:center"><br>    <a style="float: left" href="/004_非线性处理/020">上一节</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/004_非线性处理/022">下一节</a><br></div> 
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/04_19/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/04_20/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-非线性处理"><span class="nav-number">1.</span> <span class="nav-text">第四章 非线性处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第二十一节-形态变换（MorphologicalTransformation）-——-缩星"><span class="nav-number">1.1.</span> <span class="nav-text">第二十一节 形态变换（MorphologicalTransformation） —— 缩星</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

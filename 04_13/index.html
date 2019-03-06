@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="整理 by Terry（关于Terry）  第四章 非线性处理第十三节 降噪（五）最后，在NoiseReduction下是SCNR。">
+<meta name="keywords" content="PixInsight 入门到精通 教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight 入门到精通">
+<meta property="og:url" content="http://pi.bestxtech.com/04_13/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第十三节 降噪（五）最后，在NoiseReduction下是SCNR。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820672352/PI-14_Nonlinear-8-0035.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820672352/PI-14_Nonlinear-8-0036.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820672352/PI-14_Nonlinear-8-0041.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820672352/PI-14_Nonlinear-8-0043.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820672352/PI-14_Nonlinear-8-0045.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820672352/PI-14_Nonlinear-8-0046.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820672352/PI-14_Nonlinear-8-0048.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820672352/PI-14_Nonlinear-8-0052.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820672352/PI-14_Nonlinear-8-0054.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820672352/PI-14_Nonlinear-8-0055.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820672352/PI-14_Nonlinear-8-0056.png">
+<meta property="og:updated_time" content="2019-03-06T03:32:02.218Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight 入门到精通">
+<meta name="twitter:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第十三节 降噪（五）最后，在NoiseReduction下是SCNR。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15401820672352/PI-14_Nonlinear-8-0035.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/04_13/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/04_13/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 18:18:39" itemprop="dateCreated datePublished" datetime="2019-03-05T18:18:39+08:00">2019-03-05</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
+</blockquote>
+<h1 id="第四章-非线性处理"><a href="#第四章-非线性处理" class="headerlink" title="第四章 非线性处理"></a>第四章 非线性处理</h1><h2 id="第十三节-降噪（五）"><a href="#第十三节-降噪（五）" class="headerlink" title="第十三节 降噪（五）"></a>第十三节 降噪（五）</h2><p><img src="/img/15401820672352/PI-14_Nonlinear-8-0035.png" alt="PI-14_Nonlinear-8-0035-w512"><br>最后，在NoiseReduction下是SCNR。</p>
+<a id="more"></a>
+<p><img src="/img/15401820672352/PI-14_Nonlinear-8-0036.png" alt="PI-14_Nonlinear-8-0036-w512"><br>Subtractive Chromatic Noise Reduction不是真正意义上的降噪（模糊）工具，而是用于压制不正常的绿色像素的。当然，你也可以选择压制红色或蓝色。</p>
+<p><img src="/img/15401820672352/PI-14_Nonlinear-8-0041.png" alt="PI-14_Nonlinear-8-0041-w512"><br>除了一些行星状星云，深空影像中是没有绿色物体的。</p>
+<p><img src="/img/15401820672352/PI-14_Nonlinear-8-0043.png" alt="PI-14_Nonlinear-8-0043-w512"><br>OIII发射谱应该是蓝绿色，一种蓝色与绿色混合成的迷人颜色。因此我们基本上可以判定，如果在做好色平衡的深空影像中发现绿色像素，那应该是噪声。</p>
+<p><img src="/img/15401820672352/PI-14_Nonlinear-8-0045.png" alt="PI-14_Nonlinear-8-0045-w512"><br>[画面中字幕：SCNR对线性与非线性影像都可用。应先执行BackgroundModelization、BackgroundNeutralization与ColorCalibration。我们建议在进行真正降噪之前执行SCNR，因为一旦像素被模糊了，SCNR的效果可能会变差。]</p>
+<p><img src="/img/15401820672352/PI-14_Nonlinear-8-0046.png" alt="PI-14_Nonlinear-8-0046-w512"><br>SCNR的Protection机制确保了合理的绿色成分（如蓝绿色）不被破坏。默认设置Average Neutral一般能产生漂亮、均衡的背景。这个算法针对的是那些G值比R或B更高的像素，并用R与G的平均值替代原先的G值。</p>
+<p><img src="/img/15401820672352/PI-14_Nonlinear-8-0048.png" alt="PI-14_Nonlinear-8-0048-w512"><br>Amount表示SCNR强度，对大多数情况而言，用最大值1.0就可以了。如果不满意，就调低点儿。</p>
+<p><img src="/img/15401820672352/PI-14_Nonlinear-8-0052.png" alt="PI-14_Nonlinear-8-0052-w512"><br>在大多数情况下，应保持默认的Preserve Lightness勾选。这样，SCNR会先分离开亮度与色彩，应用上述算法于色彩成分，然后再把亮度与色彩重新混合。</p>
+<p><img src="/img/15401820672352/PI-14_Nonlinear-8-0054.png" alt="PI-14_Nonlinear-8-0054-w512"><br>如果画面中有意义的蓝绿色成分很多，如行星状星云、超新星遗迹或彗星的离子尾，那就选择Maximum Neutral以保护它们。</p>
+<p>在本章第二节中，我们介绍了两个IntensityTransformation工具：</p>
+<p><img src="/img/15401820672352/PI-14_Nonlinear-8-0055.png" alt="PI-14_Nonlinear-8-0055-w512"><br>LocalHistogramEqualization</p>
+<p><img src="/img/15401820672352/PI-14_Nonlinear-8-0056.png" alt="PI-14_Nonlinear-8-0056-w512"><br>还有ExponentialTransformation。我们建议在使用这一类反差强化工具时，先进行一定程度的降噪。</p>
+<p>现在降噪已基本完成，我们要着眼于影像强化了。</p>
+<div style="text-align:center"><br>    <a style="float: left" href="/004_非线性处理/012">上一节</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/004_非线性处理/014">下一节</a><br></div> 
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/04_11/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/04_12/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-非线性处理"><span class="nav-number">1.</span> <span class="nav-text">第四章 非线性处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第十三节-降噪（五）"><span class="nav-number">1.1.</span> <span class="nav-text">第十三节 降噪（五）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="整理 by Terry（关于Terry）  第四章 非线性处理第二十二节 提升色彩饱和度 —— ColorSaturation在本章第七节中, 我们介绍了用LRGBCombination的饱和度(Saturation)滑动条来提高彩色照片的色泽深度。">
+<meta name="keywords" content="PixInsight 入门到精通 教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight 入门到精通">
+<meta property="og:url" content="http://pi.bestxtech.com/04_22/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第二十二节 提升色彩饱和度 —— ColorSaturation在本章第七节中, 我们介绍了用LRGBCombination的饱和度(Saturation)滑动条来提高彩色照片的色泽深度。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0154.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0156.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0157.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0159.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0160.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0161.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0162.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0163.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0168.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0170.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0171.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0172.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0173.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0174.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0175.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0176.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0171.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0177.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0181.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0182.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0184.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0185.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0187.png">
+<meta property="og:updated_time" content="2019-03-06T03:32:23.243Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight 入门到精通">
+<meta name="twitter:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第二十二节 提升色彩饱和度 —— ColorSaturation在本章第七节中, 我们介绍了用LRGBCombination的饱和度(Saturation)滑动条来提高彩色照片的色泽深度。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15401841547463/PI-22_Nonlinear-16-0154.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/04_22/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/04_22/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 18:18:39" itemprop="dateCreated datePublished" datetime="2019-03-05T18:18:39+08:00">2019-03-05</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
+</blockquote>
+<h1 id="第四章-非线性处理"><a href="#第四章-非线性处理" class="headerlink" title="第四章 非线性处理"></a>第四章 非线性处理</h1><h2 id="第二十二节-提升色彩饱和度-——-ColorSaturation"><a href="#第二十二节-提升色彩饱和度-——-ColorSaturation" class="headerlink" title="第二十二节 提升色彩饱和度 —— ColorSaturation"></a>第二十二节 提升色彩饱和度 —— ColorSaturation</h2><p><img src="/img/15401841547463/PI-22_Nonlinear-16-0154.png" alt="PI-22_Nonlinear-16-0154-w512"><br>在本章第七节中, 我们介绍了用LRGBCombination的饱和度(Saturation)滑动条来提高彩色照片的色泽深度。</p>
+<a id="more"></a>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0156.png" alt="PI-22_Nonlinear-16-0156-w512"><br>再前面，我们讲过，CurvesTransformation 也可以用来实现同样的目的。现在，我们要仔细讲讲这个功能。选上Saturation（饱和度），我们启用实时预览功能。</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0157.png" alt="PI-22_Nonlinear-16-0157-w512"><br>CT的饱和度组件构建在一个专用的色彩空间(HSVL*)，同时利用了Lab和HSV色彩空间的优点。它的二次转化（double conversion）机制能生成很顺滑的色彩饱和度提升，并且不会造成色相偏移, 并且完全保持了明度通道的特性。</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0159.png" alt="PI-22_Nonlinear-16-0159-w512"><br>在阴影(shadow)放置一个控制点，可以让天空背景的饱和度不变。</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0160.png" alt="PI-22_Nonlinear-16-0160-w512"><br>我一般会在中间影调(midtones)和亮部(highlight)做一个温和的饱和度提升，同时防止直方图被裁剪。</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0161.png" alt="PI-22_Nonlinear-16-0161-w512"><br>大部分情况下，明度或者范围蒙版，能够让饱和度调整只针对特定的目标区域。</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0162.png" alt="PI-22_Nonlinear-16-0162-w512"><br>在方格里，可以根据需要，任意设置控制点。</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0163.png" alt="PI-22_Nonlinear-16-0163-w512"><br>反过来，也可以向下拉曲线，减少色彩饱和度。并且，你还可以在调整饱和度的同时，在其它通道做其它调整。可以重新看一遍本章第五节，复习一下CurvesTransformation的使用。</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0168.png" alt="PI-22_Nonlinear-16-0168-w512"><br>虽然CT的饱和度通道能很好地完成我们想要的工作，但是，另外一个进程ColorSaturation，也在IntensityTransformations子菜单下，是专门为调整色彩饱和度设计的。</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0170.png" alt="PI-22_Nonlinear-16-0170-w512"><br>ColorSaturation的界面与CurvesTransform看上去又点类似，同时它也是在用比色法定义的HSVL色彩空间下工作的。</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0171.png" alt="PI-22_Nonlinear-16-0171-w512"><br>再说一次，这个空间在保持色彩平衡的同时，也能够防止彩色噪声转移到明度通道上去。和CT不一样的是，CS允许你根据色相改变色彩饱和度。也就是说，CS允许你改变特定范围颜色的色彩饱和度，而不像CT那样只能做整体的调整。</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0172.png" alt="PI-22_Nonlinear-16-0172-w512"><br>我们再次打开实时预览来实时追踪调整的效果。</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0173.png" alt="PI-22_Nonlinear-16-0173-w512"><br>如果要增加整个光谱范围内的饱和度，抓住这些锚的其中一个，并往上拉。<br><img src="/img/15401841547463/PI-22_Nonlinear-16-0174.png" alt="PI-22_Nonlinear-16-0174-w512"></p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0175.png" alt="PI-22_Nonlinear-16-0175-w512"><br>如果往下拉则是减少饱和度。</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0176.png" alt="PI-22_Nonlinear-16-0176-w512"><br>如果在达到你想要的效果之前已经拉到图像尽头了怎么办？没关系，增加调整范围。</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0171.png" alt="PI-22_Nonlinear-16-0171-w512"><br>这里，要讲到CS最酷的部分了，注意这个光谱条- 红、橙、黄、绿、蓝、靛、紫，然后又回到红色。</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0177.png" alt="PI-22_Nonlinear-16-0177-w512"><br>拖拽这里来提高或者降低冷色调的饱和度</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0181.png" alt="PI-22_Nonlinear-16-0181-w512"><br>在这里放一个控制点</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0182.png" alt="PI-22_Nonlinear-16-0182-w512"><br>拖拽外围边缘来改变暖色调。</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0184.png" alt="PI-22_Nonlinear-16-0184-w512"><br>还可以放置额外的控制点，针对光谱上特定的范围作调整。这里，我只提升OIII的颜色。</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0185.png" alt="PI-22_Nonlinear-16-0185"><br>上图这个色相偏移滑动条(Hue shift)可以在不改变曲线的情况下，改变要调饱和度的颜色范围。</p>
+<p><img src="/img/15401841547463/PI-22_Nonlinear-16-0187.png" alt="PI-22_Nonlinear-16-0187-w512"><br>比如说，刚才是OIII色彩提升，现在是HA了。很快，我们继续讲颜色。</p>
+<div style="text-align:center"><br>    <a style="float: left" href="/004_非线性处理/021">上一节</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/004_非线性处理/023">下一节</a><br></div> 
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/04_23/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/04_24/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-非线性处理"><span class="nav-number">1.</span> <span class="nav-text">第四章 非线性处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第二十二节-提升色彩饱和度-——-ColorSaturation"><span class="nav-number">1.1.</span> <span class="nav-text">第二十二节 提升色彩饱和度 —— ColorSaturation</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

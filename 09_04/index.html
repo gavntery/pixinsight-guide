@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="如前所述，窄带数据可以插入(L)RGB。">
+<meta name="keywords" content="窄带">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight入门到精通 第九章 窄带 第四节">
+<meta property="og:url" content="http://pi.bestxtech.com/09_04/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="如前所述，窄带数据可以插入(L)RGB。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0070.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0071.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0076.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0078.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0081.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0084.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0087.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0089.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0092.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0093.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0094.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0095.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0096.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0097.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0101.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0102.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0103.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0105.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0106.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0107.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0108.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0109.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0110.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0111.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0112.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0113.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0114.png">
+<meta property="og:updated_time" content="2019-03-06T05:19:04.908Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight入门到精通 第九章 窄带 第四节">
+<meta name="twitter:description" content="如前所述，窄带数据可以插入(L)RGB。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15402042452782/PI-18_Narrowband-4-0070.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/09_04/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>PixInsight入门到精通 第九章 窄带 第四节 | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/09_04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PixInsight入门到精通 第九章 窄带 第四节
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <a href="/about/">Terry</a>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-04 09:43:51" itemprop="dateCreated datePublished" datetime="2019-03-04T09:43:51+08:00">2019-03-04</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/img/15402042452782/PI-18_Narrowband-4-0070.png" alt="PI-18_Narrowband-4-0070"><br>如前所述，窄带数据可以插入(L)RGB。</p>
+<a id="more"></a>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0071.png" alt="PI-18_Narrowband-4-0071-w512"><br>Ha是最经常被这样使用的，O3也可以产生非常有趣的结果。我们将回头讲怎么用进程把窄带合成到(L)RGB，但让我们现在把注意力集中在脚本上。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0076.png" alt="PI-18_Narrowband-4-0076-w512"><br>除了窄带合成，SHO-AIP 脚本也能被用于将窄带合成到RGB色彩中。这次我们将用HOO调色板中的Ha和O3合成到超新星遗迹的粉红色和绿色。注意我们也可以选择R、G和B宽带图像。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0078.png" alt="PI-18_Narrowband-4-0078-w512"><br>一旦选中图像后，我们继续用滑块去混合宽带图和相对应的窄带图。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0081.png" alt="PI-18_Narrowband-4-0081-w512"></p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0084.png" alt="PI-18_Narrowband-4-0084-w512"></p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0087.png" alt="PI-18_Narrowband-4-0087-w512"><br>从这样的设置开始试起。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0089.png" alt="PI-18_Narrowband-4-0089-w512"><br>同样在 Multichannel Synthesis（多通道合成）子目录下有HaRVB。它唯一的目标就是合成Ha到LRGB中。首要需要注意的是，它缺少SHO-AIP的自动STF特征，因此我们推荐用于非线性图像。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0092.png" alt="PI-18_Narrowband-4-0092-w512"><br>在这里设置Ha 图像，</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0093.png" alt="PI-18_Narrowband-4-0093-w512"><br>在这里设置RGB图像。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0094.png" alt="PI-18_Narrowband-4-0094-w512"><br>这脚本产生了三个新图。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0095.png" alt="PI-18_Narrowband-4-0095-w512"><br>HAR是单色Ha和红色通道合成，用作独立图像、伪亮度、或作为红色通道替代品。根据数据的性质，两个RGB图像可能看起来类似或完全不同。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0096.png" alt="PI-18_Narrowband-4-0096-w512"><br>HAR有33%的Ha添加到红色通道</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0097.png" alt="PI-18_Narrowband-4-0097-w512"><br>而RHA也是33%比例的红色通道添加到Ha通道。改变百分比可以得到不同的结果。我们发现通常把RHA用作独立镜像或者与原始(L)RGB混合。在许多情况下，HAR图像作用很小。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0101.png" alt="PI-18_Narrowband-4-0101-w512"><br>在utilities子目录下，有NBRGB Combination脚本。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0102.png" alt="PI-18_Narrowband-4-0102-w512"><br>PixInsight社区成员Silvercup和Ioannis为其发展做出了贡献，其可能还在进一步开发中。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0103.png" alt="PI-18_Narrowband-4-0103-w512"><br>像SHO-AIP一样，线性或者非线性图像可以通过右上角的复选框进行控制。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0105.png" alt="PI-18_Narrowband-4-0105-w512"><br>在这里设置RGB源图像。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0106.png" alt="PI-18_Narrowband-4-0106-w512"><br>分配你想要的窄带帧到所需的通道。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0107.png" alt="PI-18_Narrowband-4-0107-w512"><br>然后，设置您的滤镜的带宽</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0108.png" alt="PI-18_Narrowband-4-0108-w512"><br>和您希望图像比重放大的比例。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0109.png" alt="PI-18_Narrowband-4-0109-w512"><br>您可以一起混合一个，两个或所有三个通道，点击应用。 </p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0110.png" alt="PI-18_Narrowband-4-0110-w512"><br>一旦生成了预览，您可以窥视各个频道，或在RGB和NBRGB结果之间切换。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0111.png" alt="PI-18_Narrowband-4-0111-w512"><br>与SHO-AIP不同，导航窗口的缩放和滚动功能运行良好。由于脚本使用LinearFit过程来将图像强度彼此匹配，并使用相当复杂的PixelMath 表达式来进行混合，因此您可能发现用滑块缩放是不需要的。NBRGB也很容易处理天空背景和自然的星色。不幸的是，每个迭代都将覆盖之前的图像。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0112.png" alt="PI-18_Narrowband-4-0112-w512"><br>满意后，单击OK。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0113.png" alt="PI-18_Narrowband-4-0113"><br>有关详细信息请访问此链接。</p>
+<p><img src="/img/15402042452782/PI-18_Narrowband-4-0114.png" alt="PI-18_Narrowband-4-0114-w512"><br>每个窄带脚本都能够生成很好的图像，只要给予其正确的数据和设置。</p>
+<p>下一节，我们回到PixelMath。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/窄带/" rel="tag"># 窄带</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/09_03/" rel="next" title="PixInsight入门到精通 第九章 窄带 第三节">
+                <i class="fa fa-chevron-left"></i> PixInsight入门到精通 第九章 窄带 第三节
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/01_01/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

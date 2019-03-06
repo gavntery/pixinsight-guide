@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="整理 by Terry（关于Terry）  第二章 堆叠第七节 ImageIntegration —— 叠加主校准文件 &amp;amp; ImageCalibration欢迎回到Image Integration。在上一节中，我们看到如何把已经批量预处理过的亮场，最后叠加成一个主亮场。 现在，我们要学习怎么把校准文件叠加成主校准文件。">
+<meta name="keywords" content="PixInsight 入门到精通 教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight 入门到精通">
+<meta property="og:url" content="http://pi.bestxtech.com/02_07/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="整理 by Terry（关于Terry）  第二章 堆叠第七节 ImageIntegration —— 叠加主校准文件 &amp;amp; ImageCalibration欢迎回到Image Integration。在上一节中，我们看到如何把已经批量预处理过的亮场，最后叠加成一个主亮场。 现在，我们要学习怎么把校准文件叠加成主校准文件。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0079.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0080.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0081.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0082.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0084.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0085.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0086.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0087.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0088.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0089.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0091.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0092.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0093.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0094.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0096.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0097.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0098.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0099.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0100.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0002.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0003.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0005.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0006.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0007.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0008.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0009.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0010.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0011.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0012.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0013.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0015.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0016.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0017.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0018.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0019.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0020.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0021.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0023.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0024.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0025.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0026.png">
+<meta property="og:updated_time" content="2019-03-06T03:28:11.564Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight 入门到精通">
+<meta name="twitter:description" content="整理 by Terry（关于Terry）  第二章 堆叠第七节 ImageIntegration —— 叠加主校准文件 &amp;amp; ImageCalibration欢迎回到Image Integration。在上一节中，我们看到如何把已经批量预处理过的亮场，最后叠加成一个主亮场。 现在，我们要学习怎么把校准文件叠加成主校准文件。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15387504227389/PI-12_Stack-7-0079.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/02_07/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/02_07/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 18:15:34" itemprop="dateCreated datePublished" datetime="2019-03-05T18:15:34+08:00">2019-03-05</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
+</blockquote>
+<h1 id="第二章-堆叠"><a href="#第二章-堆叠" class="headerlink" title="第二章 堆叠"></a>第二章 堆叠</h1><h2 id="第七节-ImageIntegration-——-叠加主校准文件-amp-ImageCalibration"><a href="#第七节-ImageIntegration-——-叠加主校准文件-amp-ImageCalibration" class="headerlink" title="第七节 ImageIntegration —— 叠加主校准文件 &amp; ImageCalibration"></a>第七节 ImageIntegration —— 叠加主校准文件 &amp; ImageCalibration</h2><p>欢迎回到Image Integration。在上一节中，我们看到如何把已经批量预处理过的亮场，最后叠加成一个主亮场。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0079.png" alt="PI-12_Stack-7-0079-w512"><br>现在，我们要学习怎么把校准文件叠加成主校准文件。</p>
+<a id="more"></a>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0080.png" alt="PI-12_Stack-7-0080-w512"><br>由于叠加主暗场和主偏置的流程是一模一样的，我们拿暗场的叠加作为演示，</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0081.png" alt="PI-12_Stack-7-0081-w512"><br>这将让我们得到本章第三节里讲到的Cosmetic Correction里需要的主暗场。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0082.png" alt="PI-12_Stack-7-0082-w512"><br>再次打开Image Integration, 我再次把所有的参数重新设置为默认值，以避免之前的设置带来的潜在的问题</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0084.png" alt="PI-12_Stack-7-0084-w512"><br>再一次，我们用Add Files载入暗场文件。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0085.png" alt="PI-12_Stack-7-0085-w512"><br>注意，这些暗场还没有扣除偏置。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0086.png" alt="PI-12_Stack-7-0086-w512"><br>我们再次推荐Average作为叠加方法。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0087.png" alt="PI-12_Stack-7-0087-w512"><br>但是对暗场和偏置来说，这一次要选择No normalization（不归一化处理）选项。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0088.png" alt="PI-12_Stack-7-0088-w512"><br>对于权重(Weights)，选择Don’t care</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0089.png" alt="PI-12_Stack-7-0089-w512"><br>并且不要勾选Evaluate noise.</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0091.png" alt="PI-12_Stack-7-0091-w512"><br>推荐的排异算法还是Winsorized Sigma Clipping。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0092.png" alt="PI-12_Stack-7-0092-w512"><br>再一次选择No normalization。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0093.png" alt="PI-12_Stack-7-0093-w512"><br>所有其它参数默认值都OK。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0094.png" alt="PI-12_Stack-7-0094-w512"><br>搞定！点击Apply Global，并耐心等待，就得到了我们的主暗场。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0096.png" alt="PI-12_Stack-7-0096-w512"><br>用STF的自动拉伸看看，我们的结果看上去很不错。你应该也要看看Rejection maps（排异图）确认一下你的设置是有效的。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0097.png" alt="PI-12_Stack-7-0097-w512"><br>要继续生成主偏置，我们要清理(Clear)文件，添加偏置文件，用同样的参数再跑一下这个进程。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0098.png" alt="PI-12_Stack-7-0098-w512"><br>现在我们就有两个主校准文件了。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0099.png" alt="PI-12_Stack-7-0099-w512"><br>让我们继续看看平场。平场，以及如何校准的一般知识已经在我们的 Soup to Nuts 系列详细介绍过了。讲到平场，我们要先把Image Integration放一边。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0100.png" alt="PI-12_Stack-7-0100-w512"><br>打开Image Calibration进程。在这里，我们要在叠加之前，预先处理一下每张平场文件。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0002.png" alt="PI-12_Stack-7-0002-w512"><br>对于偏置和暗场来说，只要他们和亮场的像素合并模式以及温度一定就好了，但是平场，对每一个不同的滤镜，我们都需要不同的平场。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0003.png" alt="PI-12_Stack-7-0003-w512"><br>只有在使用彩色相机的时候，才只需要一组RGB平场。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0005.png" alt="PI-12_Stack-7-0005-w512"><br>这里只是起说明作用，我们用彩色相机的平场当做例子。用“Add Files”加载所有的平场文件。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0006.png" alt="PI-12_Stack-7-0006-w512"><br>然后，选择一个处理后的文件的输出目录。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0007.png" alt="PI-12_Stack-7-0007-w512"><br>除非你不想用 c 作为后缀而想用其它字母，用这些默认参数就好了。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0008.png" alt="PI-12_Stack-7-0008-w512"><br>现在，需要加载你之前合成的主偏置文件。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0009.png" alt="PI-12_Stack-7-0009-w512"><br>不要勾选Calibrate</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0010.png" alt="PI-12_Stack-7-0010-w512"><br>下一步，加载主暗场。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0011.png" alt="PI-12_Stack-7-0011-w512"><br>由于我们的主暗场还没有扣偏置，所以这个Calibrate要勾选上。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0012.png" alt="PI-12_Stack-7-0012-w512"><br>选上Optimize，让主暗场可以按比例计算后再被扣除。用这个方法，可以不用拍暗平场了。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0013.png" alt="PI-12_Stack-7-0013-w512"><br>点击Apply Global（全局运用），PI会把校准完的文件保存在输出文件夹里。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0015.png" alt="PI-12_Stack-7-0015-w512"><br>再打开Image Integration, 现在我们准备叠加校准过的平场为主平场。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0016.png" alt="PI-12_Stack-7-0016-w512"><br>再次选择Average</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0017.png" alt="PI-12_Stack-7-0017-w512"><br>但是这次选择Multiplicative </p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0018.png" alt="PI-12_Stack-7-0018-w512"><br>和 Don’t care.</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0019.png" alt="PI-12_Stack-7-0019-w512"><br>选择 Percentile Clipping </p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0020.png" alt="PI-12_Stack-7-0020-w512"><br>和 Equalize Fluxes, 并且不要选上maps。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0021.png" alt="PI-12_Stack-7-0021-w512"><br>如果是人工平场，可以试用默认的Percentile设置</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0023.png" alt="PI-12_Stack-7-0023-w512"><br>但是对天光平场来说，经常有异物存在的情况，对high和low都尽量使用低的percentage值。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0024.png" alt="PI-12_Stack-7-0024-w512"><br>点Apply Global（全局运用），这样就生成了主平场。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0025.png" alt="PI-12_Stack-7-0025-w512"><br>STF显示这是一个很好的图像。</p>
+<p><img src="/img/15387504227389/PI-12_Stack-7-0026.png" alt="PI-12_Stack-7-0026-w512"><br>搞定！现在可以把主平场存起来下一课使用。</p>
+<div style="text-align:center"><br>    <a style="float: left" href="/002_堆叠/006.ImageIntegration_01">上一节</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/002_堆叠/008.ImageCalibration&BatchDebayer&StarAlignment">下一节</a><br></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/02_05/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/02_06/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章-堆叠"><span class="nav-number">1.</span> <span class="nav-text">第二章 堆叠</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第七节-ImageIntegration-——-叠加主校准文件-amp-ImageCalibration"><span class="nav-number">1.1.</span> <span class="nav-text">第七节 ImageIntegration —— 叠加主校准文件 &amp; ImageCalibration</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

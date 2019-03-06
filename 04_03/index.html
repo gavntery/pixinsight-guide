@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="整理 by Terry（关于Terry）  第四章 非线性处理第三节 AdaptiveStretch &amp;amp; HistogramTransformation我们接着上一讲，学习AdaptiveStretch。我们从打开、拓展一个实时预览说起。">
+<meta name="keywords" content="PixInsight 入门到精通 教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight 入门到精通">
+<meta property="og:url" content="http://pi.bestxtech.com/04_03/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第三节 AdaptiveStretch &amp;amp; HistogramTransformation我们接着上一讲，学习AdaptiveStretch。我们从打开、拓展一个实时预览说起。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0112.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0114.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0115.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0116.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0117.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0118.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0119.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0120.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0121.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0122.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0123.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0126.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0127.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0128.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0134.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0135.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0137.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0139.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0140.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0141.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0142.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0144.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0146.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0147.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0148.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0150.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0151.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0153.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0156.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0157.png">
+<meta property="og:updated_time" content="2019-03-06T03:30:56.561Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight 入门到精通">
+<meta name="twitter:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第三节 AdaptiveStretch &amp;amp; HistogramTransformation我们接着上一讲，学习AdaptiveStretch。我们从打开、拓展一个实时预览说起。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15398788101104/PI-5_Linear-5-0112.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/04_03/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/04_03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 18:18:39" itemprop="dateCreated datePublished" datetime="2019-03-05T18:18:39+08:00">2019-03-05</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
+</blockquote>
+<h1 id="第四章-非线性处理"><a href="#第四章-非线性处理" class="headerlink" title="第四章 非线性处理"></a>第四章 非线性处理</h1><h2 id="第三节-AdaptiveStretch-amp-HistogramTransformation"><a href="#第三节-AdaptiveStretch-amp-HistogramTransformation" class="headerlink" title="第三节 AdaptiveStretch &amp; HistogramTransformation"></a>第三节 AdaptiveStretch &amp; HistogramTransformation</h2><p><img src="/img/15398788101104/PI-5_Linear-5-0112.png" alt="PI-5_Linear-5-0112-w512"><br>我们接着上一讲，学习AdaptiveStretch。我们从打开、拓展一个实时预览说起。</p>
+<a id="more"></a>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0114.png" alt="PI-5_Linear-5-0114-w512"><br>你可以勾选实时曲线图形（Real-Time Curve Graph），</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0115.png" alt="PI-5_Linear-5-0115-w512"><br>也可以随时把这个图形（或称函数）递送给CurvesTransformation以进行下一步的处理。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0116.png" alt="PI-5_Linear-5-0116-w512"><br>Noise Threshold（噪声阈值）滑块默认设置为给定Exponent（指数）下的最小值，</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0117.png" alt="PI-5_Linear-5-0117-w512"><br>首先选择一个Exponent，这让你有一个调整范围。我们发现，-4这个值适用于绝大多数影像。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0118.png" alt="PI-5_Linear-5-0118-w512"><br>然后只需提高Noise Threshold直至自己满意即可，差不多在1.25到2.5的范围内。对很多影像来说，这就是你所需要知道的全部了。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0119.png" alt="PI-5_Linear-5-0119-w512"><br>当勾选了Contrast Protection（反差保护）时，它会限制亮部与暗部的反差提升。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0120.png" alt="PI-5_Linear-5-0120-w512"><br>和之前一样，先设置Exponent，再滑动滑块。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0121.png" alt="PI-5_Linear-5-0121-w512"><br>我们再次发现，-4适合绝大多数情况。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0122.png" alt="PI-5_Linear-5-0122-w512"><br>在某些比较麻烦的情况下，我们可以限制程序的分析，只让它分析我们感兴趣的区域(Region of Interest)，而不是分析全图。这对于大量像素处于中间水平（比如弥散的星云）的图像尤其有用。(回顾本章第五节来复习ROI Functionality)</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0123.png" alt="PI-5_Linear-5-0123-w512"><br>选择一个亮部与暗部都表现良好的区域来作为Preview来分析，防止中间水平的像素影响分析。<br>（这样，产生的结果会有更大的反差。）</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0126.png" alt="PI-5_Linear-5-0126-w512"><br>虽然AdaptiveStretch非常简单易用，并且对很多影像的非线性拉伸效果很好，但在这个例子中，NGC253过于明亮的核心是一大挑战。我们需要一个替代工具。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0127.png" alt="PI-5_Linear-5-0127-w512"><br>接下来是HistogramTransformation。“HT”是无可争辩的所有IntensityTransformation工具中的“老黄牛”，并且仍然是我们的最爱。它不仅是调整色阶的基本工具，还是学习色阶与色阶变换的最好切入点。第一眼看过去，那些参数好像很复杂难懂，但别紧张，它们都很容易理解，在Documentation中有详细说明，或参考Mouseovers。我们来看看它的基本参数。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0128.png" alt="PI-5_Linear-5-0128-w512"><br>要显示一张图片的色阶，在下拉表单里选择这张图片。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0134.png" alt="PI-5_Linear-5-0134-w512"><br>在下面的窗口是输入色阶（Input Histogram），</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0135.png" alt="PI-5_Linear-5-0135-w512"><br>上面的是可隐藏的输出色阶（Output Histogram）。和我们期望的一样，现在输入与输出色阶是一样的。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0137.png" alt="PI-5_Linear-5-0137-w512"><br>你可以在这里调整色阶位数，并且我们偏好16bit（64K）。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0139.png" alt="PI-5_Linear-5-0139-w512"><br>你也可以用Area（面型）模式显示色阶，而不用默认的Linear（线型）。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0140.png" alt="PI-5_Linear-5-0140-w512"><br>所有这四种显示选项都是默认有效的。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0141.png" alt="PI-5_Linear-5-0141-w512"><br>与Photoshop的色阶调整类似，这里有Shadows Clipping Point（阴影剪切位点）、Midtones Balance（中间调平衡）与Highlight Clipping Point（高光剪切位点）滑块。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0142.png" alt="PI-5_Linear-5-0142-w512"><br>当准备用HT拉伸影像时，先关闭STF AutoStretch并参考实时预览。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0144.png" alt="PI-5_Linear-5-0144-w512"><br>当我把Midtones Balance滑块向左移时，注意MTF的曲线形状，同时也注意实时预览的效果与输出色阶的变化。PixInsight会估算因拉伸导致的直方图变化。通过它判断，这会是一个理想拉伸的良好开端。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0146.png" alt="PI-5_Linear-5-0146-w512"><br>但在应用之前， 我们还可以用HistogramTransformation的编辑面板来微调一下。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0147.png" alt="PI-5_Linear-5-0147"><br>在这里你可以选择放大（Zoom）与拖动（Pan）工具，并且可以点击1:1按钮回到初始状态。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0148.png" alt="PI-5_Linear-5-0148-w512"><br>最简单的缩放方法是滚动鼠标滚轮。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0150.png" alt="PI-5_Linear-5-0150-w512"><br>我们也可以用这种小箭头按钮来缩放或者直接输入想要的放大比例（上限为999）。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0151.png" alt="PI-5_Linear-5-0151-w512"><br>水平的滚动条对查看输入与输出色阶都很有用。我输入了10，然后是100。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0153.png" alt="PI-5_Linear-5-0153-w512"><br>你可以拖动输入窗口下方的水平滚动条，或者左右箭头，来移动色阶图形。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0156.png" alt="PI-5_Linear-5-0156-w512"><br>你也可以把程序的窗口拉扯到你想要的大小。</p>
+<p><img src="/img/15398788101104/PI-5_Linear-5-0157.png" alt="PI-5_Linear-5-0157-w512"><br>从小尺度上观察色阶让我们能够一次性完成一次最重要的非线性拉伸，而这是我们所推荐的。</p>
+<p>下一节，我们继续讲解HistogramTransformation。</p>
+<div style="text-align:center"><br>    <a style="float: left" href="/004_非线性处理/002">上一节</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/004_非线性处理/004">下一节</a><br></div> 
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/04_02/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/04_04/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-非线性处理"><span class="nav-number">1.</span> <span class="nav-text">第四章 非线性处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第三节-AdaptiveStretch-amp-HistogramTransformation"><span class="nav-number">1.1.</span> <span class="nav-text">第三节 AdaptiveStretch &amp; HistogramTransformation</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

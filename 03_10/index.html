@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="整理 by Terry（关于Terry）  第三章 线性处理第十节 线性降噪 —— ATWT(二) &amp;amp; PixelMath绿色的勾表示该图层有效，双击它可以使该图层无效。我们现在执行一个典型的针对小波长噪声的降噪方案。">
+<meta name="keywords" content="PixInsight 入门到精通 教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight 入门到精通">
+<meta property="og:url" content="http://pi.bestxtech.com/03_10/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="整理 by Terry（关于Terry）  第三章 线性处理第十节 线性降噪 —— ATWT(二) &amp;amp; PixelMath绿色的勾表示该图层有效，双击它可以使该图层无效。我们现在执行一个典型的针对小波长噪声的降噪方案。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0032.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0034.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0056.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0038.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0039.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0040.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0041.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0044.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0046.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0049.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0051.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0055.png">
+<meta property="og:updated_time" content="2019-03-06T03:28:49.401Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight 入门到精通">
+<meta name="twitter:description" content="整理 by Terry（关于Terry）  第三章 线性处理第十节 线性降噪 —— ATWT(二) &amp;amp; PixelMath绿色的勾表示该图层有效，双击它可以使该图层无效。我们现在执行一个典型的针对小波长噪声的降噪方案。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0032.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/03_10/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/03_10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 18:17:14" itemprop="dateCreated datePublished" datetime="2019-03-05T18:17:14+08:00">2019-03-05</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
+</blockquote>
+<h1 id="第三章-线性处理"><a href="#第三章-线性处理" class="headerlink" title="第三章 线性处理"></a>第三章 线性处理</h1><h2 id="第十节-线性降噪-——-ATWT-二-amp-PixelMath"><a href="#第十节-线性降噪-——-ATWT-二-amp-PixelMath" class="headerlink" title="第十节 线性降噪 —— ATWT(二) &amp; PixelMath"></a>第十节 线性降噪 —— ATWT(二) &amp; PixelMath</h2><p><img src="/img/15398786259307/PI-2_Linear-2-0032.png" alt="PI-2_Linear-2-0032-w512"><br>绿色的勾表示该图层有效，双击它可以使该图层无效。我们现在执行一个典型的针对小波长噪声的降噪方案。</p>
+<a id="more"></a>
+<p><img src="/img/15398786259307/PI-2_Linear-2-0034.png" alt="PI-2_Linear-2-0034-w512"><br>各图层的Threshold（阈值）依次降低，图层1降噪最强力，阈值为3；图层2为2,；图层3为1；图层4的阈值为0.5。Amount（强度）你自己看着办吧。（画面中字幕：上方：试着以此为最初设置。中间是各图层参数。下方：试着把Amount设置在0.25-0.75，Iterations设置为1-3，对RGB图层的降噪可以下手重一些。）因为我们希望保护好大部分的细节，使尽量少的真实信号被抹平，我们最好还是用小点儿的Amount值，而不是使用默认值1。如果噪声较强，想加大降噪力度，在提高Amount值之前最好试着增加一下Interations（执行次数）。以上即是我们所需要关注的参数设置。</p>
+<p><img src="/img/15398786259307/PI-2_Linear-2-0056.png" alt="PI-2_Linear-2-0056-w512"><br>尽管ATWT可以把低信噪比区域的小波长噪声分离出来处理，但保护高信噪比区域的小尺度细节不被抹平仍然是明智之举。</p>
+<p><img src="/img/15398786259307/PI-2_Linear-2-0038.png" alt="PI-2_Linear-2-0038-w512"><br>为此我们需要使用蒙版。在本章第八节中我们做了相反的事，用明度蒙版（Luminance Mask）或范围蒙版（Range Mask）来保护低信噪比区域。</p>
+<p><img src="/img/15398786259307/PI-2_Linear-2-0039.png" alt="PI-2_Linear-2-0039-w512"><br>现在我们对这两种蒙版进行反色（Invert），然后用它们保护高信噪比区域。</p>
+<p><img src="/img/15398786259307/PI-2_Linear-2-0040.png" alt="PI-2_Linear-2-0040-w512"><br>你可以复习一下第一章第四、第五节，以及本章第八节来回想蒙版的基本制作方法。低信噪比区域暴露出来之后，我们就可以用ATWT抹平它们。虽然Rogelio更愿意在非线性处理之前不去抹平图像，但我有时会对线性图像的背景与暗部轻手轻脚地搞那么一次。</p>
+<p><img src="/img/15398786259307/PI-2_Linear-2-0041.png" alt="PI-2_Linear-2-0041-w512"><br>有些人认为ATWT在对付大尺度噪声上比ACDNR表现更好，而且可以避免背景出现恶心的花花绿绿的色块。尽管这样，在这里我也只是用它来「牛刀杀鸡」，略微降一下噪。</p>
+<p><img src="/img/15398786259307/PI-2_Linear-2-0044.png" alt="PI-2_Linear-2-0044-w512"><br>PixelMath我们之前提到过，但没有多说。现在是时候来一个入门的入门了。虽然在这个时候，很难说用PixelMath做一个透明度设置来从一定程度上保留PixInsight原图层的痕迹（类似渐隐，译者注）有什么必要，但眼下，所谓的「PixMath」仍然是不可或缺的，是你必须了解的东西。</p>
+<p><img src="/img/15398786259307/PI-2_Linear-2-0046.png" alt="PI-2_Linear-2-0046-w512"><br>在逐渐熟悉PixelMath并将其贯穿于整个处理过程之前，我们先通过Addition（加法运算）来对其有一个初步了解。就算你使劲浑身解数，用了专用的工具，我们还是得承认，ATWT的降噪有些大手大脚。你可以用PixelMath将降噪后的结果与原图混合，达到渐隐的效果（类似于Photoshop中的图层透明度Opacity%）。</p>
+<p><img src="/img/15398786259307/PI-2_Linear-2-0049.png" alt="PI-2_Linear-2-0049-w512"><br>我们来看看怎么弄。我们先在一个副本上操弄，而不是直接处理原图。不过无论你怎么操作，作何选择，核心思想都是把处理前的影像（Pre-adjustment version）与处理后的（Post-adjustment version）混合起来。这样在最终结果中它们各占一半（比重）。</p>
+<p><img src="/img/15398786259307/PI-2_Linear-2-0051.png" alt="PI-2_Linear-2-0051-w512"><br>你也可以直接输入表达式，或者使用Edit按钮，不过要考虑到PixInsight 1.8的Editor与之前版本有所不同。</p>
+<p><img src="/img/15398786259307/PI-2_Linear-2-0055.png" alt="PI-2_Linear-2-0055"><br>在这里我为了节省时间，复制了影像的名称（你也可以直接双击），然后让原图占25%（这里有很多数学运算符），新图占75%，混合起来。</p>
+<p>这就完成了。下一章，我们将开始讲解非线性处理。</p>
+<div style="text-align:center"><br>    <a style="float: left" href="/003_线性处理/009">上一节</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/004_非线性处理/001">下一章</a><br></div> 
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/03_09/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/04_01/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第三章-线性处理"><span class="nav-number">1.</span> <span class="nav-text">第三章 线性处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第十节-线性降噪-——-ATWT-二-amp-PixelMath"><span class="nav-number">1.1.</span> <span class="nav-text">第十节 线性降噪 —— ATWT(二) &amp; PixelMath</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

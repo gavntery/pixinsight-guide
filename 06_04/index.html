@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="欢迎回到我们PixInsight的马赛克迷你系列。接下来是四张单色图像的范例。每张图像将有L、R、G和B主帧。4 x 4 = 16 帧。">
+<meta name="keywords" content="马赛克">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight入门到精通 第六章 马赛克 第四节 四张单色图像的拼接(一)">
+<meta property="og:url" content="http://pi.bestxtech.com/06_04/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="欢迎回到我们PixInsight的马赛克迷你系列。接下来是四张单色图像的范例。每张图像将有L、R、G和B主帧。4 x 4 = 16 帧。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0027.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0029.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0031.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0036.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0039.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0040.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0041.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0042.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0043.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0046.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0050.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0049.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0052.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0053.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0054.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0055.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0058.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0060.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0061.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0063.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0065.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0067.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0068.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0069.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0072.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0073.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0075.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0076.png">
+<meta property="og:updated_time" content="2019-03-06T05:43:42.743Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight入门到精通 第六章 马赛克 第四节 四张单色图像的拼接(一)">
+<meta name="twitter:description" content="欢迎回到我们PixInsight的马赛克迷你系列。接下来是四张单色图像的范例。每张图像将有L、R、G和B主帧。4 x 4 = 16 帧。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15401853256650/PI-8_Mosaics-4-0027.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/06_04/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>PixInsight入门到精通 第六章 马赛克 第四节 四张单色图像的拼接(一) | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/06_04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PixInsight入门到精通 第六章 马赛克 第四节 四张单色图像的拼接(一)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <a href="/about/">Terry</a>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-09 18:42:51" itemprop="dateCreated datePublished" datetime="2019-02-09T18:42:51+08:00">2019-02-09</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/img/15401853256650/PI-8_Mosaics-4-0027.png" alt="PI-8_Mosaics-4-0027-w512"><br>欢迎回到我们PixInsight的马赛克迷你系列。接下来是四张单色图像的范例。每张图像将有L、R、G和B主帧。4 x 4 = 16 帧。</p>
+<a id="more"></a>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0029.png" alt="PI-8_Mosaics-4-0029-w512"><br>因此，如果你还没有体会过Pixinsight项目（project）带来的安全和良好组织性的好处，现在是时间去试一试了。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0031.png" alt="PI-8_Mosaics-4-0031-w512"><br>我将打开银河中射手座的四个明度帧，命名为 P1、P2、P3和P4_L。这4帧是Rogelio这52张拼接超级马赛克的一部分。毫无疑问安德鲁是当今马赛克的大师，我们要向最强者学习。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0036.png" alt="PI-8_Mosaics-4-0036-w512"><br>我们的第一个任务就是构建一个对齐的模板，这对多张拼接马赛克来说是最基础的工作，而明度帧当然是最合适的构建材料。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0039.png" alt="PI-8_Mosaics-4-0039-w512"><br>我们来回顾一下PI-6的StarAlignment设置。这次，工作模式是Register/Union Mosaic。这些都设置好之后（请按画面参数设置），我们可以像第六章一样继续向前。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0040.png" alt="PI-8_Mosaics-4-0040-w512"><br>我们之前提到的星点对齐的Restrict to previews，现在是好好讨论一下它的好时机。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0041.png" alt="PI-8_Mosaics-4-0041-w512"><br>当对齐马赛克图像时，StarAlignment工作得比实际需要更努力些，它会把两张要匹配的图像整体搜索一遍。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0042.png" alt="PI-8_Mosaics-4-0042-w512"><br>实际上，两个图像共有的星点只存在于重叠区域 (10-20%)。 </p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0043.png" alt="PI-8_Mosaics-4-0043"><br>当定义了预览后，勾选上Restrict to previews，程序会把搜索区域限制在预览区域，而忽略图像的其它区域。这不仅节约时间，而且还增加了对齐的成功率。为了这个目的，我们现在要定义参考图像和目标图像的预览区域，看我们是如何实现这点的。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0046.png" alt="PI-8_Mosaics-4-0046-w512"><br>我们从P4_L开始作为参考图像，虽然我是随机选中它的，但是我还是很喜欢礁湖星云和三叶星云提供的参考点。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0050.png" alt="PI-8_Mosaics-4-0050-w512"><br>浮动 P3 到 P4，我注意到面板的重叠区域，并且在参考图和目标图定于预览。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0049.png" alt="PI-8_Mosaics-4-0049-w512"><br>这些矩形选择不需要完美，确定勾选上Restrict to previews。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0052.png" alt="PI-8_Mosaics-4-0052-w512"><br>我将StarAlignment应用到目标图像P3。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0053.png" alt="PI-8_Mosaics-4-0053-w512"><br>生成新文件P3_L_Mosaic包含图像3和4。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0054.png" alt="PI-8_Mosaics-4-0054-w512"><br>让我们检查下重叠区。为了帮助我们找到它，我们使用第一次生成的蒙版。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0055.png" alt="PI-8_Mosaics-4-0055-w512"><br>打开和关闭有助于检查结果。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0058.png" alt="PI-8_Mosaics-4-0058-w512"><br>如果存在对准偏差，尤其在角落，尝试使用没有 Distortion correction（失真校准）的StarAlignment，并且比较两个结果。不要担心可见的接缝，这只是一个模板。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0060.png" alt="PI-8_Mosaics-4-0060-w512"><br>当调整满意时，可将P3_L_Mosaic作为参考图像。我们再次确定其和下一个目标P2_L的重叠区，并且定义预览。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0061.png" alt="PI-8_Mosaics-4-0061-w512"><br>为了演示StarAlignment的能力，我们按数据采集的方向打开P2，实际上相对参考图翻转了180度。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0063.png" alt="PI-8_Mosaics-4-0063-w512"><br>当定义预览后，我将StarAlignment应用到P2_L。这个过程中对齐星点没有碰上麻烦。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0065.png" alt="PI-8_Mosaics-4-0065-w512"><br>这个现在是P2_L_Mosaic文件——包含图像2、3和4。和以前一样，检查一下对齐后的图像看看你是否满意。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0067.png" alt="PI-8_Mosaics-4-0067-w512"><br>使用mask，这是一个有用的招数。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0068.png" alt="PI-8_Mosaics-4-0068-w512"><br>虽然我们在以后的系列将更熟悉怎么使用PixelMath，现在也来看看我把这个等式运用到到MASK本身。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0069.png" alt="PI-8_Mosaics-4-0069-w512"><br>由于其不透明度降低了75%，更容易分析在重叠区的星点对齐。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0072.png" alt="PI-8_Mosaics-4-0072-w512"><br>就剩下最后一张图像了，你知道该怎么去做。设置 P2_L_Mosaic作为参考图像。P1是我们最后的’受害者’，它也是颠倒的。然而为了让事情更简单可视，我将使用Geometry的FastRotation 去翻转它。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0073.png" alt="PI-8_Mosaics-4-0073-w512"><br>第一次有图像在两面重叠，因此让我们像这样定义预览。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0075.png" alt="PI-8_Mosaics-4-0075-w512"><br>准备好后，我将最后一次应用StarAlignment，这就是我们最后完成的模板。</p>
+<p><img src="/img/15401853256650/PI-8_Mosaics-4-0076.png" alt="PI-8_Mosaics-4-0076-w512"><br>不要忘记评估最后的结果，它必须尽可能准确。</p>
+<p>接下来，第二步。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/马赛克/" rel="tag"># 马赛克</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/06_03/" rel="next" title="PixInsight入门到精通 第六章 马赛克 第三节 两张彩色图像的拼接(三)">
+                <i class="fa fa-chevron-left"></i> PixInsight入门到精通 第六章 马赛克 第三节 两张彩色图像的拼接(三)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/06_05/" rel="prev" title="PixInsight入门到精通 第六章 马赛克 第五节 四张单色图像的拼接(二)">
+                PixInsight入门到精通 第六章 马赛克 第五节 四张单色图像的拼接(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

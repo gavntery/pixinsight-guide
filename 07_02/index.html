@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="我们现在继续更进一步的讲解星点蒙版。除了锐化和消毛刺，ATrousWaveletTransform也可以用来产生一个星点蒙版。开始于默认设置，禁用残留层（Residual)，并且稍微增加第1层到第4层的bias(偏差，0.1~0.3）。">
+<meta name="keywords" content="星点蒙版">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight入门到精通 第七章 星点蒙版 第二节">
+<meta property="og:url" content="http://pi.bestxtech.com/07_02/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="我们现在继续更进一步的讲解星点蒙版。除了锐化和消毛刺，ATrousWaveletTransform也可以用来产生一个星点蒙版。开始于默认设置，禁用残留层（Residual)，并且稍微增加第1层到第4层的bias(偏差，0.1~0.3）。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0048.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0052.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0053.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0054.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0055.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0059.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0061.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0064.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0066.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0068.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0071.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0073.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0076.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0078.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0077.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0084.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0085.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0088.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0089.png">
+<meta property="og:updated_time" content="2019-03-06T05:39:11.696Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight入门到精通 第七章 星点蒙版 第二节">
+<meta name="twitter:description" content="我们现在继续更进一步的讲解星点蒙版。除了锐化和消毛刺，ATrousWaveletTransform也可以用来产生一个星点蒙版。开始于默认设置，禁用残留层（Residual)，并且稍微增加第1层到第4层的bias(偏差，0.1~0.3）。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15401855546380/PI-12_Star_Masks-2-0048.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/07_02/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>PixInsight入门到精通 第七章 星点蒙版 第二节 | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/07_02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PixInsight入门到精通 第七章 星点蒙版 第二节
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <a href="/about/">Terry</a>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-23 16:11:51" itemprop="dateCreated datePublished" datetime="2019-02-23T16:11:51+08:00">2019-02-23</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/img/15401855546380/PI-12_Star_Masks-2-0048.png" alt="PI-12_Star_Masks-2-0048-w512"><br>我们现在继续更进一步的讲解星点蒙版。除了锐化和消毛刺，ATrousWaveletTransform也可以用来产生一个星点蒙版。开始于默认设置，禁用残留层（Residual)，并且稍微增加第1层到第4层的bias(偏差，0.1~0.3）。</p>
+<a id="more"></a>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0052.png" alt="PI-12_Star_Masks-2-0052-w512"><br>为了让图像更平滑，我们也建议启用所有四个活动图层的降噪功能。把ATrouswavelets运用到一张克隆的图像上。</p>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0053.png" alt="PI-12_Star_Masks-2-0053-w512"><br>如果是彩色图像，使用亮度作为目标（或者先提取亮度通道）。</p>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0054.png" alt="PI-12_Star_Masks-2-0054-w512"><br>把ATrous运用到克隆图像以创建蒙版。</p>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0055.png" alt="PI-12_Star_Masks-2-0055-w512"><br>像任何蒙版一样，可以用HistogramTransformation让黑的更黑，白的更白，以提高蒙版的使用效率。</p>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0059.png" alt="PI-12_Star_Masks-2-0059-w512"><br>不论是用 ATrous或者StarMask进程，目的都是创建星点蒙版。</p>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0061.png" alt="PI-12_Star_Masks-2-0061"><br>有些不想要的亮部，非恒星结构也许会被包含在选择中。</p>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0064.png" alt="PI-12_Star_Masks-2-0064-w512"><br>要帮助消除它们，在创立蒙版前，先使用HDRMultiscaleTransform强力压缩图像的亮度范围。</p>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0066.png" alt="PI-12_Star_Masks-2-0066-w512"><br>当已有蒙版需要进一步的羽化，使用 ATrous，把头两层的bias设为负数。</p>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0068.png" alt="PI-12_Star_Masks-2-0068-w512"><br>我们也推荐Process/Convolution下的Gaussian blur(高斯模糊）设置，它也可以从Library（库）选项卡中找到。</p>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0071.png" alt="PI-12_Star_Masks-2-0071-w512"><br>使用5到7做轻微平滑，或者用9到11做更强的平滑。</p>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0073.png" alt="PI-12_Star_Masks-2-0073-w512"><br>任何蒙版可以通过MorphologicalTransformation进程改变其恒星结构和大小我们可以使用 Erosion收缩它们，或用Dilation扩大它们。</p>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0076.png" alt="PI-12_Star_Masks-2-0076-w512"><br>StarMask里面Mask Generation的Contours（轮廓）也很有趣的。虽然看上去很复杂，但是它可以揭示星点的外延而排除星点中央。在某些情况下可能有用。选择Contours（轮廓），降低平滑度。</p>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0078.png" alt="PI-12_Star_Masks-2-0078-w512"><br>同样重要的是把Large-scale Structure Growth（大规模结构增长）设置为零，并试着降低Small-scale（小规模）和Compensation（补偿，设为0-1）的值看看效果。</p>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0077.png" alt="PI-12_Star_Masks-2-0077-w512"><br>你能使用Contours蒙版去缩星或修复振铃伪像。显示星点轮廓时，使用<br>HistogramTransformation的中间色调滑块去调亮黑圈。在实践中，这种技术也可以让星星的<br>光晕更饱和。</p>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0084.png" alt="PI-12_Star_Masks-2-0084-w512"><br>这里还有一个用于contours选择的很好的替代方法。创建通用星点蒙版后，</p>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0085.png" alt="PI-12_Star_Masks-2-0085-w512"><br>使用MaskGeneration的RangeSelection滑块拨入contours，拨出星点核心。</p>
+<p>温习一下系列中第二部分的相关内容，我们充分展示了可以从范围蒙版或明度蒙版中扣除星点蒙版，以达成一些特殊的目的。</p>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0088.png" alt="PI-12_Star_Masks-2-0088-w512"><br>最后，请记住，CloneStamp进程可用于自定义星点蒙版。</p>
+<p><img src="/img/15401855546380/PI-12_Star_Masks-2-0089.png" alt="PI-12_Star_Masks-2-0089-w512"><br>我们希望你享受我们这两课的迷你系列中关于高级星点蒙版的内容. 我们在随后的章节中，还会看到更多关于这一点的一些很重要的技巧。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/星点蒙版/" rel="tag"># 星点蒙版</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/06_06/" rel="next" title="PixInsight入门到精通 第六章 马赛克 第六节 四张单色图像的拼接(三)">
+                <i class="fa fa-chevron-left"></i> PixInsight入门到精通 第六章 马赛克 第六节 四张单色图像的拼接(三)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/07_01/" rel="prev" title="PixInsight入门到精通 第七章 星点蒙版 第一节">
+                PixInsight入门到精通 第七章 星点蒙版 第一节 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

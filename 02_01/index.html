@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="整理 by Terry（关于Terry）  第二章 堆叠第一节 Batch Preprocessing（一）所有的一切，都围绕着信号展开，并且信号是多多益善。增加信号唯有拍摄多张单帧然后叠加，几乎没有别的替代方法。所以，无论你的拍摄系统是怎样的，都需要收集足够多的光子以产生足够细腻的图像。">
+<meta name="keywords" content="PixInsight 入门到精通 教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight 入门到精通">
+<meta property="og:url" content="http://pi.bestxtech.com/02_01/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="整理 by Terry（关于Terry）  第二章 堆叠第一节 Batch Preprocessing（一）所有的一切，都围绕着信号展开，并且信号是多多益善。增加信号唯有拍摄多张单帧然后叠加，几乎没有别的替代方法。所以，无论你的拍摄系统是怎样的，都需要收集足够多的光子以产生足够细腻的图像。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0001.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0004.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0005-1.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0009.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0010.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0011.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0013.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0014.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0016.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0015.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0017.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0018.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0019.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0022.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0026.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0028.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0029.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0030.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0031.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0032.png">
+<meta property="og:updated_time" content="2019-03-06T03:27:46.442Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight 入门到精通">
+<meta name="twitter:description" content="整理 by Terry（关于Terry）  第二章 堆叠第一节 Batch Preprocessing（一）所有的一切，都围绕着信号展开，并且信号是多多益善。增加信号唯有拍摄多张单帧然后叠加，几乎没有别的替代方法。所以，无论你的拍摄系统是怎样的，都需要收集足够多的光子以产生足够细腻的图像。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15387490259016/PI-6_Stack-1-0001.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/02_01/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/02_01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 18:15:34" itemprop="dateCreated datePublished" datetime="2019-03-05T18:15:34+08:00">2019-03-05</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
+</blockquote>
+<h1 id="第二章-堆叠"><a href="#第二章-堆叠" class="headerlink" title="第二章 堆叠"></a>第二章 堆叠</h1><h2 id="第一节-Batch-Preprocessing（一）"><a href="#第一节-Batch-Preprocessing（一）" class="headerlink" title="第一节 Batch Preprocessing（一）"></a>第一节 Batch Preprocessing（一）</h2><p><img src="/img/15387490259016/PI-6_Stack-1-0001.png" alt="PI-6_Stack-1-0001-w512"><br>所有的一切，都围绕着信号展开，并且信号是多多益善。增加信号唯有拍摄多张单帧然后叠加，几乎没有别的替代方法。所以，无论你的拍摄系统是怎样的，都需要收集足够多的光子以产生足够细腻的图像。</p>
+<a id="more"></a>
+<p>PI除了后期处理很强大之外，也是一个强大的图像预处理平台。并且，随着一些第三方脚本的发布，叠加也变得容易起来。</p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0004.png" alt="PI-6_Stack-1-0004-w512"><br>在Kai Wiechen和Juan Conejero搞出Batch Preprocessing（批预处理）之前，叠加牵涉到很多步骤，略显繁琐。</p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0005-1.png" alt="PI-6_Stack-1-0005-1-w565"><br>它牵涉到ImageCalibration（图像校准）, StarAlignment（星点对齐）以及 ImageIntegration（图像集成）等各个进程(process), 另外有需要的时候还得调用BatchDebayer脚本，以生成主文件。</p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0009.png" alt="PI-6_Stack-1-0009-w512"><br>现在，BatchPreprocessing是一个一站式的方案。实现了以下功能：生成主校准帧；把他们应用到亮帧；Debayer亮帧（彩色相机）；对齐所有亮帧；把他们叠加起来生成主文件。</p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0010.png" alt="PI-6_Stack-1-0010-w512"><br>目前，BatchPreprocessing已经充分调试过，应该可以好好工作了。但是它还是一个在不断改进的脚本。要保持这个脚本的版本是最新的，需要进入目录：Resources/Updates/Manage Repositories. </p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0011.png" alt="PI-6_Stack-1-0011-w512"><br>除了默认的更新链接外，请一定另外加上链接：<a href="http://update-devel.pixinsight.com/。" target="_blank" rel="noopener">http://update-devel.pixinsight.com/。</a></p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0013.png" alt="PI-6_Stack-1-0013-w512"><br>它会帮你从网上下载BatchPreprocessing和其它脚本。安装好了之后，它会出现在如图所示的位置。你可以把它加入你的最爱中去。</p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0014.png" alt="PI-6_Stack-1-0014-w512"><br>如果每个FITS文件的的头信息在拍摄的时候被准确写入，并且你把所有的文件类型都放在一个文件夹下，可以使用Add Files(添加文件）。</p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0016.png" alt="PI-6_Stack-1-0016-w512"><br>和MaxIm DL一样，这个脚本会识别你的校准帧和亮帧的类型，并把他们放入合适的位置。这个功能很方便，特别是对处理步骤比较复杂的黑白照片而言。</p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0015.png" alt="PI-6_Stack-1-0015-w512"><br>如果有任何照片不能正确识别，可以用Add Custom告诉脚本这些文件是哪一类型的。</p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0017.png" alt="PI-6_Stack-1-0017-w512"><br>你还可以在选中的标签类型上Clear（清除）所有的文件，或者Remove Selected(移除选中的）文件。</p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0018.png" alt="PI-6_Stack-1-0018-w512"><br>还有，你可以reset(重置)所有的设置为默认值或者上次设置的数值。</p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0019.png" alt="PI-6_Stack-1-0019-w512"><br>现在，让我们也试着手动添加文件。点击Add Bias (添加偏执）, 到合适的文件夹选中他们，并点击Open，相应的域里就出现了所有的偏置帧。现在，对暗帧(Dark frames), 平场帧（Flats），以及亮帧（Lights）做同样的操作。</p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0022.png" alt="PI-6_Stack-1-0022-w512"><br>如果需要使用之前已经叠加好的主偏执，主暗场或者主平场，在这里勾上相应的方框。这样，这些主校准场前会出现一个蓝色的星星。否则，就不要勾选这些方框。</p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0026.png" alt="PI-6_Stack-1-0026-w512"><br>让我们看看Options，Optimize dark frames（优化暗场）选项，如果暗场的曝光时间比亮场的曝光时间长，勾上这个选项，这样暗场就会在扣除偏执后按比例调整。就算暗场和亮场的时间是一样的，勾上这个选项还是能够优化计算，让暗场扣得更准确些。对于噪声很低的索尼传感器，也许可以不选上这个选项。</p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0028.png" alt="PI-6_Stack-1-0028-w512"><br>如果暗场的曝光时间不完全一致，可以调整Exposure tolerance（曝光容忍度),单位是秒。</p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0029.png" alt="PI-6_Stack-1-0029-w512"><br>如果Generate rejection maps被选上了，运行结束会生成高/低排斥图(high/low rejection map), 告诉你哪些像素没有参与最后的叠加计算。</p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0030.png" alt="PI-6_Stack-1-0030-w512"><br>Up-bottom FITS对绝大多数的相机而言都需要选上（译者注：默认是勾选上的）。</p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0031.png" alt="PI-6_Stack-1-0031-w512"><br>还需要考虑的选项是Calibrate only（只做校准）, 或者是Callibrate and Register （校准并对齐），或者是 Calibrate,Register, and Integrate （校准，对齐并叠加）。我们回头再看这个。</p>
+<p><img src="/img/15387490259016/PI-6_Stack-1-0032.png" alt="PI-6_Stack-1-0032-w512"><br>因为亮场需要对齐，你需要选择一个对齐参照照片(Registration Reference Image)。双击任何一个亮场帧，或者你也可以事先特别挑选一张最佳的作为参照帧。</p>
+<p>下一课，继续讲叠加。</p>
+<div style="text-align:center"><br>    <a style="float: left" href="/001_基础知识/005.蒙版&图像容器&进程容器">上一章</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/002_堆叠/002.BatchPreprocessing_02">下一节</a><br></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/01_06/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/02_02/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章-堆叠"><span class="nav-number">1.</span> <span class="nav-text">第二章 堆叠</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一节-Batch-Preprocessing（一）"><span class="nav-number">1.1.</span> <span class="nav-text">第一节 Batch Preprocessing（一）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

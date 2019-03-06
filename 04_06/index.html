@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="整理 by Terry（关于Terry）  第四章 非线性处理第六节 LocalHistogramEqualization &amp;amp; ExponentialTransformationLocalHistogramEqualization（局部直方图均衡）是一个强有力的工具，并且在处理流程的这一阶段可能会用到。而且它能把一张普通的图片变得极其漂亮。它简单易用，能增强低反差区域细节的能见度。LHE">
+<meta name="keywords" content="PixInsight 入门到精通 教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight 入门到精通">
+<meta property="og:url" content="http://pi.bestxtech.com/04_06/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第六节 LocalHistogramEqualization &amp;amp; ExponentialTransformationLocalHistogramEqualization（局部直方图均衡）是一个强有力的工具，并且在处理流程的这一阶段可能会用到。而且它能把一张普通的图片变得极其漂亮。它简单易用，能增强低反差区域细节的能见度。LHE">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0001.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0011.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0013.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0014.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0015.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0017.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0016.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0018.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0020.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0025.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0026.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0028.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0029.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0030.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0032.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0033.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0035.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0037.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0038.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0039.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0040.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0041.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0042.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0043.png">
+<meta property="og:updated_time" content="2019-03-06T03:30:50.373Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight 入门到精通">
+<meta name="twitter:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第六节 LocalHistogramEqualization &amp;amp; ExponentialTransformationLocalHistogramEqualization（局部直方图均衡）是一个强有力的工具，并且在处理流程的这一阶段可能会用到。而且它能把一张普通的图片变得极其漂亮。它简单易用，能增强低反差区域细节的能见度。LHE">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15401817833847/PI-8_Nonlinear-2-0001.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/04_06/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/04_06/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 18:18:39" itemprop="dateCreated datePublished" datetime="2019-03-05T18:18:39+08:00">2019-03-05</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
+</blockquote>
+<h1 id="第四章-非线性处理"><a href="#第四章-非线性处理" class="headerlink" title="第四章 非线性处理"></a>第四章 非线性处理</h1><h2 id="第六节-LocalHistogramEqualization-amp-ExponentialTransformation"><a href="#第六节-LocalHistogramEqualization-amp-ExponentialTransformation" class="headerlink" title="第六节 LocalHistogramEqualization &amp; ExponentialTransformation"></a>第六节 LocalHistogramEqualization &amp; ExponentialTransformation</h2><p>LocalHistogramEqualization（局部直方图均衡）是一个强有力的工具，并且在处理流程的这一阶段可能会用到。而且它能把一张普通的图片变得极其漂亮。它简单易用，能增强低反差区域细节的能见度。LHE会计算出一个变换曲线，提亮色阶的“高峰”同时压暗色阶的“低谷”。只需应用到图片上，大面积的亮度相似的区域反差就会得到增强。让我们来具体看看这个工具。</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0001.png" alt="PI-8_Nonlinear-2-0001-w512"><br>LHE提供了三个关键参数设定，并且配有实时预览功能帮助你决定这些参数。</p>
+<a id="more"></a>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0011.png" alt="PI-8_Nonlinear-2-0011-w512"><br>Kernel Radius决定了一个像素周围有多大的区域用于色阶评估。较低的值会产生较强的效果，但更易受噪声与星点周围Ringing效应的影响。较高的值产生的效果更柔和并且受那些人造物（如噪声与Ringing）的影响更小。对于大多数影像而言，50~100的值较为适合。</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0013.png" alt="PI-8_Nonlinear-2-0013-w512"><br>Contrast Limit（反差限制）应设为1.5~3.0。</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0014.png" alt="PI-8_Nonlinear-2-0014-w512"><br>Amount类似于透明度（Opacity）的概念。0.25的值表示把结果的25%与原图的75%混合，我们推荐0.25~0.75的Amount。</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0015.png" alt="PI-8_Nonlinear-2-0015-w512"><br>你可以不去管Histogram Resolution和Circular Kernel两个选项的设定，用默认就可以了。</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0017.png" alt="PI-8_Nonlinear-2-0017-w512"></p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0016.png" alt="PI-8_Nonlinear-2-0016-w512"><br>现在我对这张NGC253的明度图像执行LHE，注意这出色的、反差良好的结果。</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0018.png" alt="PI-8_Nonlinear-2-0018-w512"><br>不像传统的直方图均衡（HistogramEqualization）算法，LHE一般不会强化噪声。不过即便如此，我们还是建议，在用LHE或其他工具强化反差之前降一降噪。并且，不管是否降过了噪，防止背景与低信噪比区域受LHE影响都是很重要的。</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0020.png" alt="PI-8_Nonlinear-2-0020-w512"><br>我们还注意到，对全图进行强化反差的行为让亮星产生了一些令人不快的效应。怎么办呢？我们想到了蒙版，但我们如何能同时保护背景与星点呢？拓展你关于蒙版与PixelMath的知识，就知道了。为此我们先岔一下题。</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0025.png" alt="PI-8_Nonlinear-2-0025-w512"><br>在Part-1中我们学习了如何制作范围蒙版（Range Mask）与星点蒙版。让我们在这里再重复一下。</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0026.png" alt="PI-8_Nonlinear-2-0026-w512"><br>打开RangeSelection（范围选择），激活实时预览。Lower Limit在0.3及以下看起来可以在分离出星系供强化的同时保护背景。注意到有些星点跑来凑热闹了，这不合我们的意图。小而暗的星点不成问题，但亮星就比较麻烦，所以我们需要一个星点蒙版来掩盖掉它们。</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0028.png" alt="PI-8_Nonlinear-2-0028-w512"><br>经过大量的试验之后，上图就是是我们为这张特别的图片设定的参数。[画面中字幕：升高该值以（从上到下）忽视星系结构、识别较大星点、保护较大星点、排除较小星点。]</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0029.png" alt="PI-8_Nonlinear-2-0029-w512"><br>现在范围蒙版与星点蒙版都做好了</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0030.png" alt="PI-8_Nonlinear-2-0030-w512"><br>我们打开PixelMath。</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0032.png" alt="PI-8_Nonlinear-2-0032-w512"><br>把星点蒙版从范围蒙版中减去（Subtract），这样就产生了一个混合蒙版。</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0033.png" alt="PI-8_Nonlinear-2-0033-w512"><br>它同时保护了背景、低信噪比区域与星点不受反差强化的副作用的影响。</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0035.png" alt="PI-8_Nonlinear-2-0035-w512"><br>现在新的蒙版已经准备就绪</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0037.png" alt="PI-8_Nonlinear-2-0037-w512"><br>我们重新应用LocalHistogramEqualization，得到了一个近乎完美的结果。</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0038.png" alt="PI-8_Nonlinear-2-0038-w512"><br>ExponentialTransformation是为后续工作设计的善后工具，但在我们离开IntensityTransformation之前，我们认为介绍它一下还是很有意义的。</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0039.png" alt="PI-8_Nonlinear-2-0039-w512"><br>让非线性影像暗部的细节显现出来可能需要多次色阶调整，但会强化噪声，而且也可能使亮部饱和。“ET”不需要让两者（提升的暗部；噪声与高光）折衷就能达成这一目标，甚至外加一点可选择的模糊（降噪）。</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0040.png" alt="PI-8_Nonlinear-2-0040-w512"><br>虽然我们鼓励你去试验，但我们还是偏好默认的PIP Function微妙的效果。Order是执行强度的意思，而这取决于个人口味。在最小值0.1时你就能看到图像有所变化，而对于大多数图像而言，0.1~1.0的值就足够了。Smoothing选项会对噪声较强区域进行一定程度的降噪。你待会就能看到该值低至1.0时的效果，并且该值的设定你全可自己看着办。让默认的亮部蒙版（Lightness Mask）保持勾选以保护亮部区域是明智的。</p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0041.png" alt="PI-8_Nonlinear-2-0041-w512"></p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0042.png" alt="PI-8_Nonlinear-2-0042-w512"></p>
+<p><img src="/img/15401817833847/PI-8_Nonlinear-2-0043.png" alt="PI-8_Nonlinear-2-0043-w512"><br>之后我们在本系列中还会再回到IntensityTransformation。</p>
+<div style="text-align:center"><br>    <a style="float: left" href="/004_非线性处理/005">上一节</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/004_非线性处理/007">下一节</a><br></div> 
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/04_04/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/04_05/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-非线性处理"><span class="nav-number">1.</span> <span class="nav-text">第四章 非线性处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第六节-LocalHistogramEqualization-amp-ExponentialTransformation"><span class="nav-number">1.1.</span> <span class="nav-text">第六节 LocalHistogramEqualization &amp; ExponentialTransformation</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

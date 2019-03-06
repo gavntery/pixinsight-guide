@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="整理 by Terry（关于Terry）  第四章 非线性处理第二十四节 重新采样和另存为虽然 Geometry/Resample 和 File/Save As 在处理过程中任何一步都可以使用，但是一般我们都是在最后一步使用。无论是在上一节讲的sRGB转化之前还是之后做，你都希望缩小最后图像的大小以方便在网络上展示或者通过邮件发送。 打开Resample进程，它可以用来改变图像的尺寸。">
+<meta name="keywords" content="PixInsight 入门到精通 教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight 入门到精通">
+<meta property="og:url" content="http://pi.bestxtech.com/04_24/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第二十四节 重新采样和另存为虽然 Geometry/Resample 和 File/Save As 在处理过程中任何一步都可以使用，但是一般我们都是在最后一步使用。无论是在上一节讲的sRGB转化之前还是之后做，你都希望缩小最后图像的大小以方便在网络上展示或者通过邮件发送。 打开Resample进程，它可以用来改变图像的尺寸。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0188.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0191.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0194.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0195.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0196.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0197.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0198.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0201.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0203.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0210.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0212.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0213.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0216.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0217.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0218.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0220.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0221.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0223.png">
+<meta property="og:updated_time" content="2019-03-06T03:32:18.924Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight 入门到精通">
+<meta name="twitter:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第二十四节 重新采样和另存为虽然 Geometry/Resample 和 File/Save As 在处理过程中任何一步都可以使用，但是一般我们都是在最后一步使用。无论是在上一节讲的sRGB转化之前还是之后做，你都希望缩小最后图像的大小以方便在网络上展示或者通过邮件发送。 打开Resample进程，它可以用来改变图像的尺寸。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15401842463266/PI-24_Nonlinear-18-0188.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/04_24/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/04_24/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 18:18:39" itemprop="dateCreated datePublished" datetime="2019-03-05T18:18:39+08:00">2019-03-05</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
+</blockquote>
+<h1 id="第四章-非线性处理"><a href="#第四章-非线性处理" class="headerlink" title="第四章 非线性处理"></a>第四章 非线性处理</h1><h2 id="第二十四节-重新采样和另存为"><a href="#第二十四节-重新采样和另存为" class="headerlink" title="第二十四节 重新采样和另存为"></a>第二十四节 重新采样和另存为</h2><p>虽然 Geometry/Resample 和 File/Save As 在处理过程中任何一步都可以使用，但是一般我们都是在最后一步使用。无论是在上一节讲的sRGB转化之前还是之后做，你都希望缩小最后图像的大小以方便在网络上展示或者通过邮件发送。</p>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0188.png" alt="PI-24_Nonlinear-18-0188-w512"><br>打开Resample进程，它可以用来改变图像的尺寸。</p>
+<a id="more"></a>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0191.png" alt="PI-24_Nonlinear-18-0191-w512"><br>假设你想保持长宽比例，勾选Preserve Aspect Ratio，然后只要键入你想要的长度或者宽度的新尺寸，或者键入一个百分比。</p>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0194.png" alt="PI-24_Nonlinear-18-0194-w512"><br>新的像素的尺寸如上图</p>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0195.png" alt="PI-24_Nonlinear-18-0195-w512"><br>还有实际文件尺寸，这通常在需要打印的时候很有用。</p>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0196.png" alt="PI-24_Nonlinear-18-0196-w512"><br>这个是基于默认的72 ppi分辨率。</p>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0197.png" alt="PI-24_Nonlinear-18-0197-w512"><br>由于打印照片通常需要达到200-300 ppi，你可以在这里提高分辨率，注意观察实际尺寸的变化。</p>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0198.png" alt="PI-24_Nonlinear-18-0198-w512"><br>要打印比较大的照片，我们就要提高总像素尺寸, 有效地对原始照片重新采样。</p>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0201.png" alt="PI-24_Nonlinear-18-0201-w512"><br>PixInsight为了满足需求，将创建出新的像素，这个是通过插值参数来控制的。插值，对于缩小图片的尺寸也一样的重要。详细信息可以阅读帮助文档(C:/Program Files/PixInsight/doc/docs/InterpolationAlgorithns/InterpolationAlgorithms.html)。</p>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0203.png" alt="PI-24_Nonlinear-18-0203-w512"><br>但是大部分情况下，你可以用默认的Auto（自动）,让PI去选择合适的插值算法。</p>
+<p>File/Save 仅仅是按照图像现有的格式和位深来保存图像。通过Save As（另存为)则可以改变文件的参数。在图像处理结束的时候，一个常见的场景是把最后的FITS以32位浮点的格式存起来， 并且创立TIFF和JPEG格式的版本。</p>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0210.png" alt="PI-24_Nonlinear-18-0210-w512"><br>点击Save As, 你会看到Save Image File As(另存储文件为）窗口。你可以改变文件名。</p>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0212.png" alt="PI-24_Nonlinear-18-0212-w512"><br>取决于你在下拉菜单选择的格式，会显示不同的对话窗口。</p>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0213.png" alt="PI-24_Nonlinear-18-0213-w512"><br>由于PI知道这个是FITS，如果点击Save只会显示FITS的选项。如果我想在其它天文处理软件打开这个文件，我也许需要从这里修改格式以取得最好的结果。弄好之后，点击OK。</p>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0216.png" alt="PI-24_Nonlinear-18-0216-w512"><br>如果我选择TIFF, TIFF相关的选项就是出现。为了进一步在其它优秀的图像处理软件处理，比如说PS，选择16-bit unsigned integer（16位无符号整数），或者如果为了存档编目的话，直接选8位。</p>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0217.png" alt="PI-24_Nonlinear-18-0217-w512"><br>我一般不压缩图像，但是这里有压缩的选项。</p>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0218.png" alt="PI-24_Nonlinear-18-0218-w512"><br>如果内置ICC配置文件的话，就可以告诉别的软件这个文件使用了什么颜色配置文件。和前面一样，弄好了之后就点OK。</p>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0220.png" alt="PI-24_Nonlinear-18-0220-w512"><br>如果选了JPEG，FITS或者16位的TIFF就会发出警告，你可以选中“Don’t ask anymore”来禁止这个警告。</p>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0221.png" alt="PI-24_Nonlinear-18-0221-w512"><br>PixInsight会自动把文件截成8位，然后显示JPEG的选项窗口。这里，我们可以再次内置颜色配置文件(color profile), 并选择不同的图片质量。如果设为100，生成的图像和原文件看起来基本无差别，这个数值越低，压缩得就越厉害，图像质量就越差，但是文件的尺寸也越小。</p>
+<p><img src="/img/15401842463266/PI-24_Nonlinear-18-0223.png" alt="PI-24_Nonlinear-18-0223-w512"><br>在Image菜单下，有SampleFormatConversion进程，它是另外一个可以改变位深的工具。</p>
+<div style="text-align:center"><br>    <a style="float: left" href="/004_非线性处理/023">上一节</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/005_流程/001">下一章</a><br></div> 
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/04_22/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-非线性处理"><span class="nav-number">1.</span> <span class="nav-text">第四章 非线性处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第二十四节-重新采样和另存为"><span class="nav-number">1.1.</span> <span class="nav-text">第二十四节 重新采样和另存为</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

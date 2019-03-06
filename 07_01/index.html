@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="现在马赛克已经讲完了，我们继续讲其它先进概念，由于许多进程仍然需要MASK（蒙版）工具，特别是星点蒙版(star masks) 工具，我觉得这是一个合适的时间去提高我们构建蒙版的技巧。 正如我们之前看到的，星点蒙版(star masks)对许多图像处理任务有巨大的帮助作用。他们的目的通常是要么保护星点不受处理过程中的负面影响，">
+<meta name="keywords" content="星点蒙版">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight入门到精通 第七章 星点蒙版 第一节">
+<meta property="og:url" content="http://pi.bestxtech.com/07_01/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="现在马赛克已经讲完了，我们继续讲其它先进概念，由于许多进程仍然需要MASK（蒙版）工具，特别是星点蒙版(star masks) 工具，我觉得这是一个合适的时间去提高我们构建蒙版的技巧。 正如我们之前看到的，星点蒙版(star masks)对许多图像处理任务有巨大的帮助作用。他们的目的通常是要么保护星点不受处理过程中的负面影响，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0001.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0002.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0004.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0005.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0006.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0007.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0008.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0011.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0013.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0014.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0015.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0017.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0018.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0019.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0022.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0028.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0030.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0031.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0032.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0034.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0036.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0047.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0039.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0041.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0042.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0045.png">
+<meta property="og:updated_time" content="2019-03-06T05:39:06.079Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight入门到精通 第七章 星点蒙版 第一节">
+<meta name="twitter:description" content="现在马赛克已经讲完了，我们继续讲其它先进概念，由于许多进程仍然需要MASK（蒙版）工具，特别是星点蒙版(star masks) 工具，我觉得这是一个合适的时间去提高我们构建蒙版的技巧。 正如我们之前看到的，星点蒙版(star masks)对许多图像处理任务有巨大的帮助作用。他们的目的通常是要么保护星点不受处理过程中的负面影响，">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15401855043493/PI-11_Star_Masks-1-0001.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/07_01/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>PixInsight入门到精通 第七章 星点蒙版 第一节 | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/07_01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PixInsight入门到精通 第七章 星点蒙版 第一节
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <a href="/about/">Terry</a>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-23 17:25:51" itemprop="dateCreated datePublished" datetime="2019-02-23T17:25:51+08:00">2019-02-23</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>现在马赛克已经讲完了，我们继续讲其它先进概念，由于许多进程仍然需要MASK（蒙版）工具，特别是星点蒙版(star masks) 工具，我觉得这是一个合适的时间去提高我们构建蒙版的技巧。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0001.png" alt="PI-11_Star_Masks-1-0001-w512"><br>正如我们之前看到的，星点蒙版(star masks)对许多图像处理任务有巨大的帮助作用。<br>他们的目的通常是要么保护星点不受处理过程中的负面影响，</p>
+<a id="more"></a>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0002.png" alt="PI-11_Star_Masks-1-0002-w512"><br>或者去保护除了星点之外的所有东西。星点蒙版有很多种类，并且那些可用于一个任务或图像的好方法，很可能不适合另外一个。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0004.png" alt="PI-11_Star_Masks-1-0004-w512"><br>并且，通常更容易通过眼睛来观察图像，从而知道所需要的星点蒙版是什么样的类型, 而不是去实际创造个蒙版。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0005.png" alt="PI-11_Star_Masks-1-0005-w512"><br>图像中的星点数量、图像比例、以及它们的总体尺寸，</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0006.png" alt="PI-11_Star_Masks-1-0006-w512"><br>将决定我们的设置。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0007.png" alt="PI-11_Star_Masks-1-0007-w512"><br>这里有两种主要的星点蒙版工具，分别是是 MaskGeneration子菜单下的StarMask，</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0008.png" alt="PI-11_Star_Masks-1-0008-w512"><br>和Compatibility子菜单下的 ATrousWaveletTransform。StarMask 在大多数情况下是很好的，而ATrous变换则在需要构建一个非常精确的蒙版的时候派上用场。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0011.png" alt="PI-11_Star_Masks-1-0011-w512"><br>并且，在某些情况下，Morphology子菜单下的MorphologicalTransformation也可能用于进一步精制Mask。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0013.png" alt="PI-11_Star_Masks-1-0013-w512"><br>有时需要建立两个星点Masks, 并用PixelMath合并它们以获得理想的蒙版。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0014.png" alt="PI-11_Star_Masks-1-0014-w512"><br>如你所知，星点蒙版可用于线性，或非线性图。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0015.png" alt="PI-11_Star_Masks-1-0015-w512"><br>不同于Range Masks（范围蒙版），它们不需要非在线性状态下处理。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0017.png" alt="PI-11_Star_Masks-1-0017-w512"><br>让我们再看一下星点蒙版处理过程。降低噪声阈值（NoiseThreshold)的默认设置0.1将包括更多结构，增加这个值将排除一些小结构并且排除内含噪点。我们通常设置在默认值和0.2之间。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0018.png" alt="PI-11_Star_Masks-1-0018-w512"><br>工作模式是Star Mask（星点蒙版）。其它选项，尤其是结构探测（Structure Detection），可以有助于分析这个进程把哪些东西辨识为星星。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0019.png" alt="PI-11_Star_Masks-1-0019-w512"><br>Scale（尺度）也有助于星点识别。默认设置值为5是一个好的起点，但是你可能需要降低到比如说3，去抓住更小的星。当大的亮星需要被包括在内时，就需要设置调高到8或8以上。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0022.png" alt="PI-11_Star_Masks-1-0022-w512"><br>在Structure Growth下有三个参数，他们影响蒙版结构的大小。增加Large-scale值将增加大星的保护区（并且避免方形星点）。增加Small-Scale将增加小星的保护区。还可以调高Compensation（补偿）以帮助小结构的生长。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0028.png" alt="PI-11_Star_Masks-1-0028-w512"><br>下一个是 Mask Generation（蒙版生成），增加Smoothness（平滑度）可以羽化蒙版的边缘。太小的值可能让掩蔽区域和未掩蔽区域之间生硬地转换。太高的值可能弱化蒙版的保护能力。我们通常发现自己把这个值设在2-8之间比较合适。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0030.png" alt="PI-11_Star_Masks-1-0030-w512"><br>下面是Mask Preprocessing(蒙版预处理)，对蒙版生成非常重要。虽然我们之前看到过类似的<br>滑块，让我们花一点时间来理解它们。顾名思义，蒙版预处理发生在Star Detection开始前，并且是一个临时的、幕后的直方图调整，以辅助星点识别。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0031.png" alt="PI-11_Star_Masks-1-0031-w512"><br>让我们以不同的方式说明这一点。克隆图像</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0032.png" alt="PI-11_Star_Masks-1-0032-w512"></p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0034.png" alt="PI-11_Star_Masks-1-0034-w512"><br>我应用ATrousWaveletTransform去消除大结构，留下星点。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0036.png" alt="PI-11_Star_Masks-1-0036-w512"><br>调用HistogramTransformation的实时预览</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0047.png" alt="PI-11_Star_Masks-1-0047-w512"><br>我操作Shadows和Midtones滑块来调整图像。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0039.png" alt="PI-11_Star_Masks-1-0039-w512"><br>注意当我提高黑点（black points，也就是Shadows)，小星被剪掉。当我降低中点（mid point，也就是midtones），所有星星，包括非常小的星点变得更明显。使用两个滑块，我甚至能揭示最小的星点，并且同时排除不想要的星云结构。这就是蒙版预处理滑块如何工作。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0041.png" alt="PI-11_Star_Masks-1-0041-w512"><br>在实践中，提高Shadows将排除更小的星。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0042.png" alt="PI-11_Star_Masks-1-0042-w512"><br>升高Midtones也将让他们变得更加暗弱，及其让大星点也变暗弱。相反，降低Midtones将增亮所有星点。你将不用更改Highlights滑块。</p>
+<p><img src="/img/15401855043493/PI-11_Star_Masks-1-0045.png" alt="PI-11_Star_Masks-1-0045-w512"><br>当你对滑块值满意后，你将跟随我们的指引，定义进程的属性值，StarMask进程应用到克隆图像上，而不是运用到图像本身。如你所知，生成蒙版是比较慢的，并且把它运用到在小块的预览上工作也不会加快速度。因此，我们对StarMask进程的理解越深，就能越快的得到想要的结果。</p>
+<p>下一节，继续讲解星点蒙版。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/星点蒙版/" rel="tag"># 星点蒙版</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/07_02/" rel="next" title="PixInsight入门到精通 第七章 星点蒙版 第二节">
+                <i class="fa fa-chevron-left"></i> PixInsight入门到精通 第七章 星点蒙版 第二节
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/08_01/" rel="prev" title="PixInsight入门到精通 第八章 多尺度（Multiscale）处理 第一节">
+                PixInsight入门到精通 第八章 多尺度（Multiscale）处理 第一节 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

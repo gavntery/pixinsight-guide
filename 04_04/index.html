@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="整理 by Terry（关于Terry）  第四章 非线性处理第四节 HistogramTransformation让我们接着学习HistogramTransformation（色阶变换）。我们将用它强大的放大功能来完善我们的拉伸。">
+<meta name="keywords" content="PixInsight 入门到精通 教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight 入门到精通">
+<meta property="og:url" content="http://pi.bestxtech.com/04_04/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第四节 HistogramTransformation让我们接着学习HistogramTransformation（色阶变换）。我们将用它强大的放大功能来完善我们的拉伸。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0158.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0161.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0162.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0163.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0164.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0165.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0166.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0168.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0169.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0170.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0171.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0173.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0174.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0177.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0178.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0179.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0180.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0181.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0182.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0183.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0185.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0188.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0189.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0190.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0193.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0194.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0195.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0196.png">
+<meta property="og:updated_time" content="2019-03-06T03:30:54.653Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight 入门到精通">
+<meta name="twitter:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第四节 HistogramTransformation让我们接着学习HistogramTransformation（色阶变换）。我们将用它强大的放大功能来完善我们的拉伸。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0158.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/04_04/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/04_04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 18:18:39" itemprop="dateCreated datePublished" datetime="2019-03-05T18:18:39+08:00">2019-03-05</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
+</blockquote>
+<h1 id="第四章-非线性处理"><a href="#第四章-非线性处理" class="headerlink" title="第四章 非线性处理"></a>第四章 非线性处理</h1><h2 id="第四节-HistogramTransformation"><a href="#第四节-HistogramTransformation" class="headerlink" title="第四节 HistogramTransformation"></a>第四节 HistogramTransformation</h2><p><img src="/img/15398789532925/PI-6_Linear-6-0158.png" alt="PI-6_Linear-6-0158-w512"><br>让我们接着学习HistogramTransformation（色阶变换）。我们将用它强大的放大功能来完善我们的拉伸。</p>
+<a id="more"></a>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0161.png" alt="PI-6_Linear-6-0161-w512"><br>和我们在先前的IP4AP系列中看到的一样，我们想要设置一个比较暴力的Black Point（黑点），同时让最少的真实信息被切掉。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0162.png" alt="PI-6_Linear-6-0162-w512"><br>把Shadows Clipping Point（阴影剪切位点）滑块向右移</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0163.png" alt="PI-6_Linear-6-0163-w512"><br>我们通过逼近“山”的“山脚”来移去无用的空间，而“山脚”意味着真实信息的开端。为了避免切掉亮部的细节，我们一般不推荐手动降低White Point（白点）的行为。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0164.png" alt="PI-6_Linear-6-0164-w512"></p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0165.png" alt="PI-6_Linear-6-0165-w512"></p>
+<p>只需点击上图的两个按钮，就可以把阴影与高光的剪切位点设定为剪切前的最大可能值。这可以帮你避免手动调整的麻烦。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0166.png" alt="PI-6_Linear-6-0166-w512"><br>拖动Midtones Balance（中间调平衡）滑块，</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0168.png" alt="PI-6_Linear-6-0168-w512"><br>然后用肉眼和另一个东西――Pseudo White Point（伪白点），中间调附近色阶的底部的一小块亮区――来引导你的工作。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0169.png" alt="PI-6_Linear-6-0169-w512"><br>在很多例子中，我们建议把这个滑块放在这条垂线</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0170.png" alt="PI-6_Linear-6-0170-w512"><br>与中间垂线之间的某处。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0171.png" alt="PI-6_Linear-6-0171-w512"><br>在这里显示了被切掉的像素数占总像素数的百分比。即便在这如此暴力的调整下，我们可以看到只有很小一部分的像素被切掉了。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0173.png" alt="PI-6_Linear-6-0173-w512"><br>HT为阴影（Shadow）和高光（Highlight）提供了Auto Clip（自动剪切）工具。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0174.png" alt="PI-6_Linear-6-0174-w512"><br>打开Auto Clip Setup（自动剪切设置），你可以设置你想切掉的像素数占总像素数的百分比。然后点击相应的按钮，就可以把设定好的阴影与高光剪切应用到图像上。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0177.png" alt="PI-6_Linear-6-0177-w512"><br>好了，现在我们终于准备好拉伸了。关闭实时预览（Real-Time Preview），把此次变换应用于图像。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0178.png" alt="PI-6_Linear-6-0178-w512"><br>然后，就出来了一个漂亮的、反差良好的结果。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0179.png" alt="PI-6_Linear-6-0179-w512"><br>不要被Output Histogram（输出色阶）吓到了。HT现在在输出色阶上显示的是下一次应用的结果。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0180.png" alt="PI-6_Linear-6-0180-w512"><br>只需点击Reset（初始化）就可以把它还原为初始状态。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0181.png" alt="PI-6_Linear-6-0181-w512"><br>在第一章第一节中我们曾说过，在Readout Mode（读出模式）下，将鼠标移动到图像的某处然后点击，程序就会计算出鼠标所在像素的信息。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0182.png" alt="PI-6_Linear-6-0182-w512"><br>当色阶被放大到足够大时，这些信息就能够精确地读出，并且以竖线的形式显示在直方图上。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0183.png" alt="PI-6_Linear-6-0183-w512"><br>具体有关Histogram Readout Mode的Documentation我们留给你自己去看。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0185.png" alt="PI-6_Linear-6-0185-w512"><br>和AutoHistogram、CurvesTransformation一样，HistogramTransformation可以分别操控不同的色彩通道。虽然色彩合成中的灰度原片（Grayscale Color Master，即R、G、B原片）可以单独分别进行一些线性的预处理以便进行三色合成（本章第一节和第二节），而合成为色彩原片（Chrominance Master RGB）之后，它们就表达为这样的东西（R/G/B通道），你仍然可以继续调整各个通道。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0188.png" alt="PI-6_Linear-6-0188-w512"><br>对RGB原片（RGB Master）来说，你可以用合并的RGB/K通道继续拉伸，然后再进各个单色通道做精细调整。不过需要注意的是，如果需要保持先前做好的ColorCalibration（色校准）与ColorBalance（色平衡），不建议单独拉伸各个灰度原片或者单色通道。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0189.png" alt="PI-6_Linear-6-0189-w512"><br>在第一章第三节中，我们演示了如何将一个STF Auto Stretch变换直接递送给HistogramTransformation。因为Auto Stretch被认为是最好的工具之一，所以用它来做基本非线性拉伸是很有效的。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0190.png" alt="PI-6_Linear-6-0190-w512"><br>你可以想好一个变换，然后在应用之前，用HT优秀的编辑面板来完善它。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0193.png" alt="PI-6_Linear-6-0193-w512"><br>当处理单色影像时，用相似手法拉伸明度图像（Luminance）与色彩图像（Chrominance）是明智的，这样可以让它们更好地相匹配以便进行LRGB合成。用STF/HT方式来对两张图（明度与色彩）进行基础的拉伸，这种做法很合逻辑。之后我们将展示另外两种完善明度图像与色彩图像匹配程度的方式。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0194.png" alt="PI-6_Linear-6-0194-w512"><br>HT也提供了一个全局Reset（初始化）按钮</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0195.png" alt="PI-6_Linear-6-0195-w512"><br>与几个局部Reset按钮。</p>
+<p><img src="/img/15398789532925/PI-6_Linear-6-0196.png" alt="PI-6_Linear-6-0196-w512"><br>现在我们已经用上述的一个或多个工具完成了基本的非线性拉伸，我们将进入下一节――IntensityTransformations。</p>
+<div style="text-align:center"><br>    <a style="float: left" href="/004_非线性处理/003">上一节</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/004_非线性处理/005">下一节</a><br></div> 
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/04_03/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/04_06/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-非线性处理"><span class="nav-number">1.</span> <span class="nav-text">第四章 非线性处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第四节-HistogramTransformation"><span class="nav-number">1.1.</span> <span class="nav-text">第四节 HistogramTransformation</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

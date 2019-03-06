@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="整理 by Terry（关于Terry）  第四章 非线性处理第二节 CurvesTransformation &amp;amp; AutoHistogram &amp;amp; AdaptiveStretchLion分享的一些拉伸工具可以在IntensityTransformations下找到，连同我们的老朋友――Rescale和STF。">
+<meta name="keywords" content="PixInsight 入门到精通 教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight 入门到精通">
+<meta property="og:url" content="http://pi.bestxtech.com/04_02/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第二节 CurvesTransformation &amp;amp; AutoHistogram &amp;amp; AdaptiveStretchLion分享的一些拉伸工具可以在IntensityTransformations下找到，连同我们的老朋友――Rescale和STF。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398787911996/PI-4_Linear-4-0087.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398787911996/PI-4_Linear-4-0089.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398787911996/PI-4_Linear-4-0090.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398787911996/PI-4_Linear-4-0092.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398787911996/PI-4_Linear-4-0093.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398787911996/PI-4_Linear-4-0095.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398787911996/PI-4_Linear-4-0100.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398787911996/PI-4_Linear-4-0102.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398787911996/PI-4_Linear-4-0105.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398787911996/PI-4_Linear-4-0106.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398787911996/PI-4_Linear-4-0107.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398787911996/PI-4_Linear-4-0108.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398787911996/PI-4_Linear-4-0110.png">
+<meta property="og:updated_time" content="2019-03-06T03:30:58.714Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight 入门到精通">
+<meta name="twitter:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第二节 CurvesTransformation &amp;amp; AutoHistogram &amp;amp; AdaptiveStretchLion分享的一些拉伸工具可以在IntensityTransformations下找到，连同我们的老朋友――Rescale和STF。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15398787911996/PI-4_Linear-4-0087.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/04_02/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/04_02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 18:18:39" itemprop="dateCreated datePublished" datetime="2019-03-05T18:18:39+08:00">2019-03-05</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
+</blockquote>
+<h1 id="第四章-非线性处理"><a href="#第四章-非线性处理" class="headerlink" title="第四章 非线性处理"></a>第四章 非线性处理</h1><h2 id="第二节-CurvesTransformation-amp-AutoHistogram-amp-AdaptiveStretch"><a href="#第二节-CurvesTransformation-amp-AutoHistogram-amp-AdaptiveStretch" class="headerlink" title="第二节 CurvesTransformation &amp; AutoHistogram &amp; AdaptiveStretch"></a>第二节 CurvesTransformation &amp; AutoHistogram &amp; AdaptiveStretch</h2><p><img src="/img/15398787911996/PI-4_Linear-4-0087.png" alt="PI-4_Linear-4-0087-w512"><br>Lion分享的一些拉伸工具可以在IntensityTransformations下找到，连同我们的老朋友――Rescale和STF。</p>
+<a id="more"></a>
+<p>我们先来看看CurvesTransformation。我们大都很熟悉曲线的概念与实际操作了。</p>
+<p><img src="/img/15398787911996/PI-4_Linear-4-0089.png" alt="PI-4_Linear-4-0089-w512"><br>在Photoshop的曲线里，一个典型的“标准曲线（Standard Curve）”形状需要多至半打的重复操作，才能使一张天文影像得到足够的拉伸。</p>
+<p><img src="/img/15398787911996/PI-4_Linear-4-0090.png" alt="PI-4_Linear-4-0090-w512"><br>因为这个操作可以用其他工具更快更好地完成，CurvesTransformation的作用在我们看来是在最初的拉伸之后，用于微调。因此我们将在下一章的第一节中重新讲解CurvesTransformation。</p>
+<p><img src="/img/15398787911996/PI-4_Linear-4-0092.png" alt="PI-4_Linear-4-0092-w512"><br>这里也可以找到LocalHistogramEqualization。和CurvesTransformation相似，我们建议用强大的LHE来做拉伸之后的反差强化工作，之后我们也会再次讲解（本章第六节）。</p>
+<p><img src="/img/15398787911996/PI-4_Linear-4-0093.png" alt="PI-4_Linear-4-0093-w512"><br>AutoHistogram可以自动拉伸影像使其达到各通道预先规定的中间值。当整张图片的主要内容是天空背景，统计数据主要由背景决定时，选择使用它的效果是最好的。然后我们就可以用自动计算出的中间调的值（midtones）来非线性拉伸影像。</p>
+<p><img src="/img/15398787911996/PI-4_Linear-4-0095.png" alt="PI-4_Linear-4-0095-w512"><br>当Target Medien Values有效时，点击“Set As Active Image”可以查看当前的背景参数。如果影像是灰度的，那么Joint RGB/K通道的滑块会被激活。</p>
+<p><img src="/img/15398787911996/PI-4_Linear-4-0100.png" alt="PI-4_Linear-4-0100-w512"><br>彩色影像会激活Individual选项，分别有R，G，B三个滑块。</p>
+<p><img src="/img/15398787911996/PI-4_Linear-4-0102.png" alt="PI-4_Linear-4-0102-w512"><br>选择Stretch Method（拉伸方式）。你可以发现从上到下三个模式，对比度在增加，并且在很多情况下我们更偏好MTF模式。这里有一个小贴士――如果你喜欢让亮星的核心被压制，用Logarithmic Transformation来进行最初的拉伸。这就是所有的选项了。</p>
+<p><img src="/img/15398787911996/PI-4_Linear-4-0105.png" alt="PI-4_Linear-4-0105-w512"><br>接下来，该设定合适的参数了。对这个明度图像，默认值0.12作为起始是很不错的。并且我们一般是用0.12~0.2之间的参数。</p>
+<p><img src="/img/15398787911996/PI-4_Linear-4-0106.png" alt="PI-4_Linear-4-0106-w512"><br>我们提到过，你可以通过启用Histogram Clipping来改变每个通道的Black Point或White Point。这个设置和TargetMedianValues所起的效果是一样的。</p>
+<p><img src="/img/15398787911996/PI-4_Linear-4-0107.png" alt="PI-4_Linear-4-0107-w512"><br>Highlight Clipping我们一般不推荐使用，但你可以稍微用一下Shadows Clipping来产生一个更大的Black Point。</p>
+<p><img src="/img/15398787911996/PI-4_Linear-4-0108.png" alt="PI-4_Linear-4-0108-w512"><br>AutoHistogram也可以用于背景色平衡校正。无论如何，不管是在线性还是非线性下，你都可以使用AutoHistogram，来迫使所有三个通道的目标值（TargetValue）相等。</p>
+<p>除非你想特意强调某通道，否则最简单的事就是Set As Active Image这里读出当前RGB三色的比例，选择Joint，然后应用（Apply）。</p>
+<p><img src="/img/15398787911996/PI-4_Linear-4-0110.png" alt="PI-4_Linear-4-0110-w512"><br>接下来是2012年加入的新功能AdaptiveStretch，在PixInsight中它基于Maria和Costas Petrou开发的算法。它易于使用，而且最有趣的是，它通过分析影像中的真实内容来工作。低于NoiseThreshold的亮部差异不但不会被强化，甚至可能会被弱化。高于NoiseThreshold的亮度差异，被认为是真实信息，而会被强化。因此，computed transformation curve是产生理想的反差并且不强化噪声的最佳选择。另外，AdaptiveStretch保证没有任何一个像素的信息会被切掉。</p>
+<p>接下来，是对AdaptiveStretch的更多讲解。</p>
+<div style="text-align:center"><br>    <a style="float: left" href="/004_非线性处理/001">上一节</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/004_非线性处理/003">下一节</a><br></div> 
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/04_01/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/04_03/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-非线性处理"><span class="nav-number">1.</span> <span class="nav-text">第四章 非线性处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第二节-CurvesTransformation-amp-AutoHistogram-amp-AdaptiveStretch"><span class="nav-number">1.1.</span> <span class="nav-text">第二节 CurvesTransformation &amp; AutoHistogram &amp; AdaptiveStretch</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

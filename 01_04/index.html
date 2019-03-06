@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="整理 by Terry（关于Terry）  第一章 基础知识第四节 窗口按钮 &amp;amp; 预览 &amp;amp; 蒙版图上可以看到，所有的进程(process)都提供了新实例（New Instance）三角箭头(arrow)">
+<meta name="keywords" content="PixInsight 入门到精通 教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight 入门到精通">
+<meta property="og:url" content="http://pi.bestxtech.com/01_04/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="整理 by Terry（关于Terry）  第一章 基础知识第四节 窗口按钮 &amp;amp; 预览 &amp;amp; 蒙版图上可以看到，所有的进程(process)都提供了新实例（New Instance）三角箭头(arrow)">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0110.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0113.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0114.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0115.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0117.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0118.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0119.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0120.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0121.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0122.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0123.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0125.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0126.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0127.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0131.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0132.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0133.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0137.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0138.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0139.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0140.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0143.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0145.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0147.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0148.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0149.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0150.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0151.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0156.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0158.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0158.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0161.png">
+<meta property="og:updated_time" content="2019-03-06T03:27:34.030Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight 入门到精通">
+<meta name="twitter:description" content="整理 by Terry（关于Terry）  第一章 基础知识第四节 窗口按钮 &amp;amp; 预览 &amp;amp; 蒙版图上可以看到，所有的进程(process)都提供了新实例（New Instance）三角箭头(arrow)">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15387484241630/PI-4_Primer-4-0110.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/01_04/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/01_04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 18:13:41" itemprop="dateCreated datePublished" datetime="2019-03-05T18:13:41+08:00">2019-03-05</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
+</blockquote>
+<h1 id="第一章-基础知识"><a href="#第一章-基础知识" class="headerlink" title="第一章 基础知识"></a>第一章 基础知识</h1><h2 id="第四节-窗口按钮-amp-预览-amp-蒙版"><a href="#第四节-窗口按钮-amp-预览-amp-蒙版" class="headerlink" title="第四节 窗口按钮 &amp; 预览 &amp; 蒙版"></a>第四节 窗口按钮 &amp; 预览 &amp; 蒙版</h2><p><img src="/img/15387484241630/PI-4_Primer-4-0110.png" alt="PI-4_Primer-4-0110-w512"><br>图上可以看到，所有的进程(process)都提供了新实例（New Instance）三角箭头(arrow)</p>
+<a id="more"></a>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0113.png" alt="PI-4_Primer-4-0113-w512"><br>应用(Apply box), </p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0114.png" alt="PI-4_Primer-4-0114-w512"><br>文本链接（Documentation link）</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0115.png" alt="PI-4_Primer-4-0115-w512"><br>和重置(Reset), </p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0117.png" alt="PI-4_Primer-4-0117-w512"></p>
+<p>只有少数例外，比如说裁剪(Crop)和背景提取(Background Extraction)，它们是在动态模式下运行的。这些进程(process)有绿色的小勾来”运行”，而不是运用(Apply)。他们除非用红色的”x”取消，否则不能关闭。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0118.png" alt="PI-4_Primer-4-0118-w512"><br>这些为能够处理很多不同图像设计的进程(process)，都有这个”全局运用”图标。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0119.png" alt="PI-4_Primer-4-0119-w512"><br>最后，有些进程(process)有这个很方便的实时预览图标。</p>
+<p>讲这些之前，让我们先讲讲标准的预览。回忆一下，我们在第二课的的时候创建了第一个预览。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0120.png" alt="PI-4_Primer-4-0120-w512"><br>你也可以按Alt+N，然后拖动鼠标定义一个区域来创建预览。选上这个预览，我们可以缩放这个预览，或者调整它的位置。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0121.png" alt="PI-4_Primer-4-0121-w512"></p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0122.png" alt="PI-4_Primer-4-0122-w512"><br>通过拖拽这个标签，你可以复制一个一模一样的预览。想象一下，通过一模一样的图像，比较不同的操作的结果是多么的简单和直观。你也可以拖拽一个预览到另外一个图像。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0123.png" alt="PI-4_Primer-4-0123-w512"><br>有时候，我们想把不同的预览合并起来。让我们第一次使用脚本（Scripts），这是PreviewAggregator（预览聚合器），我们回头再讲它。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0125.png" alt="PI-4_Primer-4-0125-w512"><br>要把一个进程运用到一个预览，把三角箭头拖到预览上，而不是图像上。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0126.png" alt="PI-4_Primer-4-0126-w512"><br>有些进程不能运用到预览上，但是大部分都可以。一旦完成之后，撤销预览/重做预览的按钮就会出现，而不是用常规的撤销/重做按键。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0127.png" alt="PI-4_Primer-4-0127-w512"><br>你可以用这个按键来删除一个活动预览，或者在菜单里选择删除全部。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0131.png" alt="PI-4_Primer-4-0131-w512"><br>实时预览又不一样，只有少出的进程能够提供，比如说我们第三课中讲到的HistogramTransformation。点这里打开了一个新窗口，只要窗口还保持打开，进程和预览之间的联系就是实时的。看看我们做非线性拉升的时候发生了什么。这预览虽然虽然不完美但还是很好，它告诉我们任何改变对图像有什么影响。这样就不用创建很多个预览来试验这个进程在不同参数下的效果。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0132.png" alt="PI-4_Primer-4-0132-w512"><br>你甚至可以选择预览各个独立的通道。我们马上就会讲到蒙版(mask)</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0133.png" alt="PI-4_Primer-4-0133-w512"><br>但是在这里需要你记住的是，当一个图像有蒙版的时候，我们可以在这里选择是否应用蒙版。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0137.png" alt="PI-4_Primer-4-0137-w512"><br>像任何窗口一样，我们可以最大化或者关闭窗口，但是我们不能把实时预览的图像放大。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0138.png" alt="PI-4_Primer-4-0138-w512"><br>PI的蒙版(mask)是一个强大的选择性调整工具。在一个天文图像里，有不同的元素，蒙版可以让我们独立处理星点或者天空背景和其它低信噪比区域，或者我们的目标。我们用类似显露，隐藏阈值，反转的概念来创建蒙版。但是我们不“画”蒙版。在PI，我们定义了三个基本类型: 明度蒙版(Luminance Mask), 范围蒙版(Range Mask),和星点蒙版(star mask). </p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0139.png" alt="PI-4_Primer-4-0139-w512"><br>蒙版可以通过Wavelets, HistogramTransformation, CloneStamp, 和PixelMath修改。所有的我们随后都会介绍。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0140.png" alt="PI-4_Primer-4-0140-w512"><br>现在，让我们先简单介绍一下蒙版(mask)。要创立明度蒙版(Luminance mask)，简单复制一个图像，图像需要是是RGB而不是黑白图像。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0143.png" alt="PI-4_Primer-4-0143-w512"><br>用ChannelExtraction提取明度成分，或者Toolbar上的快捷图标。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0145.png" alt="PI-4_Primer-4-0145-w512"><br>然后你要用HistogramTransformation对图像做非线性拉升。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0147.png" alt="PI-4_Primer-4-0147-w512"><br>拉升时不要太温和，粗暴一点。蒙版本身的概念就是“白色的显露，黑色的隐藏”。让白的更白，黑的更黑将增加他的效果。 回头我们再讨论如何羽化让过渡更顺滑一些。创建之后，我们就可以把它最小化。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0148.png" alt="PI-4_Primer-4-0148-w512"><br>由于任何图像都可以当做蒙版，我们在这里可以选择蒙版，还可以反转蒙版。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0149.png" alt="PI-4_Primer-4-0149-w512"><br>这都取决于我们要达到怎样的效果。点击OK，蒙版在图像上可以看到，显示成红色。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0150.png" alt="PI-4_Primer-4-0150-w512"><br>你可以在这里改变覆盖的颜色。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0151.png" alt="PI-4_Primer-4-0151-w512"><br>这个蒙版，可以调整和改变图像亮部，而把其它部分都保护起来了。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0156.png" alt="PI-4_Primer-4-0156-w512"><br>我们可以在这里移除(remove)蒙版，</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0158.png" alt="PI-4_Primer-4-0158-w512"><br>或者反转(invert)它，哪怕我们在上一步没有选择翻转(invert)。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0158.png" alt="PI-4_Primer-4-0158-w512"><br>还有一点非常重要，如果想要蒙版发挥作用，请确保Enable被选上。如果你不想蒙版发挥作用，请Disable它。</p>
+<p><img src="/img/15387484241630/PI-4_Primer-4-0161.png" alt="PI-4_Primer-4-0161-w512"><br>最后，在蒙版还是有效的时候，你可以隐藏蒙版。蒙版的这些图标要花些时间才能适应。下一课，继续讲蒙版。</p>
+<div style="text-align:center"><br>    <a style="float: left" href="/001_基础知识/003.STF">上一节</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/001_基础知识/005.蒙版&图像容器&进程容器">下一节</a><br></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/01_03/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/01_05/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章-基础知识"><span class="nav-number">1.</span> <span class="nav-text">第一章 基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第四节-窗口按钮-amp-预览-amp-蒙版"><span class="nav-number">1.1.</span> <span class="nav-text">第四节 窗口按钮 &amp; 预览 &amp; 蒙版</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

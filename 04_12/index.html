@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="整理 by Terry（关于Terry）  第四章 非线性处理第十二节 降噪（四）在上一集中，我们介绍了PixInsight最新的，可能也是最强大的降噪滤镜——Total Generalized Variation Denoise。它由PTeam成员Carlos Milovic开发，并被认为是降噪算法中的佼佼者。">
+<meta name="keywords" content="PixInsight 入门到精通 教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight 入门到精通">
+<meta property="og:url" content="http://pi.bestxtech.com/04_12/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第十二节 降噪（四）在上一集中，我们介绍了PixInsight最新的，可能也是最强大的降噪滤镜——Total Generalized Variation Denoise。它由PTeam成员Carlos Milovic开发，并被认为是降噪算法中的佼佼者。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0001.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0003.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0007.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0008.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0009.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0010.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0012.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0013.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0014.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0016.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0018.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0020.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0021.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0022.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0023.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0024.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0025.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0027.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0028.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0029.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0033.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0034.png">
+<meta property="og:updated_time" content="2019-03-06T03:32:04.514Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight 入门到精通">
+<meta name="twitter:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第十二节 降噪（四）在上一集中，我们介绍了PixInsight最新的，可能也是最强大的降噪滤镜——Total Generalized Variation Denoise。它由PTeam成员Carlos Milovic开发，并被认为是降噪算法中的佼佼者。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15401820358021/PI-13_Nonlinear-7-0001.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/04_12/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | PixInsight 入门到精通</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-picatalog">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/04_12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 18:18:39" itemprop="dateCreated datePublished" datetime="2019-03-05T18:18:39+08:00">2019-03-05</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
+</blockquote>
+<h1 id="第四章-非线性处理"><a href="#第四章-非线性处理" class="headerlink" title="第四章 非线性处理"></a>第四章 非线性处理</h1><h2 id="第十二节-降噪（四）"><a href="#第十二节-降噪（四）" class="headerlink" title="第十二节 降噪（四）"></a>第十二节 降噪（四）</h2><p><img src="/img/15401820358021/PI-13_Nonlinear-7-0001.png" alt="PI-13_Nonlinear-7-0001-w512"><br>在上一集中，我们介绍了PixInsight最新的，可能也是最强大的降噪滤镜——Total Generalized Variation Denoise。它由PTeam成员Carlos Milovic开发，并被认为是降噪算法中的佼佼者。</p>
+<a id="more"></a>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0003.png" alt="PI-13_Nonlinear-7-0003-w512"><br>在这篇帖子中（<a href="http://pixinsight.com/forum/index.php?topic=5615.0），Juan通过对比PI的其他算法向我们展示了TGVD的强大。与GREYCstoration不同，TGVDenoise可以用于线性和非线性图像，并且双边逼近式的边缘保护机制也很有效。那些比较了解这一类东西的人应该知道，TGVDenoise避免了Stair-Step和其他人工雕琢的痕迹，因为――不像其他基于Anisotropic" target="_blank" rel="noopener">http://pixinsight.com/forum/index.php?topic=5615.0），Juan通过对比PI的其他算法向我们展示了TGVD的强大。与GREYCstoration不同，TGVDenoise可以用于线性和非线性图像，并且双边逼近式的边缘保护机制也很有效。那些比较了解这一类东西的人应该知道，TGVDenoise避免了Stair-Step和其他人工雕琢的痕迹，因为――不像其他基于Anisotropic</a> Diffusion的算法――它假设影像是“Piecewise Smooth”的。</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0007.png" alt="PI-13_Nonlinear-7-0007-w512"><br>TGVDenoise有两个独立的部分：降噪参数在上面</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0008.png" alt="PI-13_Nonlinear-7-0008-w512"><br>Local Support设置在下面。</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0009.png" alt="PI-13_Nonlinear-7-0009-w512"><br>对于彩色影像，要选择一个色彩模式。这个设置与灰度图像无关。在RGB/K模式下，R、G、B三个通道会应用相同的参数，并且适用于线性图像。</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0010.png" alt="PI-13_Nonlinear-7-0010-w512"><br>在CIE L*a*b模式下，目标图像首先会被转为L’ab色彩空间。当勾选了Apply时，Lightness参数会应用至CIE L*部分。</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0012.png" alt="PI-13_Nonlinear-7-0012-w512"><br>而Chrominance参数，当勾选时，会应用于a*与b*部分。在完成之前，图像会被重新转为RGB色彩空间。</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0013.png" alt="PI-13_Nonlinear-7-0013-w512"><br>和我们在ACDNR中看到的一样，这种分离明度与色彩的功能让我们能在降噪时单独地控制色彩与明度。</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0014.png" alt="PI-13_Nonlinear-7-0014-w512"><br>Strength值越大，抹平的效果就越强。Edge Protection是极其关键的参数，类似于ACDNR的Edge Protection与GREYC的Sharpness设置。较大的该值会导致一些合理结构的细节的丢失。反之，较低的该值对边缘的保护效果更强，并能保护细节。在这里，诀窍就是找到Strength与Edge Protection间的良好平衡。</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0016.png" alt="PI-13_Nonlinear-7-0016-w512"><br>如果仅调整滑块无法得到满意的结果，就调整Exponent。通常情况下-1到-4的值比较适合。</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0018.png" alt="PI-13_Nonlinear-7-0018-w512"><br>Smoothness也被用于保护高频结构。默认值2适用于大部分影像。</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0020.png" alt="PI-13_Nonlinear-7-0020-w512"><br>默认值一般是用于非线性影像的，对于线性影像来说过于暴力。</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0021.png" alt="PI-13_Nonlinear-7-0021-w512"><br>当在线性下使用TGVD时，试着按大小顺序依次降低Exponent。</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0022.png" alt="PI-13_Nonlinear-7-0022-w512"></p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0023.png" alt="PI-13_Nonlinear-7-0023-w512"><br>[画面中字幕：帮助与提示！用Process/Statistics分析背景样本，把SteDev(1)作为Edge Protection设置（2.4），把SteDev(2)作为Exponent（-3）。]</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0024.png" alt="PI-13_Nonlinear-7-0024-w512"><br>虽然默认的Iteration（迭代次数）是100，但以250开始，甚至高至500都可以，以让算法达到收敛。</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0025.png" alt="PI-13_Nonlinear-7-0025-w512"><br>对于深空影像，尤其是线性影像而言，使用Local Support是明智的。和反卷积（Deconvolution）的Local Deringing Support一样，它不是传统意义上的蒙版，并且你还可以用一个外挂的蒙版来进一步保护高信噪比区域。</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0027.png" alt="PI-13_Nonlinear-7-0027-w512"><br>默认是不开启Local Support Image的，当开启并指向目标图像后，它的强度（Intensity）部分就会投入使用。</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0028.png" alt="PI-13_Nonlinear-7-0028-w512"><br>勾选Preview来看它的模型。和ACDNR一样，这个Preview必须在执行降噪之前取消掉。</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0029.png" alt="PI-13_Nonlinear-7-0029-w512"><br>Midtones（中间调）、Shadows（阴影）、Highlights（高光）滑块和ACDNR的Lightness Mask中的设定没多大区别。最后，因为TGVDenoise过程比较集中，最好在一个小区域Preview上试验以节省时间。</p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0033.png" alt="PI-13_Nonlinear-7-0033-w512"></p>
+<p><img src="/img/15401820358021/PI-13_Nonlinear-7-0034.png" alt="PI-13_Nonlinear-7-0034-w512"><br>好好用TGVDenoise，并期待下一步对影像的完善吧！</p>
+<div style="text-align:center"><br>    <a style="float: left" href="/004_非线性处理/011">上一节</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/004_非线性处理/013">下一节</a><br></div> 
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/04_13/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/04_15/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-非线性处理"><span class="nav-number">1.</span> <span class="nav-text">第四章 非线性处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第十二节-降噪（四）"><span class="nav-number">1.1.</span> <span class="nav-text">第十二节 降噪（四）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
