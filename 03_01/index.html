@@ -46,21 +46,21 @@
 
 
 
-<link rel="stylesheet" href="/pitest.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
 
-<link rel="stylesheet" href="/pitest.github.io/css/main.css?v=7.0.1">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/pitest.github.io/images/apple-touch-icon-next.png?v=7.0.1">
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/pitest.github.io/images/favicon-32x32-next.png?v=7.0.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/pitest.github.io/images/favicon-16x16-next.png?v=7.0.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
 
 
-  <link rel="mask-icon" href="/pitest.github.io/images/logo.svg?v=7.0.1" color="#222">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
 
 
 
@@ -71,7 +71,7 @@
 <script id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/pitest.github.io/',
+    root: '/',
     scheme: 'Gemini',
     version: '7.0.1',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
@@ -96,53 +96,53 @@
 
 
 
-  <meta name="description" content="整理 by Terry（关于Terry）  第三章 线性处理第一节 DynamicCrop &amp;amp; FastRotation &amp;amp; ChannelCombination &amp;amp; ChannelExtraction &amp;amp; RGBWorkingSpace恭喜你完成了PI课程基础和叠加部分的学习。我们接下来将进入一个新的旅程，探索PI的后期处理世界。 让我们先准备好主文件(mast">
-<meta name="keywords" content="PixInsight 入门到精通 教程">
+  <meta name="description" content="恭喜你完成了PI课程基础和叠加部分的学习。我们接下来将进入一个新的旅程，探索PI的后期处理世界。 让我们先准备好主文件(master file)，这里有一张彩色的，叠加好的NGC 7023（爱丽丝星云）。它保存在DVD的piximages文件夹里，或者也可以通过链接下载。它由一个F9(焦比)的望远镜拍摄，单张15分钟，累计叠加15个小时。自动拉升后，可以看到一张很漂亮的图像">
+<meta name="keywords" content="线性处理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PixInsight 入门到精通">
-<meta property="og:url" content="https://gavntery.github.io/pitest.github.io/03_01/index.html">
+<meta property="og:title" content="PixInsight入门到精通 第三章 线性处理 第一节 DynamicCrop &amp; FastRotation &amp; ChannelCombination &amp; ChannelExtraction &amp; RGBWorkingSpace">
+<meta property="og:url" content="http://pi.bestxtech.com/03_01/index.html">
 <meta property="og:site_name" content="PixInsight 入门到精通">
-<meta property="og:description" content="整理 by Terry（关于Terry）  第三章 线性处理第一节 DynamicCrop &amp;amp; FastRotation &amp;amp; ChannelCombination &amp;amp; ChannelExtraction &amp;amp; RGBWorkingSpace恭喜你完成了PI课程基础和叠加部分的学习。我们接下来将进入一个新的旅程，探索PI的后期处理世界。 让我们先准备好主文件(mast">
+<meta property="og:description" content="恭喜你完成了PI课程基础和叠加部分的学习。我们接下来将进入一个新的旅程，探索PI的后期处理世界。 让我们先准备好主文件(master file)，这里有一张彩色的，叠加好的NGC 7023（爱丽丝星云）。它保存在DVD的piximages文件夹里，或者也可以通过链接下载。它由一个F9(焦比)的望远镜拍摄，单张15分钟，累计叠加15个小时。自动拉升后，可以看到一张很漂亮的图像">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0002.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0005.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0006.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0007.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0009.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0011.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0012.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0010.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0014.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0015.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0016.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0017.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0018.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0019.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0021.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0023.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0024.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0025.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0028.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0030.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0031.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0032.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0034.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0035.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0036.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0039.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0040.png">
-<meta property="og:updated_time" content="2019-03-06T03:30:17.388Z">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0002.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0005.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0006.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0007.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0009.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0011.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0012.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0010.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0014.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0015.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0016.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0017.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0018.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0019.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0021.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0023.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0024.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0025.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0028.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0030.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0031.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0032.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0034.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0035.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0036.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0039.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0040.png">
+<meta property="og:updated_time" content="2019-03-06T13:42:01.904Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PixInsight 入门到精通">
-<meta name="twitter:description" content="整理 by Terry（关于Terry）  第三章 线性处理第一节 DynamicCrop &amp;amp; FastRotation &amp;amp; ChannelCombination &amp;amp; ChannelExtraction &amp;amp; RGBWorkingSpace恭喜你完成了PI课程基础和叠加部分的学习。我们接下来将进入一个新的旅程，探索PI的后期处理世界。 让我们先准备好主文件(mast">
-<meta name="twitter:image" content="https://gavntery.github.io/img/15387505123888/PI-14_Linear-1-0002.png">
+<meta name="twitter:title" content="PixInsight入门到精通 第三章 线性处理 第一节 DynamicCrop &amp; FastRotation &amp; ChannelCombination &amp; ChannelExtraction &amp; RGBWorkingSpace">
+<meta name="twitter:description" content="恭喜你完成了PI课程基础和叠加部分的学习。我们接下来将进入一个新的旅程，探索PI的后期处理世界。 让我们先准备好主文件(master file)，这里有一张彩色的，叠加好的NGC 7023（爱丽丝星云）。它保存在DVD的piximages文件夹里，或者也可以通过链接下载。它由一个F9(焦比)的望远镜拍摄，单张15分钟，累计叠加15个小时。自动拉升后，可以看到一张很漂亮的图像">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15387505123888/PI-14_Linear-1-0002.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://gavntery.github.io/pitest.github.io/03_01/">
+  <link rel="canonical" href="http://pi.bestxtech.com/03_01/">
 
 
 
@@ -152,7 +152,7 @@
   };
 </script>
 
-  <title> | PixInsight 入门到精通</title>
+  <title>PixInsight入门到精通 第三章 线性处理 第一节 DynamicCrop & FastRotation & ChannelCombination & ChannelExtraction & RGBWorkingSpace | PixInsight 入门到精通</title>
   
 
 
@@ -209,7 +209,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/pitest.github.io/" class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">PixInsight 入门到精通</span>
         <span class="logo-line-after"><i></i></span>
@@ -248,7 +248,7 @@
 
     
 
-    <a href="/pitest.github.io/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
 
   </li>
         
@@ -265,7 +265,7 @@
 
     
 
-    <a href="/pitest.github.io/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
 
   </li>
         
@@ -282,7 +282,7 @@
 
     
 
-    <a href="/pitest.github.io/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
 
   </li>
 
@@ -334,12 +334,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gavntery.github.io/pitest.github.io/pitest.github.io/03_01/">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/03_01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Terry">
       <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
-      <meta itemprop="image" content="/pitest.github.io/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -351,7 +351,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">PixInsight入门到精通 第三章 线性处理 第一节 DynamicCrop & FastRotation & ChannelCombination & ChannelExtraction & RGBWorkingSpace
 
               
             
@@ -370,6 +370,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
+                <a href="/about/">Terry</a>
+              
               
                 <span class="post-meta-item-text">发表于</span>
               
@@ -378,7 +380,7 @@
                 
               
 
-              <time title="创建时间：2019-03-05 18:17:14" itemprop="dateCreated datePublished" datetime="2019-03-05T18:17:14+08:00">2019-03-05</time>
+              <time title="创建时间：2018-12-15 17:10:30" itemprop="dateCreated datePublished" datetime="2018-12-15T17:10:30+08:00">2018-12-15</time>
             
 
             
@@ -413,10 +415,7 @@
       
 
       
-        <blockquote>
-<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
-</blockquote>
-<h1 id="第三章-线性处理"><a href="#第三章-线性处理" class="headerlink" title="第三章 线性处理"></a>第三章 线性处理</h1><h2 id="第一节-DynamicCrop-amp-FastRotation-amp-ChannelCombination-amp-ChannelExtraction-amp-RGBWorkingSpace"><a href="#第一节-DynamicCrop-amp-FastRotation-amp-ChannelCombination-amp-ChannelExtraction-amp-RGBWorkingSpace" class="headerlink" title="第一节 DynamicCrop &amp; FastRotation &amp; ChannelCombination &amp; ChannelExtraction &amp; RGBWorkingSpace"></a>第一节 DynamicCrop &amp; FastRotation &amp; ChannelCombination &amp; ChannelExtraction &amp; RGBWorkingSpace</h2><p>恭喜你完成了PI课程基础和叠加部分的学习。我们接下来将进入一个新的旅程，探索PI的后期处理世界。</p>
+        <p>恭喜你完成了PI课程基础和叠加部分的学习。我们接下来将进入一个新的旅程，探索PI的后期处理世界。</p>
 <p><img src="/img/15387505123888/PI-14_Linear-1-0002.png" alt="PI-14_Linear-1-0002-w512"><br>让我们先准备好主文件(master file)，这里有一张彩色的，叠加好的NGC 7023（爱丽丝星云）。它保存在DVD的piximages文件夹里，或者也可以通过<a href="http://www.ip4ap.com/piximages.htm" target="_blank" rel="noopener">链接</a>下载。它由一个F9(焦比)的望远镜拍摄，单张15分钟，累计叠加15个小时。自动拉升后，可以看到一张很漂亮的图像</p>
 <a id="more"></a>
 <p><img src="/img/15387505123888/PI-14_Linear-1-0005.png" alt="PI-14_Linear-1-0005-w512"><br>但是也有一些深空照片的通病。虽然它是在够黑的地方拍摄的，并做了平场校准，它还是有一些gradients，并且背景的噪声也比较大。如果你不是在很完美的环境下拍摄，也很难得到很完美的数据。</p>
@@ -448,7 +447,7 @@
 <p><img src="/img/15387505123888/PI-14_Linear-1-0036.png" alt="PI-14_Linear-1-0036-w512"><br>不需要的通道就不要选上。</p>
 <p><img src="/img/15387505123888/PI-14_Linear-1-0039.png" alt="PI-14_Linear-1-0039-w512"><br>这是一个很好的从彩色图像提取伪明度(Pseudo-Luminance)的方法。</p>
 <p><img src="/img/15387505123888/PI-14_Linear-1-0040.png" alt="PI-14_Linear-1-0040-w512"><br>（视频上方字幕：使用RGBWorkingSpace进程，把R：G:B的比例调整成为1：1：1之后再进行L通道提取。Gamma2.2 sRGB默认或者调为1.)</p>
-<div style="text-align:center"><br>    <a style="float: left" href="/002_堆叠/008.ImageCalibration&BatchDebayer&StarAlignment">上一章</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/003_线性处理/002">下一节</a><br></div>
+
       
     </div>
 
@@ -474,14 +473,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/pitest.github.io/images/wechatpay.jpg" alt="Terry 微信支付">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/pitest.github.io/images/alipay.jpg" alt="Terry 支付宝">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
         <p>支付宝</p>
       </div>
     
@@ -498,6 +497,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/线性处理/" rel="tag"># 线性处理</a>
+          
+        </div>
+      
 
       
       
@@ -507,8 +512,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/pitest.github.io/02_09/" rel="next" title>
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/02_09/" rel="next" title="PixInsight入门到精通 第二章 堆叠 第九节 DynamicAlignment">
+                <i class="fa fa-chevron-left"></i> PixInsight入门到精通 第二章 堆叠 第九节 DynamicAlignment
               </a>
             
           </div>
@@ -517,8 +522,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/pitest.github.io/03_02/" rel="prev" title>
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/03_02/" rel="prev" title="PixInsight入门到精通 第三章 线性处理 第二节 工具栏上的快速拆解图像按钮 & LRGBCombination & CNR(Chrominance Noise Reduction) & 历史窗口的强大功能 & ABE和DBE背景知识介绍">
+                PixInsight入门到精通 第三章 线性处理 第二节 工具栏上的快速拆解图像按钮 & LRGBCombination & CNR(Chrominance Noise Reduction) & 历史窗口的强大功能 & ABE和DBE背景知识介绍 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -563,17 +568,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -586,7 +582,7 @@
               
                 <div class="site-state-item site-state-posts">
                 
-                  <a href="/pitest.github.io/archives">
+                  <a href="/archives">
                 
                     <span class="site-state-item-count">66</span>
                     <span class="site-state-item-name">日志</span>
@@ -615,7 +611,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -640,23 +644,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第三章-线性处理"><span class="nav-number">1.</span> <span class="nav-text">第三章 线性处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一节-DynamicCrop-amp-FastRotation-amp-ChannelCombination-amp-ChannelExtraction-amp-RGBWorkingSpace"><span class="nav-number">1.1.</span> <span class="nav-text">第一节 DynamicCrop &amp; FastRotation &amp; ChannelCombination &amp; ChannelExtraction &amp; RGBWorkingSpace</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
@@ -758,45 +745,45 @@
 
 
   
-  <script src="/pitest.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script src="/pitest.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
   
-  <script src="/pitest.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-
-  
-
-
-  <script src="/pitest.github.io/js/src/utils.js?v=7.0.1"></script>
-
-  <script src="/pitest.github.io/js/src/motion.js?v=7.0.1"></script>
-
-
-
-  
-  
-
-
-  <script src="/pitest.github.io/js/src/affix.js?v=7.0.1"></script>
-
-  <script src="/pitest.github.io/js/src/schemes/pisces.js?v=7.0.1"></script>
-
-
-
-
-  
-  <script src="/pitest.github.io/js/src/scrollspy.js?v=7.0.1"></script>
-<script src="/pitest.github.io/js/src/post-details.js?v=7.0.1"></script>
-
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
 
   
 
 
-  <script src="/pitest.github.io/js/src/bootstrap.js?v=7.0.1"></script>
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
 
 
   

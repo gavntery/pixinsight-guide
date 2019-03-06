@@ -46,21 +46,21 @@
 
 
 
-<link rel="stylesheet" href="/pitest.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
 
-<link rel="stylesheet" href="/pitest.github.io/css/main.css?v=7.0.1">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/pitest.github.io/images/apple-touch-icon-next.png?v=7.0.1">
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/pitest.github.io/images/favicon-32x32-next.png?v=7.0.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/pitest.github.io/images/favicon-16x16-next.png?v=7.0.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
 
 
-  <link rel="mask-icon" href="/pitest.github.io/images/logo.svg?v=7.0.1" color="#222">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
 
 
 
@@ -71,7 +71,7 @@
 <script id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/pitest.github.io/',
+    root: '/',
     scheme: 'Gemini',
     version: '7.0.1',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
@@ -96,40 +96,40 @@
 
 
 
-  <meta name="description" content="整理 by Terry（关于Terry）  第四章 非线性处理第十七节 影像强化 —— 基于图层的强化处理我们继续讲解非线性图像的基于图层的强化处理（Layer-Based Enhancement）。为了示范的目的，我不使用实时预览功能（Real-Time Preview）。要记住这两个工具都可以实时预览。">
-<meta name="keywords" content="PixInsight 入门到精通 教程">
+  <meta name="description" content="我们继续讲解非线性图像的基于图层的强化处理（Layer-Based Enhancement）。为了示范的目的，我不使用实时预览功能（Real-Time Preview）。要记住这两个工具都可以实时预览。">
+<meta name="keywords" content="非线性处理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PixInsight 入门到精通">
-<meta property="og:url" content="https://gavntery.github.io/pitest.github.io/04_17/index.html">
+<meta property="og:title" content="PixInsight入门到精通 第四章 非线性处理 第十七节 影像强化 —— 基于图层的强化处理">
+<meta property="og:url" content="http://pi.bestxtech.com/04_17/index.html">
 <meta property="og:site_name" content="PixInsight 入门到精通">
-<meta property="og:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第十七节 影像强化 —— 基于图层的强化处理我们继续讲解非线性图像的基于图层的强化处理（Layer-Based Enhancement）。为了示范的目的，我不使用实时预览功能（Real-Time Preview）。要记住这两个工具都可以实时预览。">
+<meta property="og:description" content="我们继续讲解非线性图像的基于图层的强化处理（Layer-Based Enhancement）。为了示范的目的，我不使用实时预览功能（Real-Time Preview）。要记住这两个工具都可以实时预览。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://gavntery.github.io/img/15401839389431/PI-18_Nonlinear-12-0067.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15401839389431/PI-18_Nonlinear-12-0068.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15401839389431/PI-18_Nonlinear-12-0069.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15401839389431/PI-18_Nonlinear-12-0070.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15401839389431/PI-18_Nonlinear-12-0071.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15401839389431/PI-18_Nonlinear-12-0073.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15401839389431/PI-18_Nonlinear-12-0074.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15401839389431/PI-18_Nonlinear-12-0075.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15401839389431/PI-18_Nonlinear-12-0077.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15401839389431/PI-18_Nonlinear-12-0080.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15401839389431/PI-18_Nonlinear-12-0083.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15401839389431/PI-18_Nonlinear-12-0085.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15401839389431/PI-18_Nonlinear-12-0087.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15401839389431/PI-18_Nonlinear-12-0088.png">
-<meta property="og:updated_time" content="2019-03-06T03:31:51.739Z">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401839389431/PI-18_Nonlinear-12-0067.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401839389431/PI-18_Nonlinear-12-0068.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401839389431/PI-18_Nonlinear-12-0069.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401839389431/PI-18_Nonlinear-12-0070.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401839389431/PI-18_Nonlinear-12-0071.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401839389431/PI-18_Nonlinear-12-0073.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401839389431/PI-18_Nonlinear-12-0074.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401839389431/PI-18_Nonlinear-12-0075.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401839389431/PI-18_Nonlinear-12-0077.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401839389431/PI-18_Nonlinear-12-0080.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401839389431/PI-18_Nonlinear-12-0083.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401839389431/PI-18_Nonlinear-12-0085.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401839389431/PI-18_Nonlinear-12-0087.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15401839389431/PI-18_Nonlinear-12-0088.png">
+<meta property="og:updated_time" content="2019-03-06T10:41:28.497Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PixInsight 入门到精通">
-<meta name="twitter:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第十七节 影像强化 —— 基于图层的强化处理我们继续讲解非线性图像的基于图层的强化处理（Layer-Based Enhancement）。为了示范的目的，我不使用实时预览功能（Real-Time Preview）。要记住这两个工具都可以实时预览。">
-<meta name="twitter:image" content="https://gavntery.github.io/img/15401839389431/PI-18_Nonlinear-12-0067.png">
+<meta name="twitter:title" content="PixInsight入门到精通 第四章 非线性处理 第十七节 影像强化 —— 基于图层的强化处理">
+<meta name="twitter:description" content="我们继续讲解非线性图像的基于图层的强化处理（Layer-Based Enhancement）。为了示范的目的，我不使用实时预览功能（Real-Time Preview）。要记住这两个工具都可以实时预览。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15401839389431/PI-18_Nonlinear-12-0067.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://gavntery.github.io/pitest.github.io/04_17/">
+  <link rel="canonical" href="http://pi.bestxtech.com/04_17/">
 
 
 
@@ -139,7 +139,7 @@
   };
 </script>
 
-  <title> | PixInsight 入门到精通</title>
+  <title>PixInsight入门到精通 第四章 非线性处理 第十七节 影像强化 —— 基于图层的强化处理 | PixInsight 入门到精通</title>
   
 
 
@@ -196,7 +196,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/pitest.github.io/" class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">PixInsight 入门到精通</span>
         <span class="logo-line-after"><i></i></span>
@@ -235,7 +235,7 @@
 
     
 
-    <a href="/pitest.github.io/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
 
   </li>
         
@@ -252,7 +252,7 @@
 
     
 
-    <a href="/pitest.github.io/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
 
   </li>
         
@@ -269,7 +269,7 @@
 
     
 
-    <a href="/pitest.github.io/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
 
   </li>
 
@@ -321,12 +321,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gavntery.github.io/pitest.github.io/pitest.github.io/04_17/">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/04_17/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Terry">
       <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
-      <meta itemprop="image" content="/pitest.github.io/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -338,7 +338,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">PixInsight入门到精通 第四章 非线性处理 第十七节 影像强化 —— 基于图层的强化处理
 
               
             
@@ -357,6 +357,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
+                <a href="/about/">Terry</a>
+              
               
                 <span class="post-meta-item-text">发表于</span>
               
@@ -365,7 +367,7 @@
                 
               
 
-              <time title="创建时间：2019-03-05 18:18:39" itemprop="dateCreated datePublished" datetime="2019-03-05T18:18:39+08:00">2019-03-05</time>
+              <time title="创建时间：2018-12-30 12:12:30" itemprop="dateCreated datePublished" datetime="2018-12-30T12:12:30+08:00">2018-12-30</time>
             
 
             
@@ -400,10 +402,7 @@
       
 
       
-        <blockquote>
-<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
-</blockquote>
-<h1 id="第四章-非线性处理"><a href="#第四章-非线性处理" class="headerlink" title="第四章 非线性处理"></a>第四章 非线性处理</h1><h2 id="第十七节-影像强化-——-基于图层的强化处理"><a href="#第十七节-影像强化-——-基于图层的强化处理" class="headerlink" title="第十七节 影像强化 —— 基于图层的强化处理"></a>第十七节 影像强化 —— 基于图层的强化处理</h2><p><img src="/img/15401839389431/PI-18_Nonlinear-12-0067.png" alt="PI-18_Nonlinear-12-0067-w512"><br>我们继续讲解非线性图像的基于图层的强化处理（Layer-Based Enhancement）。为了示范的目的，我不使用实时预览功能（Real-Time Preview）。要记住这两个工具都可以实时预览。</p>
+        <p><img src="/img/15401839389431/PI-18_Nonlinear-12-0067.png" alt="PI-18_Nonlinear-12-0067-w512"><br>我们继续讲解非线性图像的基于图层的强化处理（Layer-Based Enhancement）。为了示范的目的，我不使用实时预览功能（Real-Time Preview）。要记住这两个工具都可以实时预览。</p>
 <a id="more"></a>
 <p><img src="/img/15401839389431/PI-18_Nonlinear-12-0068.png" alt="PI-18_Nonlinear-12-0068-w512"><br>我们从MMT开始。[画面中字幕：棕色标签表示使用了蒙版。]</p>
 <p><img src="/img/15401839389431/PI-18_Nonlinear-12-0069.png" alt="PI-18_Nonlinear-12-0069-w512"><br>因为目的是强化高频结构，4个图层就足够了。</p>
@@ -429,7 +428,7 @@
 <p><img src="/img/15401839389431/PI-18_Nonlinear-12-0087.png" alt="PI-18_Nonlinear-12-0087-w512"></p>
 <p><img src="/img/15401839389431/PI-18_Nonlinear-12-0088.png" alt="PI-18_Nonlinear-12-0088-w512"></p>
 <p>下一节讲UnsharpMask。</p>
-<div style="text-align:center"><br>    <a style="float: left" href="/004_非线性处理/016">上一节</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/004_非线性处理/018">下一节</a><br></div> 
+
       
     </div>
 
@@ -455,14 +454,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/pitest.github.io/images/wechatpay.jpg" alt="Terry 微信支付">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/pitest.github.io/images/alipay.jpg" alt="Terry 支付宝">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
         <p>支付宝</p>
       </div>
     
@@ -479,6 +478,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/非线性处理/" rel="tag"># 非线性处理</a>
+          
+        </div>
+      
 
       
       
@@ -488,8 +493,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/pitest.github.io/04_18/" rel="next" title>
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/04_16/" rel="next" title="PixInsight入门到精通 第四章 非线性处理 第十六节 影像强化 —— 使用ATMT&MMT锐化">
+                <i class="fa fa-chevron-left"></i> PixInsight入门到精通 第四章 非线性处理 第十六节 影像强化 —— 使用ATMT&MMT锐化
               </a>
             
           </div>
@@ -498,8 +503,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/pitest.github.io/04_19/" rel="prev" title>
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/04_18/" rel="prev" title="PixInsight入门到精通 第四章 非线性处理 第十八节 影像强化 —— HDR合成：GradientHDRComposition & HDRComposition">
+                PixInsight入门到精通 第四章 非线性处理 第十八节 影像强化 —— HDR合成：GradientHDRComposition & HDRComposition <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -544,17 +549,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -567,7 +563,7 @@
               
                 <div class="site-state-item site-state-posts">
                 
-                  <a href="/pitest.github.io/archives">
+                  <a href="/archives">
                 
                     <span class="site-state-item-count">66</span>
                     <span class="site-state-item-name">日志</span>
@@ -596,7 +592,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -621,23 +625,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-非线性处理"><span class="nav-number">1.</span> <span class="nav-text">第四章 非线性处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第十七节-影像强化-——-基于图层的强化处理"><span class="nav-number">1.1.</span> <span class="nav-text">第十七节 影像强化 —— 基于图层的强化处理</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
@@ -739,45 +726,45 @@
 
 
   
-  <script src="/pitest.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script src="/pitest.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
   
-  <script src="/pitest.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-
-  
-
-
-  <script src="/pitest.github.io/js/src/utils.js?v=7.0.1"></script>
-
-  <script src="/pitest.github.io/js/src/motion.js?v=7.0.1"></script>
-
-
-
-  
-  
-
-
-  <script src="/pitest.github.io/js/src/affix.js?v=7.0.1"></script>
-
-  <script src="/pitest.github.io/js/src/schemes/pisces.js?v=7.0.1"></script>
-
-
-
-
-  
-  <script src="/pitest.github.io/js/src/scrollspy.js?v=7.0.1"></script>
-<script src="/pitest.github.io/js/src/post-details.js?v=7.0.1"></script>
-
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
 
   
 
 
-  <script src="/pitest.github.io/js/src/bootstrap.js?v=7.0.1"></script>
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
 
 
   

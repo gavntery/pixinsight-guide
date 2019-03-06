@@ -46,21 +46,21 @@
 
 
 
-<link rel="stylesheet" href="/pitest.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
 
-<link rel="stylesheet" href="/pitest.github.io/css/main.css?v=7.0.1">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/pitest.github.io/images/apple-touch-icon-next.png?v=7.0.1">
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/pitest.github.io/images/favicon-32x32-next.png?v=7.0.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/pitest.github.io/images/favicon-16x16-next.png?v=7.0.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
 
 
-  <link rel="mask-icon" href="/pitest.github.io/images/logo.svg?v=7.0.1" color="#222">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
 
 
 
@@ -71,7 +71,7 @@
 <script id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/pitest.github.io/',
+    root: '/',
     scheme: 'Gemini',
     version: '7.0.1',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
@@ -96,38 +96,38 @@
 
 
 
-  <meta name="description" content="整理 by Terry（关于Terry）  第三章 线性处理第十节 线性降噪 —— ATWT(二) &amp;amp; PixelMath绿色的勾表示该图层有效，双击它可以使该图层无效。我们现在执行一个典型的针对小波长噪声的降噪方案。">
-<meta name="keywords" content="PixInsight 入门到精通 教程">
+  <meta name="description" content="绿色的勾表示该图层有效，双击它可以使该图层无效。我们现在执行一个典型的针对小波长噪声的降噪方案。">
+<meta name="keywords" content="线性处理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PixInsight 入门到精通">
-<meta property="og:url" content="https://gavntery.github.io/pitest.github.io/03_10/index.html">
+<meta property="og:title" content="PixInsight入门到精通 第三章 线性处理 第十节 线性降噪 —— ATWT(二) &amp; PixelMath">
+<meta property="og:url" content="http://pi.bestxtech.com/03_10/index.html">
 <meta property="og:site_name" content="PixInsight 入门到精通">
-<meta property="og:description" content="整理 by Terry（关于Terry）  第三章 线性处理第十节 线性降噪 —— ATWT(二) &amp;amp; PixelMath绿色的勾表示该图层有效，双击它可以使该图层无效。我们现在执行一个典型的针对小波长噪声的降噪方案。">
+<meta property="og:description" content="绿色的勾表示该图层有效，双击它可以使该图层无效。我们现在执行一个典型的针对小波长噪声的降噪方案。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://gavntery.github.io/img/15398786259307/PI-2_Linear-2-0032.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398786259307/PI-2_Linear-2-0034.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398786259307/PI-2_Linear-2-0056.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398786259307/PI-2_Linear-2-0038.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398786259307/PI-2_Linear-2-0039.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398786259307/PI-2_Linear-2-0040.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398786259307/PI-2_Linear-2-0041.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398786259307/PI-2_Linear-2-0044.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398786259307/PI-2_Linear-2-0046.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398786259307/PI-2_Linear-2-0049.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398786259307/PI-2_Linear-2-0051.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398786259307/PI-2_Linear-2-0055.png">
-<meta property="og:updated_time" content="2019-03-06T03:28:49.401Z">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0032.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0034.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0056.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0038.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0039.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0040.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0041.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0044.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0046.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0049.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0051.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0055.png">
+<meta property="og:updated_time" content="2019-03-06T13:34:56.925Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PixInsight 入门到精通">
-<meta name="twitter:description" content="整理 by Terry（关于Terry）  第三章 线性处理第十节 线性降噪 —— ATWT(二) &amp;amp; PixelMath绿色的勾表示该图层有效，双击它可以使该图层无效。我们现在执行一个典型的针对小波长噪声的降噪方案。">
-<meta name="twitter:image" content="https://gavntery.github.io/img/15398786259307/PI-2_Linear-2-0032.png">
+<meta name="twitter:title" content="PixInsight入门到精通 第三章 线性处理 第十节 线性降噪 —— ATWT(二) &amp; PixelMath">
+<meta name="twitter:description" content="绿色的勾表示该图层有效，双击它可以使该图层无效。我们现在执行一个典型的针对小波长噪声的降噪方案。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0032.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://gavntery.github.io/pitest.github.io/03_10/">
+  <link rel="canonical" href="http://pi.bestxtech.com/03_10/">
 
 
 
@@ -137,7 +137,7 @@
   };
 </script>
 
-  <title> | PixInsight 入门到精通</title>
+  <title>PixInsight入门到精通 第三章 线性处理 第十节 线性降噪 —— ATWT(二) & PixelMath | PixInsight 入门到精通</title>
   
 
 
@@ -194,7 +194,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/pitest.github.io/" class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">PixInsight 入门到精通</span>
         <span class="logo-line-after"><i></i></span>
@@ -233,7 +233,7 @@
 
     
 
-    <a href="/pitest.github.io/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
 
   </li>
         
@@ -250,7 +250,7 @@
 
     
 
-    <a href="/pitest.github.io/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
 
   </li>
         
@@ -267,7 +267,7 @@
 
     
 
-    <a href="/pitest.github.io/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
 
   </li>
 
@@ -319,12 +319,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gavntery.github.io/pitest.github.io/pitest.github.io/03_10/">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/03_10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Terry">
       <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
-      <meta itemprop="image" content="/pitest.github.io/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -336,7 +336,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">PixInsight入门到精通 第三章 线性处理 第十节 线性降噪 —— ATWT(二) & PixelMath
 
               
             
@@ -355,6 +355,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
+                <a href="/about/">Terry</a>
+              
               
                 <span class="post-meta-item-text">发表于</span>
               
@@ -363,7 +365,7 @@
                 
               
 
-              <time title="创建时间：2019-03-05 18:17:14" itemprop="dateCreated datePublished" datetime="2019-03-05T18:17:14+08:00">2019-03-05</time>
+              <time title="创建时间：2018-12-16 14:26:30" itemprop="dateCreated datePublished" datetime="2018-12-16T14:26:30+08:00">2018-12-16</time>
             
 
             
@@ -398,10 +400,7 @@
       
 
       
-        <blockquote>
-<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
-</blockquote>
-<h1 id="第三章-线性处理"><a href="#第三章-线性处理" class="headerlink" title="第三章 线性处理"></a>第三章 线性处理</h1><h2 id="第十节-线性降噪-——-ATWT-二-amp-PixelMath"><a href="#第十节-线性降噪-——-ATWT-二-amp-PixelMath" class="headerlink" title="第十节 线性降噪 —— ATWT(二) &amp; PixelMath"></a>第十节 线性降噪 —— ATWT(二) &amp; PixelMath</h2><p><img src="/img/15398786259307/PI-2_Linear-2-0032.png" alt="PI-2_Linear-2-0032-w512"><br>绿色的勾表示该图层有效，双击它可以使该图层无效。我们现在执行一个典型的针对小波长噪声的降噪方案。</p>
+        <p><img src="/img/15398786259307/PI-2_Linear-2-0032.png" alt="PI-2_Linear-2-0032-w512"><br>绿色的勾表示该图层有效，双击它可以使该图层无效。我们现在执行一个典型的针对小波长噪声的降噪方案。</p>
 <a id="more"></a>
 <p><img src="/img/15398786259307/PI-2_Linear-2-0034.png" alt="PI-2_Linear-2-0034-w512"><br>各图层的Threshold（阈值）依次降低，图层1降噪最强力，阈值为3；图层2为2,；图层3为1；图层4的阈值为0.5。Amount（强度）你自己看着办吧。（画面中字幕：上方：试着以此为最初设置。中间是各图层参数。下方：试着把Amount设置在0.25-0.75，Iterations设置为1-3，对RGB图层的降噪可以下手重一些。）因为我们希望保护好大部分的细节，使尽量少的真实信号被抹平，我们最好还是用小点儿的Amount值，而不是使用默认值1。如果噪声较强，想加大降噪力度，在提高Amount值之前最好试着增加一下Interations（执行次数）。以上即是我们所需要关注的参数设置。</p>
 <p><img src="/img/15398786259307/PI-2_Linear-2-0056.png" alt="PI-2_Linear-2-0056-w512"><br>尽管ATWT可以把低信噪比区域的小波长噪声分离出来处理，但保护高信噪比区域的小尺度细节不被抹平仍然是明智之举。</p>
@@ -415,7 +414,6 @@
 <p><img src="/img/15398786259307/PI-2_Linear-2-0051.png" alt="PI-2_Linear-2-0051-w512"><br>你也可以直接输入表达式，或者使用Edit按钮，不过要考虑到PixInsight 1.8的Editor与之前版本有所不同。</p>
 <p><img src="/img/15398786259307/PI-2_Linear-2-0055.png" alt="PI-2_Linear-2-0055"><br>在这里我为了节省时间，复制了影像的名称（你也可以直接双击），然后让原图占25%（这里有很多数学运算符），新图占75%，混合起来。</p>
 <p>这就完成了。下一章，我们将开始讲解非线性处理。</p>
-<div style="text-align:center"><br>    <a style="float: left" href="/003_线性处理/009">上一节</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/004_非线性处理/001">下一章</a><br></div> 
 
       
     </div>
@@ -442,14 +440,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/pitest.github.io/images/wechatpay.jpg" alt="Terry 微信支付">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/pitest.github.io/images/alipay.jpg" alt="Terry 支付宝">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
         <p>支付宝</p>
       </div>
     
@@ -466,6 +464,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/线性处理/" rel="tag"># 线性处理</a>
+          
+        </div>
+      
 
       
       
@@ -475,8 +479,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/pitest.github.io/03_09/" rel="next" title>
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/03_09/" rel="next" title="PixInsight入门到精通 第三章 线性处理 第九节 线性降噪 —— ATWT(一)">
+                <i class="fa fa-chevron-left"></i> PixInsight入门到精通 第三章 线性处理 第九节 线性降噪 —— ATWT(一)
               </a>
             
           </div>
@@ -485,8 +489,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/pitest.github.io/04_02/" rel="prev" title>
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/04_01/" rel="prev" title="PixInsight入门到精通 第四章 非线性处理 第一节 DigitalDevelopment(DDP)">
+                PixInsight入门到精通 第四章 非线性处理 第一节 DigitalDevelopment(DDP) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -531,17 +535,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -554,7 +549,7 @@
               
                 <div class="site-state-item site-state-posts">
                 
-                  <a href="/pitest.github.io/archives">
+                  <a href="/archives">
                 
                     <span class="site-state-item-count">66</span>
                     <span class="site-state-item-name">日志</span>
@@ -583,7 +578,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -608,23 +611,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第三章-线性处理"><span class="nav-number">1.</span> <span class="nav-text">第三章 线性处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第十节-线性降噪-——-ATWT-二-amp-PixelMath"><span class="nav-number">1.1.</span> <span class="nav-text">第十节 线性降噪 —— ATWT(二) &amp; PixelMath</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
@@ -726,45 +712,45 @@
 
 
   
-  <script src="/pitest.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script src="/pitest.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
   
-  <script src="/pitest.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-
-  
-
-
-  <script src="/pitest.github.io/js/src/utils.js?v=7.0.1"></script>
-
-  <script src="/pitest.github.io/js/src/motion.js?v=7.0.1"></script>
-
-
-
-  
-  
-
-
-  <script src="/pitest.github.io/js/src/affix.js?v=7.0.1"></script>
-
-  <script src="/pitest.github.io/js/src/schemes/pisces.js?v=7.0.1"></script>
-
-
-
-
-  
-  <script src="/pitest.github.io/js/src/scrollspy.js?v=7.0.1"></script>
-<script src="/pitest.github.io/js/src/post-details.js?v=7.0.1"></script>
-
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
 
   
 
 
-  <script src="/pitest.github.io/js/src/bootstrap.js?v=7.0.1"></script>
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
 
 
   

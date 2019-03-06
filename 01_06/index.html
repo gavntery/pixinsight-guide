@@ -46,21 +46,21 @@
 
 
 
-<link rel="stylesheet" href="/pitest.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
 
-<link rel="stylesheet" href="/pitest.github.io/css/main.css?v=7.0.1">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/pitest.github.io/images/apple-touch-icon-next.png?v=7.0.1">
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/pitest.github.io/images/favicon-32x32-next.png?v=7.0.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/pitest.github.io/images/favicon-16x16-next.png?v=7.0.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
 
 
-  <link rel="mask-icon" href="/pitest.github.io/images/logo.svg?v=7.0.1" color="#222">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
 
 
 
@@ -71,7 +71,7 @@
 <script id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/pitest.github.io/',
+    root: '/',
     scheme: 'Gemini',
     version: '7.0.1',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
@@ -96,38 +96,38 @@
 
 
 
-  <meta name="description" content="整理 by Terry（关于Terry）  第一章 基础知识第六节 Blink（眨眼）Blink（眨眼）进程在ImageInspection子菜单下。">
-<meta name="keywords" content="PixInsight 入门到精通 教程">
+  <meta name="description" content="Blink（眨眼）进程在ImageInspection子菜单下。">
+<meta name="keywords" content="基础知识">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PixInsight 入门到精通">
-<meta property="og:url" content="https://gavntery.github.io/pitest.github.io/01_06/index.html">
+<meta property="og:title" content="PixInsight入门到精通 第一章 基础知识 第六节 Blink（眨眼）">
+<meta property="og:url" content="http://pi.bestxtech.com/01_06/index.html">
 <meta property="og:site_name" content="PixInsight 入门到精通">
-<meta property="og:description" content="整理 by Terry（关于Terry）  第一章 基础知识第六节 Blink（眨眼）Blink（眨眼）进程在ImageInspection子菜单下。">
+<meta property="og:description" content="Blink（眨眼）进程在ImageInspection子菜单下。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://gavntery.github.io/img/15461392320299/PI-26_Addendum-2-0075.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15461392320299/PI-26_Addendum-2-0077.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15461392320299/PI-26_Addendum-2-0079.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15461392320299/PI-26_Addendum-2-0082.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15461392320299/PI-26_Addendum-2-0083.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15461392320299/PI-26_Addendum-2-0084.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15461392320299/PI-26_Addendum-2-0085.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15461392320299/PI-26_Addendum-2-0096.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15461392320299/PI-26_Addendum-2-0088.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15461392320299/PI-26_Addendum-2-0089.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15461392320299/PI-26_Addendum-2-0090.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15461392320299/PI-26_Addendum-2-0092.png">
-<meta property="og:updated_time" content="2019-03-06T03:27:42.113Z">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15461392320299/PI-26_Addendum-2-0075.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15461392320299/PI-26_Addendum-2-0077.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15461392320299/PI-26_Addendum-2-0079.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15461392320299/PI-26_Addendum-2-0082.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15461392320299/PI-26_Addendum-2-0083.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15461392320299/PI-26_Addendum-2-0084.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15461392320299/PI-26_Addendum-2-0085.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15461392320299/PI-26_Addendum-2-0096.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15461392320299/PI-26_Addendum-2-0088.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15461392320299/PI-26_Addendum-2-0089.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15461392320299/PI-26_Addendum-2-0090.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15461392320299/PI-26_Addendum-2-0092.png">
+<meta property="og:updated_time" content="2019-03-06T13:51:58.978Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PixInsight 入门到精通">
-<meta name="twitter:description" content="整理 by Terry（关于Terry）  第一章 基础知识第六节 Blink（眨眼）Blink（眨眼）进程在ImageInspection子菜单下。">
-<meta name="twitter:image" content="https://gavntery.github.io/img/15461392320299/PI-26_Addendum-2-0075.png">
+<meta name="twitter:title" content="PixInsight入门到精通 第一章 基础知识 第六节 Blink（眨眼）">
+<meta name="twitter:description" content="Blink（眨眼）进程在ImageInspection子菜单下。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15461392320299/PI-26_Addendum-2-0075.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://gavntery.github.io/pitest.github.io/01_06/">
+  <link rel="canonical" href="http://pi.bestxtech.com/01_06/">
 
 
 
@@ -137,7 +137,7 @@
   };
 </script>
 
-  <title> | PixInsight 入门到精通</title>
+  <title>PixInsight入门到精通 第一章 基础知识 第六节 Blink（眨眼） | PixInsight 入门到精通</title>
   
 
 
@@ -194,7 +194,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/pitest.github.io/" class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">PixInsight 入门到精通</span>
         <span class="logo-line-after"><i></i></span>
@@ -233,7 +233,7 @@
 
     
 
-    <a href="/pitest.github.io/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
 
   </li>
         
@@ -250,7 +250,7 @@
 
     
 
-    <a href="/pitest.github.io/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
 
   </li>
         
@@ -267,7 +267,7 @@
 
     
 
-    <a href="/pitest.github.io/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
 
   </li>
 
@@ -319,12 +319,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gavntery.github.io/pitest.github.io/pitest.github.io/01_06/">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/01_06/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Terry">
       <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
-      <meta itemprop="image" content="/pitest.github.io/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -336,7 +336,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">PixInsight入门到精通 第一章 基础知识 第六节 Blink（眨眼）
 
               
             
@@ -355,6 +355,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
+                <a href="/about/">Terry</a>
+              
               
                 <span class="post-meta-item-text">发表于</span>
               
@@ -363,7 +365,7 @@
                 
               
 
-              <time title="创建时间：2019-03-05 18:14:20" itemprop="dateCreated datePublished" datetime="2019-03-05T18:14:20+08:00">2019-03-05</time>
+              <time title="创建时间：2018-12-13 10:15:30" itemprop="dateCreated datePublished" datetime="2018-12-13T10:15:30+08:00">2018-12-13</time>
             
 
             
@@ -398,10 +400,7 @@
       
 
       
-        <blockquote>
-<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
-</blockquote>
-<h1 id="第一章-基础知识"><a href="#第一章-基础知识" class="headerlink" title="第一章 基础知识"></a>第一章 基础知识</h1><h2 id="第六节-Blink（眨眼）"><a href="#第六节-Blink（眨眼）" class="headerlink" title="第六节 Blink（眨眼）"></a>第六节 Blink（眨眼）</h2><p><img src="/img/15461392320299/PI-26_Addendum-2-0075.png" alt="PI-26_Addendum-2-0075-w512"><br>Blink（眨眼）进程在ImageInspection子菜单下。</p>
+        <p><img src="/img/15461392320299/PI-26_Addendum-2-0075.png" alt="PI-26_Addendum-2-0075-w512"><br>Blink（眨眼）进程在ImageInspection子菜单下。</p>
 <a id="more"></a>
 <p><img src="/img/15461392320299/PI-26_Addendum-2-0077.png" alt="PI-26_Addendum-2-0077-w512"><br>这个Blink（眨眼）图像对比器，对于检查每个单张图像的质量是非常有用的，在把图像用到batch preprocessing（批预处理）前进行检查非常有必要。</p>
 <p><img src="/img/15461392320299/PI-26_Addendum-2-0079.png" alt="PI-26_Addendum-2-0079-w512"><br>点击图中这个按钮，可以从硬盘加载所需的图像。</p>
@@ -415,7 +414,7 @@
 <p><img src="/img/15461392320299/PI-26_Addendum-2-0090.png" alt="PI-26_Addendum-2-0090-w512"><br>同时，这里还提供了让你轻松制作AVI视频的按钮</p>
 <p><img src="/img/15461392320299/PI-26_Addendum-2-0092.png" alt="PI-26_Addendum-2-0092-w512"><br>对彗星和小行星猎手是很有用的。</p>
 <p>我们希望你喜欢这个PI入门系列。你应该可以很熟悉地应用工作空间(workspace)了，是的，我说的是工作空间。让我们接下来从叠加开始学习PI。</p>
-<div style="text-align:center"><br>    <a style="float: left" href="/001_基础知识/005.蒙版&图像容器&进程容器">上一节</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/002_堆叠/001.BatchPreprocessing_01">下一章</a><br></div>
+
       
     </div>
 
@@ -441,14 +440,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/pitest.github.io/images/wechatpay.jpg" alt="Terry 微信支付">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/pitest.github.io/images/alipay.jpg" alt="Terry 支付宝">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
         <p>支付宝</p>
       </div>
     
@@ -465,6 +464,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/基础知识/" rel="tag"># 基础知识</a>
+          
+        </div>
+      
 
       
       
@@ -474,8 +479,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/pitest.github.io/01_05/" rel="next" title>
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/01_05/" rel="next" title="PixInsight入门到精通 第一章 基础知识 第五节 蒙版 & 图像容器 & 进程容器">
+                <i class="fa fa-chevron-left"></i> PixInsight入门到精通 第一章 基础知识 第五节 蒙版 & 图像容器 & 进程容器
               </a>
             
           </div>
@@ -484,8 +489,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/pitest.github.io/02_02/" rel="prev" title>
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/02_01/" rel="prev" title="PixInsight入门到精通 第二章 堆叠 第一节 Batch Preprocessing（一）">
+                PixInsight入门到精通 第二章 堆叠 第一节 Batch Preprocessing（一） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -530,17 +535,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -553,7 +549,7 @@
               
                 <div class="site-state-item site-state-posts">
                 
-                  <a href="/pitest.github.io/archives">
+                  <a href="/archives">
                 
                     <span class="site-state-item-count">66</span>
                     <span class="site-state-item-name">日志</span>
@@ -582,7 +578,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -607,23 +611,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章-基础知识"><span class="nav-number">1.</span> <span class="nav-text">第一章 基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第六节-Blink（眨眼）"><span class="nav-number">1.1.</span> <span class="nav-text">第六节 Blink（眨眼）</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
@@ -725,45 +712,45 @@
 
 
   
-  <script src="/pitest.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script src="/pitest.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
   
-  <script src="/pitest.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-
-  
-
-
-  <script src="/pitest.github.io/js/src/utils.js?v=7.0.1"></script>
-
-  <script src="/pitest.github.io/js/src/motion.js?v=7.0.1"></script>
-
-
-
-  
-  
-
-
-  <script src="/pitest.github.io/js/src/affix.js?v=7.0.1"></script>
-
-  <script src="/pitest.github.io/js/src/schemes/pisces.js?v=7.0.1"></script>
-
-
-
-
-  
-  <script src="/pitest.github.io/js/src/scrollspy.js?v=7.0.1"></script>
-<script src="/pitest.github.io/js/src/post-details.js?v=7.0.1"></script>
-
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
 
   
 
 
-  <script src="/pitest.github.io/js/src/bootstrap.js?v=7.0.1"></script>
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
 
 
   

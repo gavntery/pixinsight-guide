@@ -46,21 +46,21 @@
 
 
 
-<link rel="stylesheet" href="/pitest.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
 
-<link rel="stylesheet" href="/pitest.github.io/css/main.css?v=7.0.1">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/pitest.github.io/images/apple-touch-icon-next.png?v=7.0.1">
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/pitest.github.io/images/favicon-32x32-next.png?v=7.0.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/pitest.github.io/images/favicon-16x16-next.png?v=7.0.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
 
 
-  <link rel="mask-icon" href="/pitest.github.io/images/logo.svg?v=7.0.1" color="#222">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
 
 
 
@@ -71,7 +71,7 @@
 <script id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/pitest.github.io/',
+    root: '/',
     scheme: 'Gemini',
     version: '7.0.1',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
@@ -96,54 +96,54 @@
 
 
 
-  <meta name="description" content="整理 by Terry（关于Terry）  第四章 非线性处理第四节 HistogramTransformation让我们接着学习HistogramTransformation（色阶变换）。我们将用它强大的放大功能来完善我们的拉伸。">
-<meta name="keywords" content="PixInsight 入门到精通 教程">
+  <meta name="description" content="让我们接着学习HistogramTransformation（色阶变换）。我们将用它强大的放大功能来完善我们的拉伸。">
+<meta name="keywords" content="非线性处理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PixInsight 入门到精通">
-<meta property="og:url" content="https://gavntery.github.io/pitest.github.io/04_04/index.html">
+<meta property="og:title" content="PixInsight入门到精通 第四章 非线性处理 第四节 HistogramTransformation">
+<meta property="og:url" content="http://pi.bestxtech.com/04_04/index.html">
 <meta property="og:site_name" content="PixInsight 入门到精通">
-<meta property="og:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第四节 HistogramTransformation让我们接着学习HistogramTransformation（色阶变换）。我们将用它强大的放大功能来完善我们的拉伸。">
+<meta property="og:description" content="让我们接着学习HistogramTransformation（色阶变换）。我们将用它强大的放大功能来完善我们的拉伸。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0158.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0161.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0162.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0163.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0164.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0165.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0166.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0168.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0169.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0170.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0171.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0173.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0174.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0177.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0178.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0179.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0180.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0181.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0182.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0183.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0185.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0188.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0189.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0190.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0193.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0194.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0195.png">
-<meta property="og:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0196.png">
-<meta property="og:updated_time" content="2019-03-06T03:30:54.653Z">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0158.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0161.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0162.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0163.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0164.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0165.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0166.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0168.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0169.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0170.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0171.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0173.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0174.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0177.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0178.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0179.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0180.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0181.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0182.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0183.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0185.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0188.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0189.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0190.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0193.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0194.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0195.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0196.png">
+<meta property="og:updated_time" content="2019-03-06T13:32:13.321Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PixInsight 入门到精通">
-<meta name="twitter:description" content="整理 by Terry（关于Terry）  第四章 非线性处理第四节 HistogramTransformation让我们接着学习HistogramTransformation（色阶变换）。我们将用它强大的放大功能来完善我们的拉伸。">
-<meta name="twitter:image" content="https://gavntery.github.io/img/15398789532925/PI-6_Linear-6-0158.png">
+<meta name="twitter:title" content="PixInsight入门到精通 第四章 非线性处理 第四节 HistogramTransformation">
+<meta name="twitter:description" content="让我们接着学习HistogramTransformation（色阶变换）。我们将用它强大的放大功能来完善我们的拉伸。">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15398789532925/PI-6_Linear-6-0158.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://gavntery.github.io/pitest.github.io/04_04/">
+  <link rel="canonical" href="http://pi.bestxtech.com/04_04/">
 
 
 
@@ -153,7 +153,7 @@
   };
 </script>
 
-  <title> | PixInsight 入门到精通</title>
+  <title>PixInsight入门到精通 第四章 非线性处理 第四节 HistogramTransformation | PixInsight 入门到精通</title>
   
 
 
@@ -210,7 +210,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/pitest.github.io/" class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">PixInsight 入门到精通</span>
         <span class="logo-line-after"><i></i></span>
@@ -249,7 +249,7 @@
 
     
 
-    <a href="/pitest.github.io/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
 
   </li>
         
@@ -266,7 +266,7 @@
 
     
 
-    <a href="/pitest.github.io/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
+    <a href="/picatalog/" rel="section"><i class="menu-item-icon fa fa-fw fa-star"></i> <br>PixInsight入门到精通</a>
 
   </li>
         
@@ -283,7 +283,7 @@
 
     
 
-    <a href="/pitest.github.io/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
 
   </li>
 
@@ -335,12 +335,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gavntery.github.io/pitest.github.io/pitest.github.io/04_04/">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/04_04/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Terry">
       <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
-      <meta itemprop="image" content="/pitest.github.io/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -352,7 +352,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">PixInsight入门到精通 第四章 非线性处理 第四节 HistogramTransformation
 
               
             
@@ -371,6 +371,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
+                <a href="/about/">Terry</a>
+              
               
                 <span class="post-meta-item-text">发表于</span>
               
@@ -379,7 +381,7 @@
                 
               
 
-              <time title="创建时间：2019-03-05 18:18:39" itemprop="dateCreated datePublished" datetime="2019-03-05T18:18:39+08:00">2019-03-05</time>
+              <time title="创建时间：2018-12-16 14:30:30" itemprop="dateCreated datePublished" datetime="2018-12-16T14:30:30+08:00">2018-12-16</time>
             
 
             
@@ -414,10 +416,7 @@
       
 
       
-        <blockquote>
-<p>整理 by Terry（<a href="/about">关于Terry</a>）</p>
-</blockquote>
-<h1 id="第四章-非线性处理"><a href="#第四章-非线性处理" class="headerlink" title="第四章 非线性处理"></a>第四章 非线性处理</h1><h2 id="第四节-HistogramTransformation"><a href="#第四节-HistogramTransformation" class="headerlink" title="第四节 HistogramTransformation"></a>第四节 HistogramTransformation</h2><p><img src="/img/15398789532925/PI-6_Linear-6-0158.png" alt="PI-6_Linear-6-0158-w512"><br>让我们接着学习HistogramTransformation（色阶变换）。我们将用它强大的放大功能来完善我们的拉伸。</p>
+        <p><img src="/img/15398789532925/PI-6_Linear-6-0158.png" alt="PI-6_Linear-6-0158-w512"><br>让我们接着学习HistogramTransformation（色阶变换）。我们将用它强大的放大功能来完善我们的拉伸。</p>
 <a id="more"></a>
 <p><img src="/img/15398789532925/PI-6_Linear-6-0161.png" alt="PI-6_Linear-6-0161-w512"><br>和我们在先前的IP4AP系列中看到的一样，我们想要设置一个比较暴力的Black Point（黑点），同时让最少的真实信息被切掉。</p>
 <p><img src="/img/15398789532925/PI-6_Linear-6-0162.png" alt="PI-6_Linear-6-0162-w512"><br>把Shadows Clipping Point（阴影剪切位点）滑块向右移</p>
@@ -447,7 +446,6 @@
 <p><img src="/img/15398789532925/PI-6_Linear-6-0194.png" alt="PI-6_Linear-6-0194-w512"><br>HT也提供了一个全局Reset（初始化）按钮</p>
 <p><img src="/img/15398789532925/PI-6_Linear-6-0195.png" alt="PI-6_Linear-6-0195-w512"><br>与几个局部Reset按钮。</p>
 <p><img src="/img/15398789532925/PI-6_Linear-6-0196.png" alt="PI-6_Linear-6-0196-w512"><br>现在我们已经用上述的一个或多个工具完成了基本的非线性拉伸，我们将进入下一节――IntensityTransformations。</p>
-<div style="text-align:center"><br>    <a style="float: left" href="/004_非线性处理/003">上一节</a><br>    <a href="/">返回目录</a><br>    <a style="float: right" href="/004_非线性处理/005">下一节</a><br></div> 
 
       
     </div>
@@ -474,14 +472,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/pitest.github.io/images/wechatpay.jpg" alt="Terry 微信支付">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/pitest.github.io/images/alipay.jpg" alt="Terry 支付宝">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
         <p>支付宝</p>
       </div>
     
@@ -498,6 +496,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/非线性处理/" rel="tag"># 非线性处理</a>
+          
+        </div>
+      
 
       
       
@@ -507,8 +511,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/pitest.github.io/04_03/" rel="next" title>
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/04_03/" rel="next" title="PixInsight入门到精通 第四章 非线性处理 第三节 AdaptiveStretch & HistogramTransformation">
+                <i class="fa fa-chevron-left"></i> PixInsight入门到精通 第四章 非线性处理 第三节 AdaptiveStretch & HistogramTransformation
               </a>
             
           </div>
@@ -517,8 +521,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/pitest.github.io/04_06/" rel="prev" title>
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/04_05/" rel="prev" title="PixInsight入门到精通 第四章 非线性处理 第五节 CurvesTransformation">
+                PixInsight入门到精通 第四章 非线性处理 第五节 CurvesTransformation <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -563,17 +567,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -586,7 +581,7 @@
               
                 <div class="site-state-item site-state-posts">
                 
-                  <a href="/pitest.github.io/archives">
+                  <a href="/archives">
                 
                     <span class="site-state-item-count">66</span>
                     <span class="site-state-item-name">日志</span>
@@ -615,7 +610,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -640,23 +643,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-非线性处理"><span class="nav-number">1.</span> <span class="nav-text">第四章 非线性处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第四节-HistogramTransformation"><span class="nav-number">1.1.</span> <span class="nav-text">第四节 HistogramTransformation</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
@@ -758,45 +744,45 @@
 
 
   
-  <script src="/pitest.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script src="/pitest.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
   
-  <script src="/pitest.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-
-  
-
-
-  <script src="/pitest.github.io/js/src/utils.js?v=7.0.1"></script>
-
-  <script src="/pitest.github.io/js/src/motion.js?v=7.0.1"></script>
-
-
-
-  
-  
-
-
-  <script src="/pitest.github.io/js/src/affix.js?v=7.0.1"></script>
-
-  <script src="/pitest.github.io/js/src/schemes/pisces.js?v=7.0.1"></script>
-
-
-
-
-  
-  <script src="/pitest.github.io/js/src/scrollspy.js?v=7.0.1"></script>
-<script src="/pitest.github.io/js/src/post-details.js?v=7.0.1"></script>
-
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
 
   
 
 
-  <script src="/pitest.github.io/js/src/bootstrap.js?v=7.0.1"></script>
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
 
 
   
