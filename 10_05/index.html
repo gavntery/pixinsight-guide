@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="讲完进程之后，我们要把注意力转到PI的脚本上来了。最顶部的是Batch Processing（批处理），除了BatchPreprocessing 和 BatchDeBayer, 还有另外三个要注意。 BatchFormatConversion（批次格式转换）它把SampleFormatConversion进程作用到多副图像上。 这对于升高或者降低位数很有用。 先Add（添加）图像,  选择新的格式">
+<meta name="keywords" content="第十章,脚本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight入门到精通 第十章 其它 第五节 脚本">
+<meta property="og:url" content="http://pi.bestxtech.com/10_05/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="讲完进程之后，我们要把注意力转到PI的脚本上来了。最顶部的是Batch Processing（批处理），除了BatchPreprocessing 和 BatchDeBayer, 还有另外三个要注意。 BatchFormatConversion（批次格式转换）它把SampleFormatConversion进程作用到多副图像上。 这对于升高或者降低位数很有用。 先Add（添加）图像,  选择新的格式">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0001.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0004.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0005.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0006.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0007.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0008.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0010.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0011.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0012.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0013.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0014.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0015.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0017.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0020.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0021.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0022.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0023.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0024.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0025.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0026.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0027.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0028.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0029.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0030.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0031.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0032.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0033.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0034.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0036.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0037.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0038.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0039.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0040.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0041.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0042.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0045.png">
+<meta property="og:updated_time" content="2019-03-09T16:09:54.279Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight入门到精通 第十章 其它 第五节 脚本">
+<meta name="twitter:description" content="讲完进程之后，我们要把注意力转到PI的脚本上来了。最顶部的是Batch Processing（批处理），除了BatchPreprocessing 和 BatchDeBayer, 还有另外三个要注意。 BatchFormatConversion（批次格式转换）它把SampleFormatConversion进程作用到多副图像上。 这对于升高或者降低位数很有用。 先Add（添加）图像,  选择新的格式">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15402049661836/PI-25_Scripts_Redux-0001.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/10_05/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>PixInsight入门到精通 第十章 其它 第五节 脚本 | PixInsight 入门到精通</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-1987602-8');
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!-- Google AdSense start -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3582293014438569",
+          enable_page_level_ads: true
+     });
+</script>
+  <!-- Google AdSense end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/10_05/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PixInsight入门到精通 第十章 其它 第五节 脚本
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <a href="/about/">Terry</a>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-09 23:39:51" itemprop="dateCreated datePublished" datetime="2019-03-09T23:39:51+08:00">2019-03-09</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/img/15402049661836/PI-25_Scripts_Redux-0001.png" alt="PI-25_Scripts_Redux-0001-w512"><br>讲完进程之后，我们要把注意力转到PI的脚本上来了。最顶部的是Batch Processing（批处理），除了BatchPreprocessing 和 BatchDeBayer, 还有另外三个要注意。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0004.png" alt="PI-25_Scripts_Redux-0004-w512"><br>BatchFormatConversion（批次格式转换）它把SampleFormatConversion进程作用到多副图像上。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0005.png" alt="PI-25_Scripts_Redux-0005-w512"><br>这对于升高或者降低位数很有用。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0006.png" alt="PI-25_Scripts_Redux-0006-w512"><br>先Add（添加）图像, </p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0007.png" alt="PI-25_Scripts_Redux-0007-w512"><br>选择新的格式，</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0008.png" alt="PI-25_Scripts_Redux-0008-w512"><br>选择新的Output Directory（输出目录），点击OK就行。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0010.png" alt="PI-25_Scripts_Redux-0010-w512"><br>BatchLinearFit把LinearFit进程作用到一组的图像上。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0011.png" alt="PI-25_Scripts_Redux-0011-w512"><br>在这里选择Reference image（参考图像），</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0012.png" alt="PI-25_Scripts_Redux-0012-w512"><br>添加进来的文件的背景亮度，会被调整到和参考图像一致。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0013.png" alt="PI-25_Scripts_Redux-0013-w512"><br>和往常一样，选择Output directory（输出文件夹），一般要改一下后缀名，然后点击OK。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0014.png" alt="PI-25_Scripts_Redux-0014-w512"><br>SubframeSelector我们一会儿再讲。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0015.png" alt="PI-25_Scripts_Redux-0015-w512"><br>跳到Image Analysis（图像分析）子菜单。这里有我们在PI-22提到过的FWHMEccentricity脚本。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0017.png" alt="PI-25_Scripts_Redux-0017-w512"><br>当一张图像在PI里打开后，调用脚本，并点解Measure（测量）。脚本将估算FWHM的中值，以及图像中星点的偏心率的中位数。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0020.png" alt="PI-25_Scripts_Redux-0020-w512"><br>默认参数下，建模函数是Moffat4，但是你也可以改。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0021.png" alt="PI-25_Scripts_Redux-0021-w512"><br>同样由Mike Schuster写的，但是强大得多的是Batch Processing下的SubframeSelector。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0022.png" alt="PI-25_Scripts_Redux-0022"><br>这个脚本左下角的这个按钮可以查看它的完整文档</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0023.png" alt="PI-25_Scripts_Redux-0023-w512"><br>这个脚本对你的拍摄系统参数有要求，比如说每个像素的分辨率。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0024.png" alt="PI-25_Scripts_Redux-0024-w512"><br>点击Measure（测量），</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0025.png" alt="PI-25_Scripts_Redux-0025-w512"><br>脚本像FWHMEccentricity脚本一样作计算，还算的更准些。它本质上和Blink进程是一样的，但是提供了肉眼做不到的，对图像更深入的分析（比如说信噪比）。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0026.png" alt="PI-25_Scripts_Redux-0026-w512"><br>你可以Dismiss（不予考虑）不想要的文件，并且使用Output特性，把通过检验的文件移动或者拷贝到另外一个文件夹。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0027.png" alt="PI-25_Scripts_Redux-0027-w512"><br>最后是内容极其丰富的Utilities子菜单。这个菜单的的一些脚本已经介绍过了，我们接着介绍几个，剩下的就让听众自己探索了。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0028.png" alt="PI-25_Scripts_Redux-0028-w512"><br>单反用户都知道，单反照片经常有条纹，特别是横条纹。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0029.png" alt="PI-25_Scripts_Redux-0029-w512"><br>Georg Viehoefer的CanonBandingReduction脚本运用到叠加后的非线性图像上后，可以去除这些条纹。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0030.png" alt="PI-25_Scripts_Redux-0030-w512"><br>激活Preview（预览），调节Amount（数量）滑块到你想要的结果。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0031.png" alt="PI-25_Scripts_Redux-0031-w512"><br>然后点击OK。对于竖斜纹，请用FastRotation把图像翻转90度，然后再运用脚本。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0032.png" alt="PI-25_Scripts_Redux-0032-w512"><br>下一个是类似FITSKeywords的FITSFileManager脚本，对寻找和组织你的文件非常有帮助。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0033.png" alt="PI-25_Scripts_Redux-0033-w512"><br>先添加文件，</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0034.png" alt="PI-25_Scripts_Redux-0034-w512"></p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0036.png" alt="PI-25_Scripts_Redux-0036-w512"><br>选择你想显示的字段。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0037.png" alt="PI-25_Scripts_Redux-0037-w512"></p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0038.png" alt="PI-25_Scripts_Redux-0038-w512"><br>然后你可以选择文件来编辑，拷贝或者移动到另外一个文件夹。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0039.png" alt="PI-25_Scripts_Redux-0039"><br>把鼠标放过去，会有相应的详细提示以供参考。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0040.png" alt="PI-25_Scripts_Redux-0040-w512"></p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0041.png" alt="PI-25_Scripts_Redux-0041-w512"><br>在更新的时候，脚本有时候会消失。可以到Feature Scripts（特色脚本）页面去重新生成他们。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0042.png" alt="PI-25_Scripts_Redux-0042-w512"><br>你也可以添加新的脚本，打开或者关闭他们。如果不能重新生成脚本，或者PI因为别的原因崩溃了，这里有一个很有用的小技巧让程序恢复出厂设置。按住Control键，点击PixInsight  (.exe) 图标。</p>
+<p><img src="/img/15402049661836/PI-25_Scripts_Redux-0045.png" alt="PI-25_Scripts_Redux-0045-w512"><br>出现这个对话框，点Yes来恢复出厂设置。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/第十章/" rel="tag"># 第十章</a>
+          
+            <a href="/tags/脚本/" rel="tag"># 脚本</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/10_04/" rel="next" title="PixInsight入门到精通 第十章 其它 第四节 流程更新">
+                <i class="fa fa-chevron-left"></i> PixInsight入门到精通 第十章 其它 第四节 流程更新
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">73</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

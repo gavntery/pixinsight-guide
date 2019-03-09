@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="这是我们要讲的最后一个进程。有些进程需要留给观众自己去探索，但是所有与怎么处理出艺术性的图片相关的进程，都在这个PI系列的课程中讲过了。 和我们怎么开始相呼应，我们也引用我们一个老朋友Ian ‘Harry’ 的网页作为结束。他确实干了一些标志性的工作。 这里我们讲ImageRegistration目录下的CometAlignment（彗星对齐）。 我们都知道，彗星移动得比恒星快一些。如果放大倍数够">
+<meta name="keywords" content="第十章,彗星对齐">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight入门到精通 第十章 其它 第三节 彗星对齐">
+<meta property="og:url" content="http://pi.bestxtech.com/10_03/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="这是我们要讲的最后一个进程。有些进程需要留给观众自己去探索，但是所有与怎么处理出艺术性的图片相关的进程，都在这个PI系列的课程中讲过了。 和我们怎么开始相呼应，我们也引用我们一个老朋友Ian ‘Harry’ 的网页作为结束。他确实干了一些标志性的工作。 这里我们讲ImageRegistration目录下的CometAlignment（彗星对齐）。 我们都知道，彗星移动得比恒星快一些。如果放大倍数够">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0130.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0133.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0135.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0136.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0138.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0139.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0142.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0143.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0144.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0146.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0147.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0149.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0151.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0152.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0153.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0154.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0156.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0157.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0158.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0161.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0162.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0163.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0164.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0165.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0167.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0168.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0171.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0173.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0175.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0177.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0178.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0181.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0182.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0183.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0185.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0186.png">
+<meta property="og:updated_time" content="2019-03-09T16:09:30.949Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight入门到精通 第十章 其它 第三节 彗星对齐">
+<meta name="twitter:description" content="这是我们要讲的最后一个进程。有些进程需要留给观众自己去探索，但是所有与怎么处理出艺术性的图片相关的进程，都在这个PI系列的课程中讲过了。 和我们怎么开始相呼应，我们也引用我们一个老朋友Ian ‘Harry’ 的网页作为结束。他确实干了一些标志性的工作。 这里我们讲ImageRegistration目录下的CometAlignment（彗星对齐）。 我们都知道，彗星移动得比恒星快一些。如果放大倍数够">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15402048016532/PI-23_CometAlignment-0130.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/10_03/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>PixInsight入门到精通 第十章 其它 第三节 彗星对齐 | PixInsight 入门到精通</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-1987602-8');
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!-- Google AdSense start -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3582293014438569",
+          enable_page_level_ads: true
+     });
+</script>
+  <!-- Google AdSense end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/10_03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PixInsight入门到精通 第十章 其它 第三节 彗星对齐
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <a href="/about/">Terry</a>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-09 17:42:51" itemprop="dateCreated datePublished" datetime="2019-03-09T17:42:51+08:00">2019-03-09</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/img/15402048016532/PI-23_CometAlignment-0130.png" alt="PI-23_CometAlignment-0130-w512"><br>这是我们要讲的最后一个进程。有些进程需要留给观众自己去探索，但是所有与怎么处理出艺术性的图片相关的进程，都在这个PI系列的课程中讲过了。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0133.png" alt="PI-23_CometAlignment-0133-w512"><br>和我们怎么开始相呼应，我们也引用我们一个老朋友Ian ‘Harry’ 的网页作为结束。他确实干了一些标志性的工作。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0135.png" alt="PI-23_CometAlignment-0135-w512"><br>这里我们讲ImageRegistration目录下的CometAlignment（彗星对齐）。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0136.png" alt="PI-23_CometAlignment-0136-w512"><br>我们都知道，彗星移动得比恒星快一些。如果放大倍数够高，或者单张曝光时间够长，如果对恒星进行导星，彗星看上去会变模糊。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0138.png" alt="PI-23_CometAlignment-0138-w512"><br>如果我们对彗星的核心导星，</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0139.png" alt="PI-23_CometAlignment-0139-w512"><br>恒星会拖线。怎么办？虽然PI之前的版本也提供了一定的方案，新的CometAlignment（彗星对齐）进程提供了更好的方案。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0142.png" alt="PI-23_CometAlignment-0142-w512"><br>刚开始，让我们用普通的方法对齐和叠加。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0143.png" alt="PI-23_CometAlignment-0143-w512"><br>叠加后照片中圆的星点，</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0144.png" alt="PI-23_CometAlignment-0144-w512"><br>会组成最终图像中星空背景部分。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0146.png" alt="PI-23_CometAlignment-0146-w512"></p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0147.png" alt="PI-23_CometAlignment-0147-w512"><br>下一步，打开CometAlignment，添加前面已经校准和对齐好的文件。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0149.png" alt="PI-23_CometAlignment-0149-w512"><br>双击打开所有图像中的第一个，</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0151.png" alt="PI-23_CometAlignment-0151-w512"><br>由于它还是线性图像，我们运用STF自动拉升，并且放大到慧核部分。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0152.png" alt="PI-23_CometAlignment-0152-w512"><br>点击一下，</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0153.png" alt="PI-23_CometAlignment-0153-w512"><br>把它的X和Y位置坐标传输到’Parameters’。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0154.png" alt="PI-23_CometAlignment-0154-w512"><br>对最后一个图像重复上面的步骤。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0156.png" alt="PI-23_CometAlignment-0156-w512"><br>工具现在就知道彗星的起始和结束位置。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0157.png" alt="PI-23_CometAlignment-0157-w512"><br>请注意，默认设置下，生成的图像有一个’_ca’ 后缀。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0158.png" alt="PI-23_CometAlignment-0158-w512"><br>最后，选择输出文件夹（Output），</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0161.png" alt="PI-23_CometAlignment-0161-w512"><br>并且全局运用这个工具。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0162.png" alt="PI-23_CometAlignment-0162-w512"><br>下一步，来到ImageIntegration，</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0163.png" alt="PI-23_CometAlignment-0163-w512"><br>从添加新的 ‘_ca’ 文件开始，</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0164.png" alt="PI-23_CometAlignment-0164-w512"><br>根据文件数量，选择合适的排异算法。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0165.png" alt="PI-23_CometAlignment-0165-w512"><br>由于图像是根据慧核作为参考点对齐的，拉线的星星就会被当做异常排除。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0167.png" alt="PI-23_CometAlignment-0167-w512"><br>为了达到这个目的，你需要降低Sigma high滑动条的值，而不是采用默认值，以最大程度上排除星点。准备好之后，全局运用。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0168.png" alt="PI-23_CometAlignment-0168-w512"><br>尽力去做，但是也不用太在意残余的一些星点。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0171.png" alt="PI-23_CometAlignment-0171-w512"><br>彗星图像创建好之后，我们使用StarMask进程生成一个包含尽量多星星的星点蒙版。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0173.png" alt="PI-23_CometAlignment-0173-w512"><br>你可以使用HistogramTransformation降低中点（midpoint）以尽量包含更多的暗星。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0175.png" alt="PI-23_CometAlignment-0175-w512"><br>很有可能慧核也会被包含在这个蒙版里，我们可以使用CloneStamp去除它。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0177.png" alt="PI-23_CometAlignment-0177-w512"><br>以星点图像作为参考图像，在彗星图像上运用LinearFit以对齐背景值。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0178.png" alt="PI-23_CometAlignment-0178-w512"><br>（画面文字：在用Linearfit之前一定要先用ABE/DBE) </p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0181.png" alt="PI-23_CometAlignment-0181-w512"></p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0182.png" alt="PI-23_CometAlignment-0182-w512"><br>现在，把蒙版运用在彗星图像上，</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0183.png" alt="PI-23_CometAlignment-0183-w512"><br>使用PixelMath, </p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0185.png" alt="PI-23_CometAlignment-0185-w512"><br>我们把星点图像通过蒙版添加到彗星图像上。</p>
+<p><img src="/img/15402048016532/PI-23_CometAlignment-0186.png" alt="PI-23_CometAlignment-0186-w512"><br>这就是我们的最终结果啦。</p>
+<p>下一课，更多关于预处理的内容。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/第十章/" rel="tag"># 第十章</a>
+          
+            <a href="/tags/彗星对齐/" rel="tag"># 彗星对齐</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/10_02/" rel="next" title="PixInsight入门到精通 第十章 其它 第二节 Drizzle">
+                <i class="fa fa-chevron-left"></i> PixInsight入门到精通 第十章 其它 第二节 Drizzle
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/10_04/" rel="prev" title="PixInsight入门到精通 第十章 其它 第四节 流程更新">
+                PixInsight入门到精通 第十章 其它 第四节 流程更新 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">73</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

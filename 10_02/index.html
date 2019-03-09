@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="我们继续讲PI预处理里一些更新的工具。在2014年5月，添加了Variable-Pixel Linear Reconstruction（VPLR，可变像素线性重构）功能，对系统采样不足的人来说，可是大好消息。VPLR，它有一个更广为人知的名字叫Drizzle,这个算法最开始是为哈勃望远镜开发的。 当有合适的数据，用新的DrizzleIntegration进程进行合成后，结果是很让人印象深刻的。 方">
+<meta name="keywords" content="第十章,Drizzle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PixInsight入门到精通 第十章 其它 第二节 Drizzle">
+<meta property="og:url" content="http://pi.bestxtech.com/10_02/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="我们继续讲PI预处理里一些更新的工具。在2014年5月，添加了Variable-Pixel Linear Reconstruction（VPLR，可变像素线性重构）功能，对系统采样不足的人来说，可是大好消息。VPLR，它有一个更广为人知的名字叫Drizzle,这个算法最开始是为哈勃望远镜开发的。 当有合适的数据，用新的DrizzleIntegration进程进行合成后，结果是很让人印象深刻的。 方">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0087.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0089.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0091.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0093.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0094.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0095.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0096.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0098.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0099.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0100.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0101.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0102.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0106.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0107.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0108.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0109.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0110.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0111.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0112.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0113.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0115.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0117.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0118.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0119.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0120.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0121.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0122.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0124.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0126.png">
+<meta property="og:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0128.png">
+<meta property="og:updated_time" content="2019-03-09T16:10:09.349Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PixInsight入门到精通 第十章 其它 第二节 Drizzle">
+<meta name="twitter:description" content="我们继续讲PI预处理里一些更新的工具。在2014年5月，添加了Variable-Pixel Linear Reconstruction（VPLR，可变像素线性重构）功能，对系统采样不足的人来说，可是大好消息。VPLR，它有一个更广为人知的名字叫Drizzle,这个算法最开始是为哈勃望远镜开发的。 当有合适的数据，用新的DrizzleIntegration进程进行合成后，结果是很让人印象深刻的。 方">
+<meta name="twitter:image" content="http://pi.bestxtech.com/img/15402047422073/PI-22_Drizzle-0087.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/10_02/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>PixInsight入门到精通 第十章 其它 第二节 Drizzle | PixInsight 入门到精通</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-1987602-8');
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!-- Google AdSense start -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3582293014438569",
+          enable_page_level_ads: true
+     });
+</script>
+  <!-- Google AdSense end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/10_02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月4日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PixInsight入门到精通 第十章 其它 第二节 Drizzle
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <a href="/about/">Terry</a>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-09 17:16:51" itemprop="dateCreated datePublished" datetime="2019-03-09T17:16:51+08:00">2019-03-09</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/img/15402047422073/PI-22_Drizzle-0087.png" alt="PI-22_Drizzle-0087-w512"><br>我们继续讲PI预处理里一些更新的工具。在2014年5月，添加了Variable-Pixel Linear Reconstruction（VPLR，可变像素线性重构）功能，对系统采样不足的人来说，可是大好消息。VPLR，它有一个更广为人知的名字叫Drizzle,这个算法最开始是为哈勃望远镜开发的。</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0089.png" alt="PI-22_Drizzle-0089-w512"><br>当有合适的数据，用新的DrizzleIntegration进程进行合成后，结果是很让人印象深刻的。</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0091.png" alt="PI-22_Drizzle-0091-w512"><br>方形的星点变圆变好看了，细节也更加的锐利。为了利用这个技术带来的好处，必须满足四个条件：</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0093.png" alt="PI-22_Drizzle-0093-w512"></p>
+<ol>
+<li>首先，前面说过，图像必须是采样不足的。你可以测量星点的FWHM（画面文字：DynamicPSF，FWHMEccentriity等工具，小于2个像素），你也可以把图像放大到200%看，如果星点是方形的，那就满足了。很明显的，这是一个焦距和像素大小不匹配的副产品。</li>
+</ol>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0094.png" alt="PI-22_Drizzle-0094-w512"></p>
+<ol start="2">
+<li>其次，图像采集过程中必须Dither（抖动）</li>
+</ol>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0095.png" alt="PI-22_Drizzle-0095-w512"></p>
+<ol start="3">
+<li>第三，由于过程中会产生一些噪声，至少需要15帧图像。</li>
+</ol>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0096.png" alt="PI-22_Drizzle-0096-w512"></p>
+<ol start="4">
+<li>最后，推荐使用黑白图像（彩色相机也有可能。译者：彩色相机有bayer drizzle。）。</li>
+</ol>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0098.png" alt="PI-22_Drizzle-0098-w512"><br>Drizzle过程分成三步。第一步是星点对齐，</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0099.png" alt="PI-22_Drizzle-0099-w512"><br>然后是图像合成，</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0100.png" alt="PI-22_Drizzle-0100-w512"><br>最后才是调用DrizzleIntegration进行最终合成。</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0101.png" alt="PI-22_Drizzle-0101-w512"><br>得到的结果是一个比原来尺寸放大一倍的图像。</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0102.png" alt="PI-22_Drizzle-0102-w512"><br>让我们看看具体怎么做。</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0106.png" alt="PI-22_Drizzle-0106-w512"><br>无论是用StarAlignment进程还是用BatchPreprocessing脚本进行星点对齐，勾选上Generate drizzle data（生成drizzle数据）框。软件会生成一个特殊文件(.drz)方便随后使用。</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0107.png" alt="PI-22_Drizzle-0107-w512"><br>接下来，移步到ImageIntegration进程。</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0108.png" alt="PI-22_Drizzle-0108-w512"><br>添加对齐后的文件之后，</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0109.png" alt="PI-22_Drizzle-0109-w512"><br>然后点击“Add Drizzle Files”，并选中所有的.drz文件。</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0110.png" alt="PI-22_Drizzle-0110-w512"><br>注意文件名前面出现了一个前缀。</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0111.png" alt="PI-22_Drizzle-0111-w512"><br>然后勾选“Generate drizzle data（生成Drizzle数据）”。</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0112.png" alt="PI-22_Drizzle-0112-w512"><br>现在，点全局运用（apply globally），做一个普通的叠加。</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0113.png" alt="PI-22_Drizzle-0113"><br>一个命名为’integration’的文件生成了。</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0115.png" alt="PI-22_Drizzle-0115-w512"><br>最后一步很简单，打开DrizzleIntegration进程，添加被第二步ImageItegration进程修改过的.drz文件。</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0117.png" alt="PI-22_Drizzle-0117-w512"><br>如果想快速地看看drizzle后的结果看上去如何，可以’integration’ 图像定于一个预览。它应该包含一些小的星点。</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0118.png" alt="PI-22_Drizzle-0118-w512"><br>然后选中Region of Interest(ROI，感兴趣的区域),</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0119.png" alt="PI-22_Drizzle-0119-w512"><br>并且选中这个预览。</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0120.png" alt="PI-22_Drizzle-0120-w512"><br>都准备好之后，不选ROI，</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0121.png" alt="PI-22_Drizzle-0121-w512"><br>然后用默认参数全局运用这个进程。</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0122.png" alt="PI-22_Drizzle-0122-w512"><br>得到我们的结果了！</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0124.png" alt="PI-22_Drizzle-0124-w512"></p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0126.png" alt="PI-22_Drizzle-0126-w512"><br>比较一下普通叠加的和drizzle叠加的图像的星点。</p>
+<p><img src="/img/15402047422073/PI-22_Drizzle-0128.png" alt="PI-22_Drizzle-0128-w512"><br>这个链接包含关于drizzle的更多信息，包括怎么把drizzle运用在CFA数据上的一些想法。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/第十章/" rel="tag"># 第十章</a>
+          
+            <a href="/tags/Drizzle/" rel="tag"># Drizzle</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/10_01/" rel="next" title="PixInsight入门到精通 第十章 其它 第一节 超级偏置">
+                <i class="fa fa-chevron-left"></i> PixInsight入门到精通 第十章 其它 第一节 超级偏置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/10_03/" rel="prev" title="PixInsight入门到精通 第十章 其它 第三节 彗星对齐">
+                PixInsight入门到精通 第十章 其它 第三节 彗星对齐 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月4日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">73</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
