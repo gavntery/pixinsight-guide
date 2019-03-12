@@ -104,23 +104,23 @@
 <meta property="og:site_name" content="PixInsight 入门到精通">
 <meta property="og:description" content="绿色的勾表示该图层有效，双击它可以使该图层无效。我们现在执行一个典型的针对小波长噪声的降噪方案。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0032.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0034.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0056.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0038.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0039.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0040.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0041.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0044.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0046.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0049.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0051.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0055.png">
-<meta property="og:updated_time" content="2019-03-06T13:34:56.925Z">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0032.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0034.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0056.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0038.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0039.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0040.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0041.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0044.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0046.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0049.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0051.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0055.png">
+<meta property="og:updated_time" content="2019-03-12T02:34:50.681Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PixInsight入门到精通 第三章 线性处理 第十节 线性降噪 —— ATWT(二) &amp; PixelMath">
 <meta name="twitter:description" content="绿色的勾表示该图层有效，双击它可以使该图层无效。我们现在执行一个典型的针对小波长噪声的降噪方案。">
-<meta name="twitter:image" content="http://pi.bestxtech.com/img/15398786259307/PI-2_Linear-2-0032.png">
+<meta name="twitter:image" content="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0032.png">
 
 
 
@@ -403,19 +403,19 @@
       
 
       
-        <p><img src="/img/15398786259307/PI-2_Linear-2-0032.png" alt="PI-2_Linear-2-0032-w512"><br>绿色的勾表示该图层有效，双击它可以使该图层无效。我们现在执行一个典型的针对小波长噪声的降噪方案。</p>
+        <p><img src="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0032.png" alt="PI-2_Linear-2-0032-w512"><br>绿色的勾表示该图层有效，双击它可以使该图层无效。我们现在执行一个典型的针对小波长噪声的降噪方案。</p>
 <a id="more"></a>
-<p><img src="/img/15398786259307/PI-2_Linear-2-0034.png" alt="PI-2_Linear-2-0034-w512"><br>各图层的Threshold（阈值）依次降低，图层1降噪最强力，阈值为3；图层2为2,；图层3为1；图层4的阈值为0.5。Amount（强度）你自己看着办吧。（画面中字幕：上方：试着以此为最初设置。中间是各图层参数。下方：试着把Amount设置在0.25-0.75，Iterations设置为1-3，对RGB图层的降噪可以下手重一些。）因为我们希望保护好大部分的细节，使尽量少的真实信号被抹平，我们最好还是用小点儿的Amount值，而不是使用默认值1。如果噪声较强，想加大降噪力度，在提高Amount值之前最好试着增加一下Interations（执行次数）。以上即是我们所需要关注的参数设置。</p>
-<p><img src="/img/15398786259307/PI-2_Linear-2-0056.png" alt="PI-2_Linear-2-0056-w512"><br>尽管ATWT可以把低信噪比区域的小波长噪声分离出来处理，但保护高信噪比区域的小尺度细节不被抹平仍然是明智之举。</p>
-<p><img src="/img/15398786259307/PI-2_Linear-2-0038.png" alt="PI-2_Linear-2-0038-w512"><br>为此我们需要使用蒙版。在本章第八节中我们做了相反的事，用明度蒙版（Luminance Mask）或范围蒙版（Range Mask）来保护低信噪比区域。</p>
-<p><img src="/img/15398786259307/PI-2_Linear-2-0039.png" alt="PI-2_Linear-2-0039-w512"><br>现在我们对这两种蒙版进行反色（Invert），然后用它们保护高信噪比区域。</p>
-<p><img src="/img/15398786259307/PI-2_Linear-2-0040.png" alt="PI-2_Linear-2-0040-w512"><br>你可以复习一下第一章第四、第五节，以及本章第八节来回想蒙版的基本制作方法。低信噪比区域暴露出来之后，我们就可以用ATWT抹平它们。虽然Rogelio更愿意在非线性处理之前不去抹平图像，但我有时会对线性图像的背景与暗部轻手轻脚地搞那么一次。</p>
-<p><img src="/img/15398786259307/PI-2_Linear-2-0041.png" alt="PI-2_Linear-2-0041-w512"><br>有些人认为ATWT在对付大尺度噪声上比ACDNR表现更好，而且可以避免背景出现恶心的花花绿绿的色块。尽管这样，在这里我也只是用它来「牛刀杀鸡」，略微降一下噪。</p>
-<p><img src="/img/15398786259307/PI-2_Linear-2-0044.png" alt="PI-2_Linear-2-0044-w512"><br>PixelMath我们之前提到过，但没有多说。现在是时候来一个入门的入门了。虽然在这个时候，很难说用PixelMath做一个透明度设置来从一定程度上保留PixInsight原图层的痕迹（类似渐隐，译者注）有什么必要，但眼下，所谓的「PixMath」仍然是不可或缺的，是你必须了解的东西。</p>
-<p><img src="/img/15398786259307/PI-2_Linear-2-0046.png" alt="PI-2_Linear-2-0046-w512"><br>在逐渐熟悉PixelMath并将其贯穿于整个处理过程之前，我们先通过Addition（加法运算）来对其有一个初步了解。就算你使劲浑身解数，用了专用的工具，我们还是得承认，ATWT的降噪有些大手大脚。你可以用PixelMath将降噪后的结果与原图混合，达到渐隐的效果（类似于Photoshop中的图层透明度Opacity%）。</p>
-<p><img src="/img/15398786259307/PI-2_Linear-2-0049.png" alt="PI-2_Linear-2-0049-w512"><br>我们来看看怎么弄。我们先在一个副本上操弄，而不是直接处理原图。不过无论你怎么操作，作何选择，核心思想都是把处理前的影像（Pre-adjustment version）与处理后的（Post-adjustment version）混合起来。这样在最终结果中它们各占一半（比重）。</p>
-<p><img src="/img/15398786259307/PI-2_Linear-2-0051.png" alt="PI-2_Linear-2-0051-w512"><br>你也可以直接输入表达式，或者使用Edit按钮，不过要考虑到PixInsight 1.8的Editor与之前版本有所不同。</p>
-<p><img src="/img/15398786259307/PI-2_Linear-2-0055.png" alt="PI-2_Linear-2-0055"><br>在这里我为了节省时间，复制了影像的名称（你也可以直接双击），然后让原图占25%（这里有很多数学运算符），新图占75%，混合起来。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0034.png" alt="PI-2_Linear-2-0034-w512"><br>各图层的Threshold（阈值）依次降低，图层1降噪最强力，阈值为3；图层2为2,；图层3为1；图层4的阈值为0.5。Amount（强度）你自己看着办吧。（画面中字幕：上方：试着以此为最初设置。中间是各图层参数。下方：试着把Amount设置在0.25-0.75，Iterations设置为1-3，对RGB图层的降噪可以下手重一些。）因为我们希望保护好大部分的细节，使尽量少的真实信号被抹平，我们最好还是用小点儿的Amount值，而不是使用默认值1。如果噪声较强，想加大降噪力度，在提高Amount值之前最好试着增加一下Interations（执行次数）。以上即是我们所需要关注的参数设置。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0056.png" alt="PI-2_Linear-2-0056-w512"><br>尽管ATWT可以把低信噪比区域的小波长噪声分离出来处理，但保护高信噪比区域的小尺度细节不被抹平仍然是明智之举。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0038.png" alt="PI-2_Linear-2-0038-w512"><br>为此我们需要使用蒙版。在本章第八节中我们做了相反的事，用明度蒙版（Luminance Mask）或范围蒙版（Range Mask）来保护低信噪比区域。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0039.png" alt="PI-2_Linear-2-0039-w512"><br>现在我们对这两种蒙版进行反色（Invert），然后用它们保护高信噪比区域。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0040.png" alt="PI-2_Linear-2-0040-w512"><br>你可以复习一下第一章第四、第五节，以及本章第八节来回想蒙版的基本制作方法。低信噪比区域暴露出来之后，我们就可以用ATWT抹平它们。虽然Rogelio更愿意在非线性处理之前不去抹平图像，但我有时会对线性图像的背景与暗部轻手轻脚地搞那么一次。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0041.png" alt="PI-2_Linear-2-0041-w512"><br>有些人认为ATWT在对付大尺度噪声上比ACDNR表现更好，而且可以避免背景出现恶心的花花绿绿的色块。尽管这样，在这里我也只是用它来「牛刀杀鸡」，略微降一下噪。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0044.png" alt="PI-2_Linear-2-0044-w512"><br>PixelMath我们之前提到过，但没有多说。现在是时候来一个入门的入门了。虽然在这个时候，很难说用PixelMath做一个透明度设置来从一定程度上保留PixInsight原图层的痕迹（类似渐隐，译者注）有什么必要，但眼下，所谓的「PixMath」仍然是不可或缺的，是你必须了解的东西。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0046.png" alt="PI-2_Linear-2-0046-w512"><br>在逐渐熟悉PixelMath并将其贯穿于整个处理过程之前，我们先通过Addition（加法运算）来对其有一个初步了解。就算你使劲浑身解数，用了专用的工具，我们还是得承认，ATWT的降噪有些大手大脚。你可以用PixelMath将降噪后的结果与原图混合，达到渐隐的效果（类似于Photoshop中的图层透明度Opacity%）。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0049.png" alt="PI-2_Linear-2-0049-w512"><br>我们来看看怎么弄。我们先在一个副本上操弄，而不是直接处理原图。不过无论你怎么操作，作何选择，核心思想都是把处理前的影像（Pre-adjustment version）与处理后的（Post-adjustment version）混合起来。这样在最终结果中它们各占一半（比重）。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0051.png" alt="PI-2_Linear-2-0051-w512"><br>你也可以直接输入表达式，或者使用Edit按钮，不过要考虑到PixInsight 1.8的Editor与之前版本有所不同。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15398786259307/PI-2_Linear-2-0055.png" alt="PI-2_Linear-2-0055"><br>在这里我为了节省时间，复制了影像的名称（你也可以直接双击），然后让原图占25%（这里有很多数学运算符），新图占75%，混合起来。</p>
 <p>这就完成了。下一章，我们将开始讲解非线性处理。</p>
 
       

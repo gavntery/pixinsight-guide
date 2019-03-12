@@ -104,21 +104,21 @@
 <meta property="og:site_name" content="PixInsight 入门到精通">
 <meta property="og:description" content="我们现在返回到把窄带与(L)RGB混合的PI进程。在本节和下一节，我们提出两种不同的方式来操作。记住，每个对象是独特的，没有唯一正确的方法去处理这个目标。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15402042735773/PI-19_Narrowband-5-0001.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15402042735773/PI-19_Narrowband-5-0006.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15402042735773/PI-19_Narrowband-5-0008.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15402042735773/PI-19_Narrowband-5-0009.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15402042735773/PI-19_Narrowband-5-0011.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15402042735773/PI-19_Narrowband-5-0014.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15402042735773/PI-19_Narrowband-5-0018.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15402042735773/PI-19_Narrowband-5-0020.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15402042735773/PI-19_Narrowband-5-0021.png">
-<meta property="og:image" content="http://pi.bestxtech.com/img/15402042735773/PI-19_Narrowband-5-0022.png">
-<meta property="og:updated_time" content="2019-03-09T16:04:44.085Z">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0001.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0006.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0008.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0009.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0011.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0014.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0018.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0020.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0021.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0022.png">
+<meta property="og:updated_time" content="2019-03-12T02:34:25.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PixInsight入门到精通 第九章 窄带 第五节">
 <meta name="twitter:description" content="我们现在返回到把窄带与(L)RGB混合的PI进程。在本节和下一节，我们提出两种不同的方式来操作。记住，每个对象是独特的，没有唯一正确的方法去处理这个目标。">
-<meta name="twitter:image" content="http://pi.bestxtech.com/img/15402042735773/PI-19_Narrowband-5-0001.png">
+<meta name="twitter:image" content="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0001.png">
 
 
 
@@ -401,17 +401,17 @@
       
 
       
-        <p><img src="/img/15402042735773/PI-19_Narrowband-5-0001.png" alt="PI-19_Narrowband-5-0001-w512"><br>我们现在返回到把窄带与(L)RGB混合的PI进程。在本节和下一节，我们提出两种不同的方式来操作。记住，每个对象是独特的，没有唯一正确的方法去处理这个目标。</p>
+        <p><img src="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0001.png" alt="PI-19_Narrowband-5-0001-w512"><br>我们现在返回到把窄带与(L)RGB混合的PI进程。在本节和下一节，我们提出两种不同的方式来操作。记住，每个对象是独特的，没有唯一正确的方法去处理这个目标。</p>
 <a id="more"></a>
-<p><img src="/img/15402042735773/PI-19_Narrowband-5-0006.png" alt="PI-19_Narrowband-5-0006-w512"><br>实验并找到最适合您的特定图像的处理方法。</p>
-<p><img src="/img/15402042735773/PI-19_Narrowband-5-0008.png" alt="PI-19_Narrowband-5-0008-w512"><br>对于第一个例子，让我们将Ha与明度混合。在应用非线性伸展之后，我们使用HDRMultiscaleTransform来压缩明度图像的动态范围。这将有助于更好地与Ha混合。虽然<br>一个有丰富对比度的Ha的图像作为一个灰度分布存在是很理想的，但是其过于尖锐，无法补充明度。</p>
-<p><img src="/img/15402042735773/PI-19_Narrowband-5-0009.png" alt="PI-19_Narrowband-5-0009-w512"><br>为了使它与L一致，我们再次使用HDRMultiscaleTransform来压缩其亮度范围。如果两个图像的亮度级别仍存在差异，使用HistogramTransformation或LinearFit去平衡他们。</p>
-<p><img src="/img/15402042735773/PI-19_Narrowband-5-0011.png" alt="PI-19_Narrowband-5-0011-w512"><br>打开PixelMath，我们把20%明度与80%Ha相加，从而充分利用Ha的细节，但是同时也利用了L通道对星点的贡献。还有两个步骤要做。</p>
-<p><img src="/img/15402042735773/PI-19_Narrowband-5-0014.png" alt="PI-19_Narrowband-5-0014-w512"><br>我们用新的Ha+L组合替换RGB的亮度通道</p>
-<p><img src="/img/15402042735773/PI-19_Narrowband-5-0018.png" alt="PI-19_Narrowband-5-0018-w512"><br>使用ChannelCombination在Lab模式下，将新的Ha/L图像应用于彩色图像。</p>
-<p><img src="/img/15402042735773/PI-19_Narrowband-5-0020.png" alt="PI-19_Narrowband-5-0020-w512"><br>最后，如果有需要，可以用CurvesTransformation或者ColorSaturation还原饱和度。</p>
-<p><img src="/img/15402042735773/PI-19_Narrowband-5-0021.png" alt="PI-19_Narrowband-5-0021-w512"></p>
-<p><img src="/img/15402042735773/PI-19_Narrowband-5-0022.png" alt="PI-19_Narrowband-5-0022-w512"></p>
+<p><img src="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0006.png" alt="PI-19_Narrowband-5-0006-w512"><br>实验并找到最适合您的特定图像的处理方法。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0008.png" alt="PI-19_Narrowband-5-0008-w512"><br>对于第一个例子，让我们将Ha与明度混合。在应用非线性伸展之后，我们使用HDRMultiscaleTransform来压缩明度图像的动态范围。这将有助于更好地与Ha混合。虽然<br>一个有丰富对比度的Ha的图像作为一个灰度分布存在是很理想的，但是其过于尖锐，无法补充明度。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0009.png" alt="PI-19_Narrowband-5-0009-w512"><br>为了使它与L一致，我们再次使用HDRMultiscaleTransform来压缩其亮度范围。如果两个图像的亮度级别仍存在差异，使用HistogramTransformation或LinearFit去平衡他们。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0011.png" alt="PI-19_Narrowband-5-0011-w512"><br>打开PixelMath，我们把20%明度与80%Ha相加，从而充分利用Ha的细节，但是同时也利用了L通道对星点的贡献。还有两个步骤要做。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0014.png" alt="PI-19_Narrowband-5-0014-w512"><br>我们用新的Ha+L组合替换RGB的亮度通道</p>
+<p><img src="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0018.png" alt="PI-19_Narrowband-5-0018-w512"><br>使用ChannelCombination在Lab模式下，将新的Ha/L图像应用于彩色图像。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0020.png" alt="PI-19_Narrowband-5-0020-w512"><br>最后，如果有需要，可以用CurvesTransformation或者ColorSaturation还原饱和度。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0021.png" alt="PI-19_Narrowband-5-0021-w512"></p>
+<p><img src="http://qiniucdn.bestxtech.com/15402042735773/PI-19_Narrowband-5-0022.png" alt="PI-19_Narrowband-5-0022-w512"></p>
 <p>接下来，更多关于窄带和 (L)RGB 组合的内容。</p>
 
       
