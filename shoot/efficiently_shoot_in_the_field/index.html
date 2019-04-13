@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="“我的后期处理其实是很渣的。”——bin’s tuoluofusiji  最近帮好几位同好处理野外拍摄的片子，感觉很有必要写一个教程，如何在野外进行高效率的拍摄。“高效率”不是指你拍的有多快，而是尽量让拍的每一张片子都能起到作用，相对来说，也相当于高效率的拍摄了。 一、拍摄位置的选择既然我们是野外拍摄，那么就应当有选择性的挑选拍摄地点。拍摄地点的选择要遵循以下几个原则：  光害小。这个很容易理解">
+<meta name="keywords" content="拍摄,野战,野外,户外,摄影党">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高效野外拍摄">
+<meta property="og:url" content="http://pi.bestxtech.com/shoot/efficiently_shoot_in_the_field/index.html">
+<meta property="og:site_name" content="PixInsight 入门到精通">
+<meta property="og:description" content="“我的后期处理其实是很渣的。”——bin’s tuoluofusiji  最近帮好几位同好处理野外拍摄的片子，感觉很有必要写一个教程，如何在野外进行高效率的拍摄。“高效率”不是指你拍的有多快，而是尽量让拍的每一张片子都能起到作用，相对来说，也相当于高效率的拍摄了。 一、拍摄位置的选择既然我们是野外拍摄，那么就应当有选择性的挑选拍摄地点。拍摄地点的选择要遵循以下几个原则：  光害小。这个很容易理解">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/001.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/002.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/003.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/004.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/005.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/006.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/007.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/008.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/009.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/010.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/011.png">
+<meta property="og:updated_time" content="2019-04-13T05:33:12.639Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高效野外拍摄">
+<meta name="twitter:description" content="“我的后期处理其实是很渣的。”——bin’s tuoluofusiji  最近帮好几位同好处理野外拍摄的片子，感觉很有必要写一个教程，如何在野外进行高效率的拍摄。“高效率”不是指你拍的有多快，而是尽量让拍的每一张片子都能起到作用，相对来说，也相当于高效率的拍摄了。 一、拍摄位置的选择既然我们是野外拍摄，那么就应当有选择性的挑选拍摄地点。拍摄地点的选择要遵循以下几个原则：  光害小。这个很容易理解">
+<meta name="twitter:image" content="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/001.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/shoot/efficiently_shoot_in_the_field/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>高效野外拍摄 | PixInsight 入门到精通</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-1987602-8');
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!-- Google AdSense start -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3582293014438569",
+          enable_page_level_ads: true
+     });
+</script>
+  <!-- Google AdSense end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PixInsight 入门到精通</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/shoot/efficiently_shoot_in_the_field/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="PixInsight 教程(最后更新时间：2019年3月9日)">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PixInsight 入门到精通">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">高效野外拍摄
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <a href="/about/">钟点工</a>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-05-23 00:00:00" itemprop="dateCreated datePublished" datetime="2016-05-23T00:00:00+08:00">2016-05-23</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/shoot/efficiently_shoot_in_the_field/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/shoot/efficiently_shoot_in_the_field/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>“我的后期处理其实是很渣的。”——bin’s tuoluofusiji</p>
+</blockquote>
+<p>最近帮好几位同好处理野外拍摄的片子，感觉很有必要写一个教程，如何在野外进行高效率的拍摄。“高效率”不是指你拍的有多快，而是尽量让拍的每一张片子都能起到作用，相对来说，也相当于高效率的拍摄了。</p>
+<h2 id="一、拍摄位置的选择"><a href="#一、拍摄位置的选择" class="headerlink" title="一、拍摄位置的选择"></a>一、拍摄位置的选择</h2><p>既然我们是野外拍摄，那么就应当有选择性的挑选拍摄地点。拍摄地点的选择要遵循以下几个原则：</p>
+<ol>
+<li><p>光害小。这个很容易理解，深空摄影的第一天敌就是光害，所以在地点选择上，首选就是要避开光害，或者退而求其次，选择目标整晚不在光害影响范围内的地方。比如：我们要拍M42，那么就要选择南面没有光害的地方，因为M42几乎整晚都在东南向西南方向转动。</p>
+</li>
+<li><p>视宁度好的地方。我的理解：视宁度就是大气湍流强度。大气湍流越强，视宁度越渣。</p>
+<p> 最简单的办法就是，看那些高手经常去哪里拍摄，他们已经给你实测过视宁度的好坏，他们选择的地方基本上都是比较好的。</p>
+<p> 自己选择的话，首选海拔较高的地点，海拔2000m以上为佳，同一地点，海拔越低视宁越差。</p>
+<p> 其次，选风的迎风面位置。</p>
+<p> <img src="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/001.png" alt="001"></p>
+<p> 简单看一个示意图，黑色线条表示地形，是一座山。红色线条表示风向。那么在A B C D四个位置中，B点视宁度是最好的，A次之，C最差。</p>
+</li>
+<li><p>远离环境湿度过大的地点。夜晚容易结露，冬季容易结霜。发热带只是辅助。</p>
+</li>
+<li><p>关注气象信息。冷热气流交替，大的云团过境之前之后，都不是理想的拍摄时机。</p>
+</li>
+</ol>
+<h2 id="二、拍摄器材的准备"><a href="#二、拍摄器材的准备" class="headerlink" title="二、拍摄器材的准备"></a>二、拍摄器材的准备</h2><p>“细节决定成败”。</p>
+<p>野外拍摄，时间紧迫，不能把大量的时间浪费到调整器材上。所以你在日常就要做好设备的调试准备工作，包括设备稳定性测试，冷冻CCD的暗场库，设备大致合焦位置，设备刚性等等。</p>
+<ol>
+<li><p>稳定性测试。在室内组装好你的全套设备，反复连接断开，甚至断电，重启电脑，提前做好软硬件升级匹配，多次检验整套系统稳定性，确保整套设备到野外以后，一次开机连接所有设备成功，不要在野外安装驱动等等操作。</p>
+</li>
+<li><p>冷冻CCD或者单反的暗场库。暗场可以在室内提前准备好，不需要在野外浪费时间进行拍摄。提前拍摄暗场和暗场的偏置场，叠加处理，建立暗场库，省去在野外拍摄的时间。对一般的冷冻CCD，夏天可以做-10度的暗场库，冬季可以做-20度甚至-30度的暗场库，野外拍摄可以直接选用暗场库温度来拍摄。</p>
+</li>
+<li><p>大致的合焦位置。有些人不注意这些细节，天黑之后才手忙脚乱的找大致的合焦位置，浪费十几分钟甚至几十分钟时间。正确的做法应该是，你上次拍摄准确合焦以后，你记住调焦座刻度尺的位置，下次拍摄，直接调到这里，基本上星点就能看了，下一步就是仔细调焦，节约大量时间。</p>
+</li>
+<li><p>设备刚性问题。</p>
+<p> 设备刚性是指，你整套系统的同步性。比如，你的主镜和导星镜因为角度不同，重力不同，导致两个之间有微小的形变，那么恭喜你，虽然导星很好，但是你的片子必然拉线。所以，我建议一体式的系统。</p>
+</li>
+<li><p>拍摄用的电脑及其他要注意的问题。</p>
+<p> 首先，拍摄用的电脑尽量专用，只安装与拍摄有关的软件，其他的一律不装，尽量提高电脑稳定性。其次，对于用笔记本电脑的同好来说，在设备管理器里关掉所有设备节电模式。</p>
+</li>
+</ol>
+<p><img src="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/002.png" alt="002"></p>
+<h2 id="三、SKYX拍摄软件重要功能"><a href="#三、SKYX拍摄软件重要功能" class="headerlink" title="三、SKYX拍摄软件重要功能"></a>三、SKYX拍摄软件重要功能</h2><p>强烈要求，每一位野战党都安装一个SKYX软件。其次，拍摄尽量使用MDL软件。</p>
+<ol>
+<li><p>SKYX软件的作用。主要作用就是用来寻找目标和构图，以及多次外出拍摄所得片子能够顺利累积。</p>
+<p> <img src="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/003.png" alt="003"></p>
+<p> 上面这个在一个夜晚拍摄的M33（图三），就是一个典型的反面教材。这个教材的最大问题就是，其中某几张片子拍摄时CCD的角度与其他的不同。询问之后发现，由于过中天之后，发现构图有偏差，手动调整了CCD角度以达到相同的构图位置，结果很显然，这个角度偏差肉眼很难发现，但在后期处理时，导致平场无法校准。</p>
+<p> Linkage大神出过SKYX的详细教程，我选择其中最有用的几个再次演示，让大家能体会到SKYX的强大功能。</p>
+<ul>
+<li><p>第一步：location设置（图四）。因为我们是野外党，可能每次去的地点都不同，那么我们的位置也就不相同。利用手机或者其他GPS设备获取拍摄地点的详细GPS坐标，输入到SKYX里面，以便得到实际的星图位置。此功能在 Input-Location里设置。Latitude是纬度，北半球最后的N就是North，代表北半球，如果是南半球，那么输入S，South南半球。Longitude是经度，我们所在的时区是东经，那么输入E，East东方，如果是在西经地区，那么输入W，West西方。Time Zone是时区，中国大部分地区是使用东八区的时间，那么就选8hours。Elevation是海拔，按GPS提示的海拔高度输入就行。正确设置好Location以后，SKYX显示的星图才和当前天空是一致的。</p>
+<p><img src="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/004.png" alt="004"></p>
+</li>
+<li><p>第二步：设置Closed Loop Slew参数（图五）。在Telescope—calibration run—Automated Calibration—setup里。Exposure time曝光时间，以能拍到大量星点为准。Image scale是相机分辨率，这个有计算公式，也可以用skyx的盲解得出数值（图六）。Binning就是Bin，Bin和image scale是对应的。如果你是用BIN1*1模式的图解析出image scale，那么在BIN2*2的时候，这个image scale就要乘以2。</p>
+<p><img src="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/005.png" alt="005"></p>
+<p><img src="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/006.png" alt="006"></p>
+</li>
+<li><p>第三步：寻找需要拍摄的目标（图七）。比如我们需要拍摄M101，那么在Find里输入M101，点后面的Find，会出来下面这张图片所显示的内容。下面这个红圈里的数字就是目标现在的方位角和高度角。一般尽量选择高度角在30度以上的目标。然后点击第一个红圈Closed Loop Slew这个功能。我给这个功能定义为，“精确goto”。</p>
+<p><img src="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/007.png" alt="007"></p>
+<p>这个精确GOTO有两个主要的作用，第一就是准确寻找目标，其误差以个位数的像素来表示，比如只差几个像素的距离，肉眼无法分辨，极高的精度。第二就是可以用之前拍摄的图片的位置，来进行下一次的累积拍摄，而不出现较大的构图偏差。下面具体来讲如何实现这个功能。</p>
+</li>
+</ul>
+</li>
+<li><p>SKYX的goto及精确goto。</p>
+<p> 在做goto之前，需要在skyx软件里做一次类似于一星校准的步骤，以便skyx能准确知道望远镜光轴指向的位置。</p>
+<p> 我们连接好赤道仪和CCD之后，任意转动赤道仪，让望远镜指向一个天区，拍摄一张10秒左右的短时间照片，在Tools—Image Link里打开这张图片，进行解析。完成之后会在星图上看到这张照片在星图中的位置（图八）。</p>
+<p> <img src="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/008.png" alt="008"></p>
+<p> 我们用鼠标点到这个白框的正中心，会显示出XXXX Linked Photo，表示我们已经选择了这张解析图片的中心。然后选择Telescope—start up—synchronize（图九）。</p>
+<p> <img src="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/009.png" alt="009"></p>
+<p> 点击之后出来如下的界面：</p>
+<p> <img src="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/010.png" alt="010"></p>
+<p> 我们点击这个红圈，表示，一星校准到这个拍摄的图片位置。</p>
+<p> 这个功能有两个重要的作用，一就是赤道仪的一星校准，二就是能用之前所拍摄的片子来作为goto的目标，方法是：选择之前拍摄片子做解析，选中片子中心位置，然后Closed Loop Slew精确GOTO，那么赤道仪会转动到你上一次拍摄的位置，而且误差只有几个像素。</p>
+<p> 这中间还有一个问题，就是对于每次拍摄完以后都要拆卸CCD下来的同好，那么在你对天随意拍摄一张，解析以后可以看到相机的角度，（图六）的第二个红圈270°07就是你上一次拍摄时CCD的角度，这次拍摄的时候，旋转相机，使这两个角度相同或非常接近，最起码精确到几角分。</p>
+<p> 这样就实现了，上次拍摄和这次拍摄相同的构图，相同的角度。</p>
+</li>
+</ol>
+<h2 id="四、MDL的使用。"><a href="#四、MDL的使用。" class="headerlink" title="四、MDL的使用。"></a>四、MDL的使用。</h2><p>MDL是大家经常使用的一个拍摄软件，它自带导星，拍摄起来会让你觉得很惬意，唯一要注意的一点就是，在拍摄的过程中，如果你急于查看某一张的效果，而手动做了DDP以后，切忌一定看完以后关掉这张照片，如果你没这么做，那么你这张照片以后的片子，MDL将不会保存到你的硬盘里，今晚就白费了。</p>
+<h2 id="五、后期处理的准备工作。"><a href="#五、后期处理的准备工作。" class="headerlink" title="五、后期处理的准备工作。"></a>五、后期处理的准备工作。</h2><p>其实认真看过crazygame图像后期三教程的同好来说，这个不存在问题。我这里再复述一次，因为这真的很重要。</p>
+<ol>
+<li><p>偏置的拍摄。对于野战党来说，到达拍摄地点，安装好设备，就可以开始进行偏置的拍摄了。等CCD制冷到设置的温度，盖上镜头盖，先进行50-100张偏置的拍摄。但请注意，在此过程及整晚的拍摄中，请不要断开CCD的电源，否则偏置只对断电前的片子有用。重新通电以后仍然需要重新拍摄偏置。这就是我强调系统稳定性的原因。万一系统出问题，需要断电，那么偏置就要重新拍。此为现场偏置。</p>
+</li>
+<li><p>平场的拍摄。平场有两种方法，一是天光，在日落后和日出前的短暂时间里，天光亮度不大且均匀，是拍摄平场的最佳时机，但是由于时间太短，对黑白CCD多滤镜通道拍摄来说，时间根本不够用。二是平场板，分为减光性的平场板和自发光平场板。减光性平场板适合天光足够亮的时候拍摄，使ADU达到30000左右（16位CCD），看下（图十一）。这就是一张合格的平场图像。</p>
+</li>
+</ol>
+<p><img src="http://qiniucdn.bestxtech.com/efficiently_shoot_in_the_field/011.png" alt="011"></p>
+<p>需要强调的是，第一必须是合焦位置，不能偏差过大，第二就是不能转动CCD的角度，两者有一个出问题，那么平场就废了。</p>
+<p>有了现场偏置和准确的平场，才是后期处理的开始。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/拍摄/" rel="tag"># 拍摄</a>
+          
+            <a href="/tags/野战/" rel="tag"># 野战</a>
+          
+            <a href="/tags/野外/" rel="tag"># 野外</a>
+          
+            <a href="/tags/户外/" rel="tag"># 户外</a>
+          
+            <a href="/tags/摄影党/" rel="tag"># 摄影党</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/01_01/" rel="prev" title="PixInsight入门到精通 第一章 基础知识 第一节 界面基础（一）">
+                PixInsight入门到精通 第一章 基础知识 第一节 界面基础（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">PixInsight 教程(最后更新时间：2019年3月9日)</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">74</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://www.miitbeian.gov.cn" rel="noopener" target="_blank">沪ICP备16052040号-1 </a>&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'NFc63kU1QBVdljmdimx4m4yH-gzGzoHsz',
+    appKey: 'mPDe95SAhi8aU0eD2k9gVuRn',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
