@@ -407,7 +407,7 @@
 <p>工作之余，遇到好天（上海的好天极其难得），便会约上同好，趁着月黑风高，带上设备，钻入茫茫黑夜，去体会与星辰大海融为一体的感觉。</p>
 <p>未来计划找一个环境好的远程台，将深空设备安置过去。平时有机会，就出去拍拍星野。</p>
 <p>本人微信：gavntery（申请好友时请注明“PixInsight”）</p>
-<p>Email: <a href="mailto:&#103;&#x61;&#x76;&#110;&#x74;&#101;&#114;&#x79;&#64;&#x67;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#99;&#111;&#x6d;" target="_blank" rel="noopener">&#103;&#x61;&#x76;&#110;&#x74;&#101;&#114;&#x79;&#64;&#x67;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#99;&#111;&#x6d;</a></p>
+<p>Email: <a href="mailto:&#x67;&#x61;&#118;&#x6e;&#x74;&#x65;&#114;&#121;&#x40;&#x67;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#99;&#x6f;&#109;" target="_blank" rel="noopener">&#x67;&#x61;&#118;&#x6e;&#x74;&#x65;&#114;&#121;&#x40;&#x67;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#99;&#x6f;&#109;</a></p>
 <p>欢迎各位同好联系交流</p>
 <p><img src="http://qiniucdn.bestxtech.com/M42_20190127.jpg" alt="M42_20190127"><br>猎户座大星云(M42)</p>
 
@@ -732,6 +732,14 @@
     pageSize: '10' || 10,
     visitor: false
   });
+
+  //新增以下代码，可以移除.info下所有子节点。
+var infoEle = document.querySelector('#comments .info');
+if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+  infoEle.childNodes.forEach(function(item) {
+    item.parentNode.removeChild(item);
+  });
+}
 </script>
 
 
