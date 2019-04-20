@@ -96,58 +96,29 @@
 
 
 
-  <meta name="description" content="图上可以看到，所有的进程(process)都提供了新实例（New Instance）三角箭头(arrow)">
-<meta name="keywords" content="基础知识">
+  <meta name="description" content="今晚，我们将建立并执行一个具有五项事件的拍摄任务序列，今晚结束后，SGP将会给你奉上一组亮场和暗场的图片。 在开始之前，我们需要先选定一颗越过子午线的亮星或深空天体作为拍摄目标，并从软件中查到它的赤经赤纬坐标。选择越过子午线的原因是，可以避免可能的中天翻转，它会使整个拍摄过程复杂化，而它并不是我们今晚需要解决的问题。 安装好整套设备并做好平衡、对好极轴等准备工作。 启动PHD。 启动SGP。 在S">
+<meta name="keywords" content="拍摄,SGP,自动化,天文,户外,摄影党,远程台,Sequence Generator">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PixInsight入门到精通 第一章 基础知识 第四节 窗口按钮 &amp; 预览 &amp; 蒙版">
-<meta property="og:url" content="http://pi.bestxtech.com/01_04/index.html">
+<meta property="og:title" content="SGP初级使用教程 第五夜：第一个拍摄任务序列">
+<meta property="og:url" content="http://pi.bestxtech.com/sgp/05.fifth_night/index.html">
 <meta property="og:site_name" content="星空π对">
-<meta property="og:description" content="图上可以看到，所有的进程(process)都提供了新实例（New Instance）三角箭头(arrow)">
+<meta property="og:description" content="今晚，我们将建立并执行一个具有五项事件的拍摄任务序列，今晚结束后，SGP将会给你奉上一组亮场和暗场的图片。 在开始之前，我们需要先选定一颗越过子午线的亮星或深空天体作为拍摄目标，并从软件中查到它的赤经赤纬坐标。选择越过子午线的原因是，可以避免可能的中天翻转，它会使整个拍摄过程复杂化，而它并不是我们今晚需要解决的问题。 安装好整套设备并做好平衡、对好极轴等准备工作。 启动PHD。 启动SGP。 在S">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0110.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0113.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0114.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0115.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0117.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0118.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0119.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0120.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0121.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0122.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0123.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0125.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0126.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0127.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0131.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0132.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0133.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0137.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0138.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0139.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0140.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0143.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0145.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0147.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0148.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0149.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0150.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0151.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0156.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0158.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0158.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0161.png">
-<meta property="og:updated_time" content="2019-03-12T02:35:02.684Z">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/sgp/023.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/sgp/024.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/sgp/025.png">
+<meta property="og:updated_time" content="2019-04-20T09:38:20.590Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PixInsight入门到精通 第一章 基础知识 第四节 窗口按钮 &amp; 预览 &amp; 蒙版">
-<meta name="twitter:description" content="图上可以看到，所有的进程(process)都提供了新实例（New Instance）三角箭头(arrow)">
-<meta name="twitter:image" content="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0110.png">
+<meta name="twitter:title" content="SGP初级使用教程 第五夜：第一个拍摄任务序列">
+<meta name="twitter:description" content="今晚，我们将建立并执行一个具有五项事件的拍摄任务序列，今晚结束后，SGP将会给你奉上一组亮场和暗场的图片。 在开始之前，我们需要先选定一颗越过子午线的亮星或深空天体作为拍摄目标，并从软件中查到它的赤经赤纬坐标。选择越过子午线的原因是，可以避免可能的中天翻转，它会使整个拍摄过程复杂化，而它并不是我们今晚需要解决的问题。 安装好整套设备并做好平衡、对好极轴等准备工作。 启动PHD。 启动SGP。 在S">
+<meta name="twitter:image" content="http://qiniucdn.bestxtech.com/sgp/023.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://pi.bestxtech.com/01_04/">
+  <link rel="canonical" href="http://pi.bestxtech.com/sgp/05.fifth_night/">
 
 
 
@@ -157,7 +128,7 @@
   };
 </script>
 
-  <title>PixInsight入门到精通 第一章 基础知识 第四节 窗口按钮 & 预览 & 蒙版 | 星空π对</title>
+  <title>SGP初级使用教程 第五夜：第一个拍摄任务序列 | 星空π对</title>
   
 
 
@@ -401,7 +372,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/01_04/">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/sgp/05.fifth_night/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Terry">
@@ -418,7 +389,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PixInsight入门到精通 第一章 基础知识 第四节 窗口按钮 & 预览 & 蒙版
+          <h1 class="post-title" itemprop="name headline">SGP初级使用教程 第五夜：第一个拍摄任务序列
 
               
             
@@ -447,7 +418,7 @@
                 
               
 
-              <time title="创建时间：2018-12-13 10:13:30" itemprop="dateCreated datePublished" datetime="2018-12-13T10:13:30+08:00">2018-12-13</time>
+              <time title="创建时间：2019-04-20 17:29:02" itemprop="dateCreated datePublished" datetime="2019-04-20T17:29:02+08:00">2019-04-20</time>
             
 
             
@@ -466,8 +437,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/01_04/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/01_04/" itemprop="commentCount"></span>
+                <a href="/sgp/05.fifth_night/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/sgp/05.fifth_night/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -495,41 +466,41 @@
       
 
       
-        <p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0110.png" alt="PI-4_Primer-4-0110-w512"><br>图上可以看到，所有的进程(process)都提供了新实例（New Instance）三角箭头(arrow)</p>
-<a id="more"></a>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0113.png" alt="PI-4_Primer-4-0113-w512"><br>应用(Apply box), </p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0114.png" alt="PI-4_Primer-4-0114-w512"><br>文本链接（Documentation link）</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0115.png" alt="PI-4_Primer-4-0115-w512"><br>和重置(Reset), </p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0117.png" alt="PI-4_Primer-4-0117-w512"></p>
-<p>只有少数例外，比如说裁剪(Crop)和背景提取(Background Extraction)，它们是在动态模式下运行的。这些进程(process)有绿色的小勾来”运行”，而不是运用(Apply)。他们除非用红色的”x”取消，否则不能关闭。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0118.png" alt="PI-4_Primer-4-0118-w512"><br>这些为能够处理很多不同图像设计的进程(process)，都有这个”全局运用”图标。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0119.png" alt="PI-4_Primer-4-0119-w512"><br>最后，有些进程(process)有这个很方便的实时预览图标。</p>
-<p>讲这些之前，让我们先讲讲标准的预览。回忆一下，我们在第二课的的时候创建了第一个预览。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0120.png" alt="PI-4_Primer-4-0120-w512"><br>你也可以按Alt+N，然后拖动鼠标定义一个区域来创建预览。选上这个预览，我们可以缩放这个预览，或者调整它的位置。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0121.png" alt="PI-4_Primer-4-0121-w512"></p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0122.png" alt="PI-4_Primer-4-0122-w512"><br>通过拖拽这个标签，你可以复制一个一模一样的预览。想象一下，通过一模一样的图像，比较不同的操作的结果是多么的简单和直观。你也可以拖拽一个预览到另外一个图像。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0123.png" alt="PI-4_Primer-4-0123-w512"><br>有时候，我们想把不同的预览合并起来。让我们第一次使用脚本（Scripts），这是PreviewAggregator（预览聚合器），我们回头再讲它。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0125.png" alt="PI-4_Primer-4-0125-w512"><br>要把一个进程运用到一个预览，把三角箭头拖到预览上，而不是图像上。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0126.png" alt="PI-4_Primer-4-0126-w512"><br>有些进程不能运用到预览上，但是大部分都可以。一旦完成之后，撤销预览/重做预览的按钮就会出现，而不是用常规的撤销/重做按键。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0127.png" alt="PI-4_Primer-4-0127-w512"><br>你可以用这个按键来删除一个活动预览，或者在菜单里选择删除全部。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0131.png" alt="PI-4_Primer-4-0131-w512"><br>实时预览又不一样，只有少数的进程能够提供，比如说我们第三课中讲到的HistogramTransformation。点这里打开了一个新窗口，只要窗口还保持打开，进程和预览之间的联系就是实时的。看看我们做非线性拉升的时候发生了什么。这预览虽然虽然不完美但还是很好，它告诉我们任何改变对图像有什么影响。这样就不用创建很多个预览来试验这个进程在不同参数下的效果。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0132.png" alt="PI-4_Primer-4-0132-w512"><br>你甚至可以选择预览各个独立的通道。我们马上就会讲到蒙版(mask)</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0133.png" alt="PI-4_Primer-4-0133-w512"><br>但是在这里需要你记住的是，当一个图像有蒙版的时候，我们可以在这里选择是否应用蒙版。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0137.png" alt="PI-4_Primer-4-0137-w512"><br>像任何窗口一样，我们可以最大化或者关闭窗口，但是我们不能把实时预览的图像放大。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0138.png" alt="PI-4_Primer-4-0138-w512"><br>PI的蒙版(mask)是一个强大的选择性调整工具。在一个天文图像里，有不同的元素，蒙版可以让我们独立处理星点或者天空背景和其它低信噪比区域，或者我们的目标。我们用类似显露，隐藏阈值，反转的概念来创建蒙版。但是我们不“画”蒙版。在PI，我们定义了三个基本类型: 明度蒙版(Luminance Mask), 范围蒙版(Range Mask),和星点蒙版(star mask). </p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0139.png" alt="PI-4_Primer-4-0139-w512"><br>蒙版可以通过Wavelets, HistogramTransformation, CloneStamp, 和PixelMath修改。所有的我们随后都会介绍。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0140.png" alt="PI-4_Primer-4-0140-w512"><br>现在，让我们先简单介绍一下蒙版(mask)。要创立明度蒙版(Luminance mask)，简单复制一个图像，图像需要是是RGB而不是黑白图像。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0143.png" alt="PI-4_Primer-4-0143-w512"><br>用ChannelExtraction提取明度成分，或者Toolbar上的快捷图标。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0145.png" alt="PI-4_Primer-4-0145-w512"><br>然后你要用HistogramTransformation对图像做非线性拉升。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0147.png" alt="PI-4_Primer-4-0147-w512"><br>拉升时不要太温和，粗暴一点。蒙版本身的概念就是“白色的显露，黑色的隐藏”。让白的更白，黑的更黑将增加他的效果。 回头我们再讨论如何羽化让过渡更顺滑一些。创建之后，我们就可以把它最小化。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0148.png" alt="PI-4_Primer-4-0148-w512"><br>由于任何图像都可以当做蒙版，我们在这里可以选择蒙版，还可以反转蒙版。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0149.png" alt="PI-4_Primer-4-0149-w512"><br>这都取决于我们要达到怎样的效果。点击OK，蒙版在图像上可以看到，显示成红色。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0150.png" alt="PI-4_Primer-4-0150-w512"><br>你可以在这里改变覆盖的颜色。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0151.png" alt="PI-4_Primer-4-0151-w512"><br>这个蒙版，可以调整和改变图像亮部，而把其它部分都保护起来了。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0156.png" alt="PI-4_Primer-4-0156-w512"><br>我们可以在这里移除(remove)蒙版，</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0158.png" alt="PI-4_Primer-4-0158-w512"><br>或者反转(invert)它，哪怕我们在上一步没有选择翻转(invert)。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0158.png" alt="PI-4_Primer-4-0158-w512"><br>还有一点非常重要，如果想要蒙版发挥作用，请确保Enable被选上。如果你不想蒙版发挥作用，请Disable它。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387484241630/PI-4_Primer-4-0161.png" alt="PI-4_Primer-4-0161-w512"><br>最后，在蒙版还是有效的时候，你可以隐藏蒙版。蒙版的这些图标要花些时间才能适应。下一课，继续讲蒙版。</p>
+        <p>今晚，我们将建立并执行一个具有五项事件的拍摄任务序列，今晚结束后，SGP将会给你奉上一组亮场和暗场的图片。</p>
+<p>在开始之前，我们需要先选定一颗越过子午线的亮星或深空天体作为拍摄目标，并从软件中查到它的赤经赤纬坐标。选择越过子午线的原因是，可以避免可能的中天翻转，它会使整个拍摄过程复杂化，而它并不是我们今晚需要解决的问题。</p>
+<p>安装好整套设备并做好平衡、对好极轴等准备工作。</p>
+<p>启动PHD。</p>
+<p>启动SGP。</p>
+<p>在SGP主界面连接好所有的设备（确保每项设备旁边的红色连接图标变成灰色）。</p>
+<p>如果你从未设定过序列，在Target List（目标列表）区域会显示名为“Target1”的默认目标名称，点击它旁边的小齿轮图标进入Target Setting（目标设定）界面。</p>
+<p>在这个界面，按如下图所示设定：</p>
+<p><img src="http://qiniucdn.bestxtech.com/sgp/023.png" alt="023"></p>
+<p>如果有自动CAA装置，可以勾选最下面的rotate选项。</p>
+<p>点击OK回到主界面，如下图。</p>
+<p><img src="http://qiniucdn.bestxtech.com/sgp/024.png" alt="024"></p>
+<p>目标数据（Target Data）区域，你可以设定拍摄所得的图片文件的保存目录，以及文件名命名规则，这里暂时使用默认设置。</p>
+<p>在界面下半部分，是一个五行十列的表格，就是我们设定任务序列的地方，下面讲解各列的设定方法，其中，第1列事件（Event）设定、第2列事件的高级设定，暂时忽略，第10列显示每一行所代表的任务的执行进度。</p>
+<p>对使用冷冻CCD拍摄LRGB及暗场的场景：</p>
+<ul>
+<li>执行（Run）列，勾选后SGP才会执行该行序列。</li>
+<li>类型（Type）列，选择拍摄的是亮场还是暗场的类型。</li>
+<li>后缀（Suffix）列，指定拍摄图片的文件名后缀，通常使用滤镜的简写，如L、R。</li>
+<li>曝光（Exposure）列，设定该行任务的曝光时间，单位是秒。</li>
+<li>Bin列，设定该行任务使用的bin模式。</li>
+<li>张数（Repeat）列，设定拍多少张。</li>
+</ul>
+<p>若使用单反，上述界面会略有不同，如会出现ISO一列，但大同小异也好理解。</p>
+<p>界面右边的延迟和顺序选项：</p>
+<p><img src="http://qiniucdn.bestxtech.com/sgp/025.png" alt="025"></p>
+<p>Delay first设定整体任务序列开始之前的等待时间，Delay between设定每张照片之间的间隔时间，单位为秒。</p>
+<p>Event order这里设定不同滤镜拍摄的顺序，对刚才设定的任务序列来说，Rotate through events设定后，SGP会按LRGBDark LRGBDark LRGBDark LRGBDark LRGBDark的顺序执行，而Finish entire events first的设定，SGP会按LLLLL RRRRR GGGGG BBBBB DarkDarkDarkDarkDark的顺序执行。</p>
+<p>然后就可以点击右下角的Run SEQUENCE来执行整个任务序列了。</p>
+<p>观察下执行的过程，界面中Sequence statue这里显示了任务序列执行了多久、还有多久执行完。注意剩余时间不包括对焦、解析、goto、下载等事件，所以任务序列的实际执行耗时要比显示的长些。</p>
+<p>如果一切顺利，你将会在大约半小时后，在你设定的文件夹中看到两个子目录，分别存放亮场和暗场的图片文件，并且每个文件的名称都以设定的规则作为前缀名。</p>
+<p>以上就是今晚的主要工作，如果执行顺利，就可以开始下一节了。</p>
+<blockquote>
+<p>补充：<br>其实第五夜计划还有些有用功能没有写出来，比如目标几点结束（台子遮挡，低于30度，或者晨光等）及时结束前一个，及早开始下一个。还有一个功能就是拍完后片子不合格可以随时修改ok的张数，就在计划最后面双击完成的张数，修改就行，SGP会自动多拍减掉的数量，这个真滴很有用。可用skysafari pro等软件预判目标几点低于30度，据此设定结束时间，还有晨光时间。还可以根据具体情况改动通道计划顺序。还有一个平场拍摄自动测光功能，在下面会补枪。计划里面的设置内容很多，以后版本补充吧。琢磨起来也不难，大家自己尝试折腾下吧。（SR注）</p>
+</blockquote>
 
       
     </div>
@@ -582,7 +553,21 @@
       
         <div class="post-tags">
           
-            <a href="/tags/基础知识/" rel="tag"># 基础知识</a>
+            <a href="/tags/拍摄/" rel="tag"># 拍摄</a>
+          
+            <a href="/tags/SGP/" rel="tag"># SGP</a>
+          
+            <a href="/tags/自动化/" rel="tag"># 自动化</a>
+          
+            <a href="/tags/天文/" rel="tag"># 天文</a>
+          
+            <a href="/tags/户外/" rel="tag"># 户外</a>
+          
+            <a href="/tags/摄影党/" rel="tag"># 摄影党</a>
+          
+            <a href="/tags/远程台/" rel="tag"># 远程台</a>
+          
+            <a href="/tags/Sequence-Generator/" rel="tag"># Sequence Generator</a>
           
         </div>
       
@@ -595,8 +580,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/01_03/" rel="next" title="PixInsight入门到精通 第一章 基础知识 第三节 STF">
-                <i class="fa fa-chevron-left"></i> PixInsight入门到精通 第一章 基础知识 第三节 STF
+              <a href="/sgp/04.fourth_night/" rel="next" title="SGP初级使用教程 第四夜：解析与精确指向">
+                <i class="fa fa-chevron-left"></i> SGP初级使用教程 第四夜：解析与精确指向
               </a>
             
           </div>
@@ -604,10 +589,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/01_05/" rel="prev" title="PixInsight入门到精通 第一章 基础知识 第五节 蒙版 & 图像容器 & 进程容器">
-                PixInsight入门到精通 第一章 基础知识 第五节 蒙版 & 图像容器 & 进程容器 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
