@@ -96,18 +96,22 @@
 
 
 
-  <meta name="description" content="不喜欢星空的程序猿不是好厨子">
-<meta name="keywords" content="PixInsight,入门到精通,教程,天文,astro,">
+  <meta name="description" content="最近需要设置OFFSET，咨询了SGP官方以及linkage和ssyhang，终于搞定了OFFSET设置的方法，分享出来，造福同好。 对于许多品牌的滤镜，它本身没有齐焦这个属性，或者标称齐焦，但是还是有微小的误差。如果分通道进行调焦，将浪费大量的时间，以及分通道调焦带来的不确定因素。所以，用L通道进行段曝光调焦就有了很大的优势。 先看OFFSET设置的位置：  SGP把这个功能叫做Focus pt">
+<meta name="keywords" content="拍摄,SGP,自动化,天文,户外,摄影党,远程台,Sequence Generator">
 <meta property="og:type" content="article">
-<meta property="og:title" content="星空π对">
+<meta property="og:title" content="SGP初级使用教程 附录6：Lǒvの钟点工编写的SGP的调焦OFFSET设置">
 <meta property="og:url" content="http://pi.bestxtech.com/sgp/13.appendix_06/index.html">
 <meta property="og:site_name" content="星空π对">
-<meta property="og:description" content="不喜欢星空的程序猿不是好厨子">
+<meta property="og:description" content="最近需要设置OFFSET，咨询了SGP官方以及linkage和ssyhang，终于搞定了OFFSET设置的方法，分享出来，造福同好。 对于许多品牌的滤镜，它本身没有齐焦这个属性，或者标称齐焦，但是还是有微小的误差。如果分通道进行调焦，将浪费大量的时间，以及分通道调焦带来的不确定因素。所以，用L通道进行段曝光调焦就有了很大的优势。 先看OFFSET设置的位置：  SGP把这个功能叫做Focus pt">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-20T12:29:31.395Z">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/sgp/073.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/sgp/074.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/sgp/075.png">
+<meta property="og:updated_time" content="2019-04-20T14:57:08.719Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="星空π对">
-<meta name="twitter:description" content="不喜欢星空的程序猿不是好厨子">
+<meta name="twitter:title" content="SGP初级使用教程 附录6：Lǒvの钟点工编写的SGP的调焦OFFSET设置">
+<meta name="twitter:description" content="最近需要设置OFFSET，咨询了SGP官方以及linkage和ssyhang，终于搞定了OFFSET设置的方法，分享出来，造福同好。 对于许多品牌的滤镜，它本身没有齐焦这个属性，或者标称齐焦，但是还是有微小的误差。如果分通道进行调焦，将浪费大量的时间，以及分通道调焦带来的不确定因素。所以，用L通道进行段曝光调焦就有了很大的优势。 先看OFFSET设置的位置：  SGP把这个功能叫做Focus pt">
+<meta name="twitter:image" content="http://qiniucdn.bestxtech.com/sgp/073.png">
 
 
 
@@ -124,7 +128,7 @@
   };
 </script>
 
-  <title> | 星空π对</title>
+  <title>SGP初级使用教程 附录6：Lǒvの钟点工编写的SGP的调焦OFFSET设置 | 星空π对</title>
   
 
 
@@ -385,7 +389,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">SGP初级使用教程 附录6：Lǒvの钟点工编写的SGP的调焦OFFSET设置
 
               
             
@@ -404,6 +408,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
+                <a href="/about/">Terry</a>
+              
               
                 <span class="post-meta-item-text">发表于</span>
               
@@ -412,7 +418,7 @@
                 
               
 
-              <time title="创建时间：2019-04-20 20:29:31" itemprop="dateCreated datePublished" datetime="2019-04-20T20:29:31+08:00">2019-04-20</time>
+              <time title="创建时间：2019-04-20 22:55:29" itemprop="dateCreated datePublished" datetime="2019-04-20T22:55:29+08:00">2019-04-20</time>
             
 
             
@@ -460,7 +466,18 @@
       
 
       
-        
+        <p>最近需要设置OFFSET，咨询了SGP官方以及linkage和ssyhang，终于搞定了OFFSET设置的方法，分享出来，造福同好。</p>
+<p>对于许多品牌的滤镜，它本身没有齐焦这个属性，或者标称齐焦，但是还是有微小的误差。如果分通道进行调焦，将浪费大量的时间，以及分通道调焦带来的不确定因素。所以，用L通道进行段曝光调焦就有了很大的优势。</p>
+<p>先看OFFSET设置的位置：</p>
+<p><img src="http://qiniucdn.bestxtech.com/sgp/073.png" alt="073"></p>
+<p>SGP把这个功能叫做Focus pt。</p>
+<p>假设L的合焦位置在5000，R在4980，G在5020，B在5010。那么在Focus pt里如何设置呢？Focus pt的设置是一个相对位置的设置，我们可以把L定义为1000，那么R就是980，G是1020，B是1010。注意，这个Focus pt不能设置负值。</p>
+<p>OFFSET的测定需要在恒温或者温差极小的时候来测定，以排除温度变化对焦点的影响。</p>
+<p>那么，在用L进行调焦完成之后，拍摄R通道时，SGP会控制电调，按照Focus pt的设置，按L的焦点位置减小20步，然后直接拍摄。</p>
+<p>最后，附上我的Focus pt测试设置截图。</p>
+<p><img src="http://qiniucdn.bestxtech.com/sgp/074.png" alt="074"></p>
+<p><img src="http://qiniucdn.bestxtech.com/sgp/075.png" alt="075"></p>
+
       
     </div>
 
@@ -510,6 +527,26 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/拍摄/" rel="tag"># 拍摄</a>
+          
+            <a href="/tags/SGP/" rel="tag"># SGP</a>
+          
+            <a href="/tags/自动化/" rel="tag"># 自动化</a>
+          
+            <a href="/tags/天文/" rel="tag"># 天文</a>
+          
+            <a href="/tags/户外/" rel="tag"># 户外</a>
+          
+            <a href="/tags/摄影党/" rel="tag"># 摄影党</a>
+          
+            <a href="/tags/远程台/" rel="tag"># 远程台</a>
+          
+            <a href="/tags/Sequence-Generator/" rel="tag"># Sequence Generator</a>
+          
+        </div>
+      
 
       
       
@@ -519,8 +556,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/sgp/11.appendix_04/" rel="next" title>
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/sgp/12.appendix_05/" rel="next" title="SGP初级使用教程 附录5：Lǒvの钟点工制作的视频教程">
+                <i class="fa fa-chevron-left"></i> SGP初级使用教程 附录5：Lǒvの钟点工制作的视频教程
               </a>
             
           </div>
@@ -528,10 +565,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/sgp/12.appendix_05/" rel="prev" title>
-                 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
