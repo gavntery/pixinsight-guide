@@ -96,31 +96,30 @@
 
 
 
-  <meta name="description" content="如果你之前用过MaxIm DL、The SkyX等软件，今晚将很简单，只是要让SGP知道该从哪里调用所有拍摄设备。其实，如果你之前真的拍摄过，可以不看这章…… 不要急着上床，今夜的目标是先深入了解建立感情，在坐下来打开软件前，手头得准备一些你的拍摄系统的参数：比如调焦步进行程、CCD像素、尺寸等…便于配置SGP系统的初始参数。（记住这些是一个好习惯，不知道的话可以到这里查询http://www.1">
+  <meta name="description" content="首先要说明的是，SGP的AutoFocus(自动对焦简写做：AF，下同)机理稍有不同于其他软件的模式，其他软件大都是采用亮星HFR测定对焦的模式，结合V曲线测绘算得。而SGP则是以视场内众多星点目标的HFR“综合值”进行计算。所以，SGP在做AF的时候不需要寻找特定的亮星目标。直接在拍摄视场进行对焦。首先，针对AF的control模块来讲解设定工作。   Focus information：调焦器">
 <meta name="keywords" content="拍摄,SGP,自动化,天文,户外,摄影党,远程台,Sequence Generator">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SGP初级使用教程 第二夜：搞定设备连接">
-<meta property="og:url" content="http://pi.bestxtech.com/sgp/02.second_night/index.html">
+<meta property="og:title" content="SGP初级使用教程 第三夜：自动对焦(AutoFocus)设定及实操">
+<meta property="og:url" content="http://pi.bestxtech.com/sgp/03.third_night/index.html">
 <meta property="og:site_name" content="星空π对">
-<meta property="og:description" content="如果你之前用过MaxIm DL、The SkyX等软件，今晚将很简单，只是要让SGP知道该从哪里调用所有拍摄设备。其实，如果你之前真的拍摄过，可以不看这章…… 不要急着上床，今夜的目标是先深入了解建立感情，在坐下来打开软件前，手头得准备一些你的拍摄系统的参数：比如调焦步进行程、CCD像素、尺寸等…便于配置SGP系统的初始参数。（记住这些是一个好习惯，不知道的话可以到这里查询http://www.1">
+<meta property="og:description" content="首先要说明的是，SGP的AutoFocus(自动对焦简写做：AF，下同)机理稍有不同于其他软件的模式，其他软件大都是采用亮星HFR测定对焦的模式，结合V曲线测绘算得。而SGP则是以视场内众多星点目标的HFR“综合值”进行计算。所以，SGP在做AF的时候不需要寻找特定的亮星目标。直接在拍摄视场进行对焦。首先，针对AF的control模块来讲解设定工作。   Focus information：调焦器">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/sgp/004.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/sgp/005.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/sgp/006.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/sgp/007.png">
-<meta property="og:image" content="http://qiniucdn.bestxtech.com/sgp/008.png">
-<meta property="og:updated_time" content="2019-04-20T05:48:35.582Z">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/sgp/009.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/sgp/010.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/sgp/011.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/sgp/012.png">
+<meta property="og:updated_time" content="2019-04-20T09:00:47.956Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SGP初级使用教程 第二夜：搞定设备连接">
-<meta name="twitter:description" content="如果你之前用过MaxIm DL、The SkyX等软件，今晚将很简单，只是要让SGP知道该从哪里调用所有拍摄设备。其实，如果你之前真的拍摄过，可以不看这章…… 不要急着上床，今夜的目标是先深入了解建立感情，在坐下来打开软件前，手头得准备一些你的拍摄系统的参数：比如调焦步进行程、CCD像素、尺寸等…便于配置SGP系统的初始参数。（记住这些是一个好习惯，不知道的话可以到这里查询http://www.1">
-<meta name="twitter:image" content="http://qiniucdn.bestxtech.com/sgp/004.png">
+<meta name="twitter:title" content="SGP初级使用教程 第三夜：自动对焦(AutoFocus)设定及实操">
+<meta name="twitter:description" content="首先要说明的是，SGP的AutoFocus(自动对焦简写做：AF，下同)机理稍有不同于其他软件的模式，其他软件大都是采用亮星HFR测定对焦的模式，结合V曲线测绘算得。而SGP则是以视场内众多星点目标的HFR“综合值”进行计算。所以，SGP在做AF的时候不需要寻找特定的亮星目标。直接在拍摄视场进行对焦。首先，针对AF的control模块来讲解设定工作。   Focus information：调焦器">
+<meta name="twitter:image" content="http://qiniucdn.bestxtech.com/sgp/009.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://pi.bestxtech.com/sgp/02.second_night/">
+  <link rel="canonical" href="http://pi.bestxtech.com/sgp/03.third_night/">
 
 
 
@@ -130,7 +129,7 @@
   };
 </script>
 
-  <title>SGP初级使用教程 第二夜：搞定设备连接 | 星空π对</title>
+  <title>SGP初级使用教程 第三夜：自动对焦(AutoFocus)设定及实操 | 星空π对</title>
   
 
 
@@ -374,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/sgp/02.second_night/">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/sgp/03.third_night/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Terry">
@@ -391,7 +390,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SGP初级使用教程 第二夜：搞定设备连接
+          <h1 class="post-title" itemprop="name headline">SGP初级使用教程 第三夜：自动对焦(AutoFocus)设定及实操
 
               
             
@@ -420,7 +419,7 @@
                 
               
 
-              <time title="创建时间：2019-04-20 13:42:08" itemprop="dateCreated datePublished" datetime="2019-04-20T13:42:08+08:00">2019-04-20</time>
+              <time title="创建时间：2019-04-20 15:09:50" itemprop="dateCreated datePublished" datetime="2019-04-20T15:09:50+08:00">2019-04-20</time>
             
 
             
@@ -439,8 +438,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/sgp/02.second_night/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/sgp/02.second_night/" itemprop="commentCount"></span>
+                <a href="/sgp/03.third_night/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/sgp/03.third_night/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -468,49 +467,72 @@
       
 
       
-        <p>如果你之前用过MaxIm DL、The SkyX等软件，今晚将很简单，只是要让SGP知道该从哪里调用所有拍摄设备。其实，如果你之前真的拍摄过，可以不看这章……</p>
-<p>不要急着上床，今夜的目标是先深入了解建立感情，在坐下来打开软件前，手头得准备一些你的拍摄系统的参数：比如调焦步进行程、CCD像素、尺寸等…便于配置SGP系统的初始参数。（记住这些是一个好习惯，不知道的话可以到这里查询<a href="http://www.12dstring.me.uk/fov.htm" target="_blank" rel="noopener">http://www.12dstring.me.uk/fov.htm</a>或这里<a href="http://starizona.com/acb/ccd/calc_pixel.aspx" target="_blank" rel="noopener">http://starizona.com/acb/ccd/calc_pixel.aspx</a>或群里问）。</p>
-<p>今晚的目标就是确保所有的设备都正常工作，并能与计算机可靠的建立通信（不仅仅是插上线，要确保能识别、能控制），如果晚上有其他要做的话，这些事儿白天也可以做。</p>
-<p>今晚的准备工作其实很重要，就是要在实际测试或出门拍摄前设置好所有软硬件的参数，就像出车前要检查车况一样，这是个好习惯，免得是准备工作不足而荒废一整个晴夜。具体就是：</p>
+        <p>首先要说明的是，SGP的AutoFocus(自动对焦简写做：AF，下同)机理稍有不同于其他软件的模式，其他软件大都是采用亮星HFR测定对焦的模式，结合V曲线测绘算得。而SGP则是以视场内众多星点目标的HFR“综合值”进行计算。所以，SGP在做AF的时候不需要寻找特定的亮星目标。直接在拍摄视场进行对焦。首先，针对AF的control模块来讲解设定工作。</p>
+<p><img src="http://qiniucdn.bestxtech.com/sgp/009.png" alt="009"></p>
+<ul>
+<li>Focus information：调焦器状态信息</li>
+<li>Focus Control：手动控制对焦菜单</li>
+<li>Focus Options：设置选项</li>
+</ul>
+<p>依次勾选后的设定：</p>
 <ol>
-<li>打开设备的电源，但先不要连接到电脑。</li>
-<li><p>打开Windows的设备管理器，重点看一看串口、USB（通用串行总线控制器）、图像设备、USB转串口…都包括哪些（因为之后插上设备的USB后，这里会有变化）。</p>
-<p><img src="http://qiniucdn.bestxtech.com/sgp/004.png" alt="004"></p>
+<li>Reverse focuser direction：翻转调焦器进出方向</li>
+<li>Focus reminder：调焦动作提醒</li>
+<li>Use auto focus：勾选则使用自动对焦，点击Set进入具体设定。这里很重要，具体功能见下面</li>
+<li>Auto adjust focus per filter：每次换滤镜时自动调焦</li>
+<li>Temperature compensation：温度补偿，如果你不是很确定，建议还是别用吧</li>
+<li>Focus Pointing Settings：焦点位置设定<ul>
+<li>Focus：对当前AF滤镜设定合焦位置</li>
+<li>Set Focus：对所有滤镜采用当前合焦位置设定</li>
+</ul>
 </li>
-<li><p>插上CCD或相机数据线，看设备管理器有什么变化，如果打问号，请装好驱动再继续。</p>
-</li>
-<li>插上导星摄像头数据线，同上。</li>
-<li>插上赤道仪数据线，赤道仪的接口通常是com串口，所以我们要用到一个USB转串口的设备，插到电脑上后，记得设备管理器里对应显示的串口号是多少（比如COM2、COM3…）。</li>
-<li>one by one的插入其他需要计算机控制的设备，如果需要的话，记住新增设备的端口号（比如电调焦、滤镜轮、场旋器…都会用到串口），如果没记住，拔下来再插一次。</li>
-<li>打开所有设备，试试用软件控制赤道仪指向是否正常。<br>注意：尽量每次用同样的方式连接你的设备，如果你这次插的这个USB口，那么下次也要插这个，如果变动的话，可能会引起相应的端口号变动，导致软件无法连接设备，尤其是赤道仪。可以的话给线贴个标签…有序连接是一个好习惯。</li>
-<li><p>现在可以打开SGP软件了，第一件要做的事就是建立一个自己的“Profile”配置文档，这里包括所有的设备的配置信息。</p>
-<p><img src="http://qiniucdn.bestxtech.com/sgp/005.png" alt="005"></p>
-<p>补充说明下SGP中Profile和Control Panel的关系：可以针对不同组合的设备设置不同的Profile，Control Panel是针对应用了某个Profile后的拍摄序列实例的设置。</p>
-</li>
-<li><p>按照相机、滤镜、对焦…的顺序进行设置。这里，软件会给出一些tool tips设置建议，如果你没有看到tool tips，点击菜单Tools/Options/General并勾选”Show Tool Tips…”。</p>
-</li>
-<li><p>点击“Camera”相机选项卡：如果你的是制冷CCD，在这里设置10分钟制冷到-20°、15分钟升温到+10°，避免骤升骤降，这样的缓慢制冷和恢复温度可以保护设备。增益、角度、读出噪声、高速下载这些可以用默认值。</p>
-<p>注意：我们今晚只是测试，所以勾选 “Cool Down on Camera Connect.” 可以让相机连接后缓慢降温，但是不要勾选 “Warm Up on Sequence Complete”（实际拍摄时要勾选），避免出错后退出软件造成相机反复升温、降温。另外，相机的像素、尺寸、分辨率可以在之前给出的网站查到。</p>
-<p><img src="http://qiniucdn.bestxtech.com/sgp/006.png" alt="006"></p>
-</li>
+<li>图中最上面Connected to中的Other按钮，点击则进入调焦器设定，可以设置回差等，具体功能见后</li>
 </ol>
-<ol start="11">
-<li>如果是单色相机的话，接着设置滤镜轮。</li>
-<li><p>设置对焦参数。重点关注focuser step sizes对焦步进参数。</p>
-<p><img src="http://qiniucdn.bestxtech.com/sgp/007.png" alt="007"></p>
+<h3 id="自动对焦及其设定（功能编号沿用前面的3）："><a href="#自动对焦及其设定（功能编号沿用前面的3）：" class="headerlink" title="自动对焦及其设定（功能编号沿用前面的3）："></a>自动对焦及其设定（功能编号沿用前面的3）：</h3><p><img src="http://qiniucdn.bestxtech.com/sgp/010.png" alt="010"></p>
+<h4 id="3-1-Auto-Focus-Frequency-自动调焦频率设定-："><a href="#3-1-Auto-Focus-Frequency-自动调焦频率设定-：" class="headerlink" title="3.1 Auto Focus Frequency(自动调焦频率设定)："></a>3.1 Auto Focus Frequency(自动调焦频率设定)：</h4><ul>
+<li>Auto focus every N frames：每N帧AF</li>
+<li>Auto focus every N degree change：每变化N度AF（需要电调上有温度传感器）</li>
+<li>Auto focus every N minutes：每N分钟AF</li>
+<li>Auto focus on filter change：变换滤镜AF……</li>
+<li>Auto focus before sequence start(not on resume)：计划开拍AF（而非恢复拍摄时）</li>
+<li>Auto focus on resume：恢复时AF</li>
+<li>Auto focus after automatic centering action：自动对中后AF……</li>
+</ul>
+<h4 id="3-2-Star-Detection：星点侦测"><a href="#3-2-Star-Detection：星点侦测" class="headerlink" title="3.2 Star Detection：星点侦测"></a>3.2 Star Detection：星点侦测</h4><ul>
+<li>Nebula Rejection：对视场中星云目标排除，越强排除的越彻底，一般以视场中星点绿框消失为准</li>
+<li>Sample Size：AF取样星点多少，这个要结合Image Statistics发现的星点数量来设定，数量如果在100以下，可以适度把数字取小</li>
+</ul>
+<h4 id="3-3-Options：选项"><a href="#3-3-Options：选项" class="headerlink" title="3.3 Options：选项"></a>3.3 Options：选项</h4><ul>
+<li>Exposure time For or OSC ：AF时各滤镜曝光时间设定（点击For子菜单分别对各通道单独设定曝光时间和焦点开始位置）OSC后的曝光时间是针对彩色相机的AF设定</li>
+<li>Bin：bin模式设定，如果bin1拍摄就选bin1，同样类推</li>
+<li>Auto Focus Data Points：AF设定步数</li>
+<li>Step Size：对焦步长；此两项最为关键，步数×步长一定要小于设备的HFR最大值，否则，将无法完成AF，或者严重失准（具体HFR最大值计算参考此网站<a href="http://www.wilmslowastro.com/software/formulae.htm#CFZ" target="_blank" rel="noopener">http://www.wilmslowastro.com/software/formulae.htm#CFZ</a>）</li>
+<li>Auto focus dialog auto-close…：当对焦完成后，对焦窗口多长时间后自动关闭</li>
+<li>Disable smart focus：如果物镜有遮挡需要勾选此选项（如牛反，RC等）</li>
+<li>Auto focus with filter：设定使用哪片滤镜用来自动对焦（通常首选L，其次R，如果各通道都做，需要做最佳曝光测定，此时选择none就行）</li>
+<li>Crop auto focus frames by：把画面剪切百分之多少来去掉画面周边畸变（主要针对大视场CCD）</li>
+<li>Apply dark subtraction. Dark library path：应用暗场来优化AF，此处可以指定暗场文件的路径</li>
+<li>Save Auto Focus packages to: 自动对焦包的保存路径</li>
+</ul>
+<h3 id="调焦器设定（功能编号沿用前面的7）："><a href="#调焦器设定（功能编号沿用前面的7）：" class="headerlink" title="调焦器设定（功能编号沿用前面的7）："></a>调焦器设定（功能编号沿用前面的7）：</h3><p><img src="http://qiniucdn.bestxtech.com/sgp/011.png" alt="011"></p>
+<ul>
+<li>Set absolute focus position for first filter：对第一个滤镜设定为绝对焦点位置（目前一直没有采用这个设置，一般都是开拍前往外走合适的步长——可以参考前夜走得步长来调整，这样的话可能更快）</li>
+<li>Override maximum steps：手动设置最大调焦步数，做限位用，防止调焦座已经到最外端了还在继续走损坏电调；</li>
+<li>Focuser backlash compensation：调焦器回差补偿<ul>
+<li>Compensation direction：补偿方向设定（最好是IN，你懂得）</li>
+<li>Compensation step size：回差补偿值（这个SGP建议一定要比测得实际值大为好，建议大30%吧，如果你的测定准确的话）</li>
+</ul>
 </li>
-<li><p>设置赤道仪参数。注意：同样由于今晚只是测试，所以先不勾选 “Park Telescope when sequence completes” 这个参数，避免意外退出后赤道仪乱跑</p>
-</li>
-<li>设置解析参数。原文档用的是PinPoint，我们这里用PlateSolve2，具体说明见第四夜。</li>
-<li>设置导星参数。最好使用PHD2和最新版的SPG，勾选Dither，如果你镜子焦距小于1000mm 的话，选择small dither,如果大于的话，选择large dither。除了“Stop Autoguide when sequence completes”之外，勾选其他复选框。其他的参数不知道的话先默认…记住，我们现在只是入门，只是想让SGP先顺利的工作起来，更高级的设置以后再摸索。</li>
-<li>最后记得保存配置文件，并设置为默认配置文件，下次开启就不用再设置了，如果更换设备，可以重新建立一个配置文档。</li>
-<li><p>在工具栏的左侧第一个图标”New Sequence.”  ，这就是新建拍摄序列的地方，这里可以控制有所拍摄流程。这里有很多参数，但现在我们先关注一下右上方的区域。看到  “Equipment” 区域没有？这里列出了相机、滤镜轮等等刚才配置文件中设置的设备（点击红色连接图标左侧的设置图标，也可以设置设备参数，但是临时的，下次再用时还得从新设置，所以建议在Profile里都设置好）。</p>
-<p><img src="http://qiniucdn.bestxtech.com/sgp/008.png" alt="008"></p>
-</li>
-<li><p>点击红色的连接图标，如果之前的准备工作做的够好，这里就连接上来，图标会变成灰色。<br>如果，还是没有成功…你开电源没？想一想，电源有没有开、驱动有没有装好、端口有没有设置错…直到成功。</p>
-</li>
-</ol>
-<p>如果都完成了，恭喜你！明晚就可以入洞房了~</p>
+<li>Use Temper device for temperature input：对调焦器采用温度补偿（不建议使用）</li>
+</ul>
+<p>附图：完美V曲线，看到这条曲线，那就恭喜你，成功了！继续下一夜吧～</p>
+<p><img src="http://qiniucdn.bestxtech.com/sgp/012.png" alt="012"></p>
+<blockquote>
+<p>补充说明：SGP是英文版软件，界面在中文系统上会出现错位，将就吧，如果鼠标点不到就用Tab键切换到按钮上再回车执行，也可以双击标题栏全屏放大后点击。</p>
+</blockquote>
+<blockquote>
+<p>附录3里还有钟点工的AF实战经验供参考。</p>
+</blockquote>
 
       
     </div>
@@ -590,8 +612,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/sgp/01.first_night/" rel="next" title="SGP初级使用教程 初夜：前期准备工作">
-                <i class="fa fa-chevron-left"></i> SGP初级使用教程 初夜：前期准备工作
+              <a href="/sgp/02.second_night/" rel="next" title="SGP初级使用教程 第二夜：搞定设备连接">
+                <i class="fa fa-chevron-left"></i> SGP初级使用教程 第二夜：搞定设备连接
               </a>
             
           </div>
@@ -599,10 +621,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/sgp/03.third_night/" rel="prev" title="SGP初级使用教程 第三夜：自动对焦(AutoFocus)设定及实操">
-                SGP初级使用教程 第三夜：自动对焦(AutoFocus)设定及实操 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
