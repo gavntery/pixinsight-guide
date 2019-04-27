@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-pi.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-pi.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-pi.png?v=7.0.1">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="GoTo、定位及调整构图 接下来做GoTo 移动赤道仪工作，这里以加州星云为例。在 Observatory 窗口中选择Catalog 标签（图 11 红色箭头处），在红框位置中选择目标类别（Deep Space，深空天体）和目标编号（NGC 1499），点绿色箭头处的 search，目标信息会出现下方绿框中。点击蓝色箭头处的Go To，赤道仪就会开始移动到该目标位置。     图 11  移动停止">
+<meta name="keywords" content="Maxim DL,MDL,天文摄影,拍摄">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maxim DL(MDL)拍摄流程（二） 拍摄流程">
+<meta property="og:url" content="http://pi.bestxtech.com/mdl/002/index.html">
+<meta property="og:site_name" content="星空π对">
+<meta property="og:description" content="GoTo、定位及调整构图 接下来做GoTo 移动赤道仪工作，这里以加州星云为例。在 Observatory 窗口中选择Catalog 标签（图 11 红色箭头处），在红框位置中选择目标类别（Deep Space，深空天体）和目标编号（NGC 1499），点绿色箭头处的 search，目标信息会出现下方绿框中。点击蓝色箭头处的Go To，赤道仪就会开始移动到该目标位置。     图 11  移动停止">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/mdl/011.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/mdl/012.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/mdl/013.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/mdl/014.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/mdl/015.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/mdl/016.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/mdl/017.png">
+<meta property="og:updated_time" content="2019-04-27T05:48:12.506Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Maxim DL(MDL)拍摄流程（二） 拍摄流程">
+<meta name="twitter:description" content="GoTo、定位及调整构图 接下来做GoTo 移动赤道仪工作，这里以加州星云为例。在 Observatory 窗口中选择Catalog 标签（图 11 红色箭头处），在红框位置中选择目标类别（Deep Space，深空天体）和目标编号（NGC 1499），点绿色箭头处的 search，目标信息会出现下方绿框中。点击蓝色箭头处的Go To，赤道仪就会开始移动到该目标位置。     图 11  移动停止">
+<meta name="twitter:image" content="http://qiniucdn.bestxtech.com/mdl/011.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/mdl/002/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Maxim DL(MDL)拍摄流程（二） 拍摄流程 | 星空π对</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-1987602-8');
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!-- Google AdSense start -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3582293014438569",
+          enable_page_level_ads: true
+     });
+</script>
+  <!-- Google AdSense end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">星空π对</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">有关天文的那些事儿</p>
+      
+    
+    
+      <a>
+        <img class="custom-logo-image" src="/images/favicon-32x32-pi.png" alt="星空π对">
+      </a>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-pi">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-image"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-mdl">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/mdl/index/" rel="section"><i class="menu-item-icon fa fa-fw fa-magic"></i> <br>mdl</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sgp">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sgp/index/" rel="section"><i class="menu-item-icon fa fa-fw fa-magic"></i> <br>SGP教程</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-shoot">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/shoot/index/" rel="section"><i class="menu-item-icon fa fa-fw fa-camera"></i> <br>拍摄技巧</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/mdl/002/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="不喜欢星空的程序猿不是好厨子">
+      <meta itemprop="image" content="http://bestxtech.com/wp-content/themes/NexT/statics/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="星空π对">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Maxim DL(MDL)拍摄流程（二） 拍摄流程
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <a href="/about/">yzhzhang</a>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-27 13:10:23" itemprop="dateCreated datePublished" datetime="2019-04-27T13:10:23+08:00">2019-04-27</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/mdl/002/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/mdl/002/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="GoTo、定位及调整构图"><a href="#GoTo、定位及调整构图" class="headerlink" title="GoTo、定位及调整构图"></a>GoTo、定位及调整构图</h2><ol>
+<li><p>接下来做GoTo 移动赤道仪工作，这里以加州星云为例。在 Observatory 窗口中选择<br>Catalog 标签（图 11 红色箭头处），在红框位置中选择目标类别（Deep Space，深空天体）和目标编号（NGC 1499），点绿色箭头处的 search，目标信息会出现下方绿框中。点击蓝色箭头处的Go To，赤道仪就会开始移动到该目标位置。</p>
+ <center><img src="http://qiniucdn.bestxtech.com/mdl/011.png" alt="011"></center>
+
+ <center>图 11</center>
+</li>
+<li><p>移动停止之后，取决于你的极轴准确度和赤道仪的 point accuracy，望远镜会大概指向目标方位，但是不一定准确指向目标的坐标。接下来做 Pinpoint 解析（以下简称 PP），定位当前赤道仪位置。有关 PP 的具体操作可以参阅Northwowlfwu 同好的详细教程[5]，这里就介绍一下具体操作流程。L 通道 8~10 秒曝光一张照片（类似上一节5.4，图 12 中的图片是长时间曝光，仅是示范作用。实际曝光后只会是一些星点，但足够用来做 PP 解析），点击 MDL 上端的Analyze 标签（图 12 红色箭头），点击第一个选项 Pinpoint Astrometry。在弹出的窗口中，图 12 红框处指定 GSC 星表路径(<a href="http://www.astronomy.com.cn/bbs/thread- 181699-1-1.html" target="_blank" rel="noopener">Maxim DL 导星分析图片和精确构图攻略</a>)，图 12 绿框处勾选 FITS SCALE 和 FITS CENTER，然后点击蓝色箭头处 Process。一般情况下解析会非常快，成功之后图 12 蓝框中会显示当前望远镜赤经赤纬坐标，选择角度，焦距长度以及 pixel scale。</p>
+ <center><img src="http://qiniucdn.bestxtech.com/mdl/012.png" alt="012"></center>
+
+ <center>图 12</center>
+</li>
+<li><p>获得当前赤经赤纬坐标后，回到 Observatory 菜单中的 telescope 标签。这时红框位置中会显示你GoTo 时目标的设定坐标，而不是望远镜当前的实际坐标（图 13 中坐标只是为了举例，并不正确）。通过刚才第 12 步的 pp 解析，你获取了望远镜的实际坐标，所以通过点击蓝色箭头处的 sync 按钮，并选中蓝框中的 Solved position，点击 OK 后，红框中会变成 pp 解析后的坐标，代表赤道仪同步到了正确的当前位置。</p>
+ <center><img src="http://qiniucdn.bestxtech.com/mdl/013.png" alt="013"></center>
+
+ <center>图 13</center>
+</li>
+<li><p>重复上述3步可以提高指向精度。一般重复一次至两次就足够精确了。另外如果你不需要目标在图像正中间的话，可以事先查好你需要的构图形态以及构图后的中心坐标（MDL 的星图的确是惨不忍睹，我一般不用它来构图。我发现一个非常好的<a href="http://www.blackwaterskies.co.uk/p/imagingtoolbox.html" target="_blank" rel="noopener">构图网站</a>，可以指定相机和望远镜，指定目标，非常方便的构图并获取中心坐标。可惜的是国内似乎不能直接访问，需要翻墙。。。有兴趣的同好不妨一试<br>），在图 13 中Target Coordinates 中输入赤经和赤纬坐标，并且选择 J2000，点 Go To，这样赤道仪就会运行到你想要的构图位置了。</p>
+</li>
+</ol>
+<h2 id="对焦"><a href="#对焦" class="headerlink" title="对焦"></a>对焦</h2><ol>
+<li><p>利用 MDL 和电调焦来调焦还是挺方便和精确的。对焦前，先在 camera control 中选择合适的滤镜。然后在 Observatory 窗口中点击 Focus 标签（图 14 红色箭头）。图 14 中，红框中显示当前调焦座所在位置，蓝框中可以命令调焦座移出或者移进指定距离，紫框中可以命令调焦座移动到指定位置。</p>
+ <center><img src="http://qiniucdn.bestxtech.com/mdl/014.png" alt="014"></center>
+
+ <center>图 14</center>
+</li>
+<li><p>MDL 也有自动对焦功能。在自动对焦之前，需要做手动测量，计算出每一“步“所代表的调焦座实际移动距离。做法可以是在蓝框中命令调焦座移动 1000 步，用尺子测出移动距离，然后除以 1000。该数值不用非常非常精确。</p>
+</li>
+<li><p>确定这个数值之后，点击图 14 蓝色箭头 Options 进行自动对焦设置。在弹出的窗口中，绿框中填入刚刚测得的数值，注意绿框中的单位是微英寸或者微米，要选择你正确的单位。绿箭头处选择最后合焦时的调焦座移动方向。黄框中指定合焦目标。之后点图 15 中红色箭头 Exposure 进行曝光设置，红框中设定曝光长度，对焦视场等等。都设定好之后点OK，再点绿色箭头处的 Start。开始自动对焦后，图 15 中蓝框区域会自动生成一条 V 型曲线。曲线生成之后，MDL 会自动判别合焦处调焦座位置，并自动移动到该位置，自动对焦完成。</p>
+ <center><img src="http://qiniucdn.bestxtech.com/mdl/015.png" alt="015"></center>
+
+ <center>图 15</center>
+
+</li>
+</ol>
+<h2 id="导星"><a href="#导星" class="headerlink" title="导星"></a>导星</h2><ol>
+<li><p>接下来做导星设定。回到 camera control 窗口，点击Guide 标签，点击 Settings，弹出图 16 左侧的窗口。在红框中设定导星校准的时间。在校准过程中，校准星必须在X 和Y 轴都移动至少 5 个像素。所以若被导星比较靠近北天极，星点的移动线速度比较慢，可以适当增加红框中的 Cal Time，确保星点移动足够距离。在蓝色箭头处的下拉菜单中选择合适的导星方式。如果通过 ST4 口导星，需选择Guider Relay。如果通过 ASCOM 导星，选择ASCOM Direct。</p>
+ <center><img src="http://qiniucdn.bestxtech.com/mdl/016.png" alt="016"></center>
+
+ <center>图 16</center>
+</li>
+<li><p>设定完毕后点 ok 回到图 17，在红框中选择 Expose，曝光一张照片，鼠标左键照片中的一颗亮星。之后选择红框中的 Calibrate，点 start，星点会朝一个方向移动图 16 中指定的时间，然后移动回到原先位置；然后朝与之前移动方向垂直的另一方向移动，同样再回到原点。校准完成后星点会在图片上产生一个红色的L 型轨迹。最后选择红框中的track 并点start，导星开始。蓝框中的 Aggressiveness 可以分别控制两轴的矫正强度，如果曲线波动太剧烈，说明纠正命令太频繁，可以适当减小 Aggressiveness。</p>
+ <center><img src="http://qiniucdn.bestxtech.com/mdl/017.png" alt="017"></center>
+
+ <center>图 17</center>
+
+</li>
+</ol>
+<h2 id="拍摄及自动保存"><a href="#拍摄及自动保存" class="headerlink" title="拍摄及自动保存"></a>拍摄及自动保存</h2><p>导星开始之后就可以进行正常曝光了。在 expose 标签中选择图 18 中红色箭头处的 autosave，弹出左侧窗口。在绿色箭头处输入保存文件名，红框中输入曝光参数，如滤镜，曝光长度，binning，曝光张数等。蓝框中可以进行 dither 设置。蓝色箭头处点开，可以选择自动保存路径。设定完毕后点 ok，然后点 start 开始曝光。可以去休息啦！</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Maxim-DL/" rel="tag"># Maxim DL</a>
+          
+            <a href="/tags/MDL/" rel="tag"># MDL</a>
+          
+            <a href="/tags/天文摄影/" rel="tag"># 天文摄影</a>
+          
+            <a href="/tags/拍摄/" rel="tag"># 拍摄</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/mdl/index/" rel="next" title="Maxim DL(MDL)拍摄流程 目录">
+                <i class="fa fa-chevron-left"></i> Maxim DL(MDL)拍摄流程 目录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://bestxtech.com/wp-content/themes/NexT/statics/images/avatar.jpg" alt="Terry">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">不喜欢星空的程序猿不是好厨子</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">95</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://www.miitbeian.gov.cn" rel="noopener" target="_blank">沪ICP备16052040号-1 </a>&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'NFc63kU1QBVdljmdimx4m4yH-gzGzoHsz',
+    appKey: 'mPDe95SAhi8aU0eD2k9gVuRn',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+
+  //新增以下代码，可以移除.info下所有子节点。
+var infoEle = document.querySelector('#comments .info');
+if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+  infoEle.childNodes.forEach(function(item) {
+    item.parentNode.removeChild(item);
+  });
+}
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

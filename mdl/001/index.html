@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-pi.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-pi.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-pi.png?v=7.0.1">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="一、软件准备 Maxim DL Pro 5 (我用的是 V5.23) ASCOM 平台（支持大部分赤道仪控制,列表见网址，介绍及下载见网址），赤道仪驱动（下载见网址） 相机驱动：包括主拍摄相机与导星相机以及滤镜轮，有时需分别下载安装。 电调焦 ASCOM 驱动（下载见网址）  二、设备连接及准备设备架设完毕，做好平衡，对好极轴，将赤道仪回归 park position（也叫“零位”，镜筒平行赤经轴">
+<meta name="keywords" content="Maxim DL,MDL,天文摄影,拍摄">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maxim DL(MDL)拍摄流程（一） 拍摄前期准备">
+<meta property="og:url" content="http://pi.bestxtech.com/mdl/001/index.html">
+<meta property="og:site_name" content="星空π对">
+<meta property="og:description" content="一、软件准备 Maxim DL Pro 5 (我用的是 V5.23) ASCOM 平台（支持大部分赤道仪控制,列表见网址，介绍及下载见网址），赤道仪驱动（下载见网址） 相机驱动：包括主拍摄相机与导星相机以及滤镜轮，有时需分别下载安装。 电调焦 ASCOM 驱动（下载见网址）  二、设备连接及准备设备架设完毕，做好平衡，对好极轴，将赤道仪回归 park position（也叫“零位”，镜筒平行赤经轴">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/mdl/001.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/mdl/002.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/mdl/003.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/mdl/004.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/mdl/005.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/mdl/006.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/mdl/007.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/mdl/008.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/mdl/009.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/mdl/010.png">
+<meta property="og:updated_time" content="2019-04-27T05:37:51.840Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Maxim DL(MDL)拍摄流程（一） 拍摄前期准备">
+<meta name="twitter:description" content="一、软件准备 Maxim DL Pro 5 (我用的是 V5.23) ASCOM 平台（支持大部分赤道仪控制,列表见网址，介绍及下载见网址），赤道仪驱动（下载见网址） 相机驱动：包括主拍摄相机与导星相机以及滤镜轮，有时需分别下载安装。 电调焦 ASCOM 驱动（下载见网址）  二、设备连接及准备设备架设完毕，做好平衡，对好极轴，将赤道仪回归 park position（也叫“零位”，镜筒平行赤经轴">
+<meta name="twitter:image" content="http://qiniucdn.bestxtech.com/mdl/001.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/mdl/001/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Maxim DL(MDL)拍摄流程（一） 拍摄前期准备 | 星空π对</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-1987602-8');
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!-- Google AdSense start -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3582293014438569",
+          enable_page_level_ads: true
+     });
+</script>
+  <!-- Google AdSense end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">星空π对</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">有关天文的那些事儿</p>
+      
+    
+    
+      <a>
+        <img class="custom-logo-image" src="/images/favicon-32x32-pi.png" alt="星空π对">
+      </a>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-pi">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-image"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-mdl">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/mdl/index/" rel="section"><i class="menu-item-icon fa fa-fw fa-magic"></i> <br>mdl</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sgp">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sgp/index/" rel="section"><i class="menu-item-icon fa fa-fw fa-magic"></i> <br>SGP教程</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-shoot">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/shoot/index/" rel="section"><i class="menu-item-icon fa fa-fw fa-camera"></i> <br>拍摄技巧</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/mdl/001/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="不喜欢星空的程序猿不是好厨子">
+      <meta itemprop="image" content="http://bestxtech.com/wp-content/themes/NexT/statics/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="星空π对">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Maxim DL(MDL)拍摄流程（一） 拍摄前期准备
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <a href="/about/">yzhzhang</a>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-27 12:45:58" itemprop="dateCreated datePublished" datetime="2019-04-27T12:45:58+08:00">2019-04-27</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/mdl/001/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/mdl/001/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、软件准备"><a href="#一、软件准备" class="headerlink" title="一、软件准备"></a>一、软件准备</h2><ul>
+<li>Maxim DL Pro 5 (我用的是 V5.23)</li>
+<li>ASCOM 平台（支持大部分赤道仪控制,列表见<a href="http://ascom-standards.org/Support/Scopes.htm" target="_blank" rel="noopener">网址</a>，介绍及下载见<a href="http://ascom-standards.org/" target="_blank" rel="noopener">网址</a>），赤道仪驱动（下载见<a href="http://ascom-standards.org/Downloads/ScopeDrivers.htm" target="_blank" rel="noopener">网址</a>）</li>
+<li>相机驱动：包括主拍摄相机与导星相机以及滤镜轮，有时需分别下载安装。</li>
+<li>电调焦 ASCOM 驱动（下载见<a href="http://ascom-standards.org/Downloads/ScopeDrivers.htm" target="_blank" rel="noopener">网址</a>）</li>
+</ul>
+<h2 id="二、设备连接及准备"><a href="#二、设备连接及准备" class="headerlink" title="二、设备连接及准备"></a>二、设备连接及准备</h2><p>设备架设完毕，做好平衡，对好极轴，将赤道仪回归 park position（也叫“零位”，镜筒平行赤经轴，重锤杆竖直向下），锁紧赤经、赤纬轴。线缆全部正确连接之后，首先需要在设备管理器中确认各个串口的端口号，用于在 MDL 中指定。</p>
+<ul>
+<li>USB 转串口线质量一定要好，便宜的经常出现连接问题。</li>
+<li>有些 usb hub 供电不足，会导致拍摄相机或者导星相机拍摄时卡死。遇到这情况的话可以检查一下电脑直连相机，跳过 usb hub，看看能不能解决问题。</li>
+</ul>
+<p>接下来就可以软件连接各个设备。</p>
+<h2 id="三、赤道仪："><a href="#三、赤道仪：" class="headerlink" title="三、赤道仪："></a>三、赤道仪：</h2><ul>
+<li><p>3.1 打开 MDL，点击 Toggle Observatory Control（图一中红色箭头处），打开 Observatory 窗口（图一蓝色窗口）。</p>
+  <center><img src="http://qiniucdn.bestxtech.com/mdl/001.png" alt="001"></center>
+
+  <center>图一</center>
+</li>
+<li><p>3.2 在 Telescope 窗口下点 Options 右侧的黑色三角（图二红框），在弹出的下拉菜单（图二蓝框）中选择合适的赤道仪，点右侧 Properties。</p>
+  <center><img src="http://qiniucdn.bestxtech.com/mdl/002.png" alt="002"></center>
+
+  <center>图二</center>
+</li>
+<li><p>3.3 接下来弹出的窗口根据不同的赤道仪可能有区别，最基本的设置是要填写 COM 口的信息（图三绿框）（USB 转串口线质量一定要好，便宜的经常出现连接问题。）。正确填写 COM 口端号之后点击两次 OK 返回 Observatory 页面。点击 Telescope 框下的 connect 按钮（图四红框），connect 按钮变灰，右侧 disconnect 按钮变成可选（图四蓝框），说明赤道仪已连接成功。</p>
+  <center><img src="http://qiniucdn.bestxtech.com/mdl/003.png" alt="003"></center>
+
+  <center>图三</center>
+
+  <center><img src="http://qiniucdn.bestxtech.com/mdl/004.png" alt="004"></center>
+
+  <center>图四</center>
+
+
+
+</li>
+</ul>
+<h2 id="四、电调焦："><a href="#四、电调焦：" class="headerlink" title="四、电调焦："></a>四、电调焦：</h2><ul>
+<li><p>4.1 类似第二步，在 Focuser 1 窗口下点击 options 右侧黑色三角（图五红框），下拉菜单中选中合适的调焦，点右侧Properties 进行设置。</p>
+  <center><img src="http://qiniucdn.bestxtech.com/mdl/005.png" alt="005"></center>
+
+  <center>图五</center>
+</li>
+<li><p>4.2 在弹出窗口中设置 COM 口（max position 似乎并不重要，个人认为这个步数只是相对的），之后点两次 ok 退回图四窗口，点 connect 进行连接。</p>
+  <center><img src="http://qiniucdn.bestxtech.com/mdl/006.png" alt="006"></center>
+
+  <center>图六</center>
+
+
+
+</li>
+</ul>
+<h2 id="五、相机及滤镜轮："><a href="#五、相机及滤镜轮：" class="headerlink" title="五、相机及滤镜轮："></a>五、相机及滤镜轮：</h2><ul>
+<li><p>5.1 点击 Toggle Camera Control（图七红箭头处），弹出相机设置窗口。一般默认 camera 1是主拍摄相机，camera 2 是导星相机。点击图七绿色箭头处 setup camera 设置主相机。在弹出窗口（图七绿框）中选择对应的相机，点 ok（一些相机需要进一步设置，比如选择 usb 端口等等，按需设置）。之后 camera 2 中对导星相机进行类似设置。</p>
+  <center><img src="http://qiniucdn.bestxtech.com/mdl/007.png" alt="007"></center>
+
+  <center>图七</center>
+</li>
+<li><p>5.2 相机设置好之后，点击图八红色箭头处设置滤镜轮。在弹出窗口下拉菜单（图八红框） 中选择对应的滤镜轮，在蓝框中填入各个位置对应的滤镜名称，点击 ok 完成设置。回到camera control 窗口点击 connect（图八绿框），完成连接相机。至此设备连接完成。</p>
+  <center><img src="http://qiniucdn.bestxtech.com/mdl/008.png" alt="008"></center>
+
+  <center>图八</center>
+</li>
+<li><p>5.3 接下来我会打开制冷，点图九红色箭头处，在弹出窗口中蓝色箭头处设置制冷温度，点ok，在绿色箭头处点 on 打开制冷。</p>
+  <center><img src="http://qiniucdn.bestxtech.com/mdl/009.png" alt="009"></center>
+
+  <center>图九</center>
+</li>
+<li><p>5.4 之后我一般会试曝光一张，在 camera control 窗口中，选择 expose 标签（图十红框），确保红色箭头处选择 single 和 camera 1，图十绿框中选择 L 滤镜，图十蓝框中选择曝光时间，点击图十蓝色箭头处 start 进行曝光。根据曝光可以进行粗略调焦。</p>
+  <center><img src="http://qiniucdn.bestxtech.com/mdl/010.png" alt="010"></center>
+
+  <center>图十</center>
+
+</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Maxim-DL/" rel="tag"># Maxim DL</a>
+          
+            <a href="/tags/MDL/" rel="tag"># MDL</a>
+          
+            <a href="/tags/天文摄影/" rel="tag"># 天文摄影</a>
+          
+            <a href="/tags/拍摄/" rel="tag"># 拍摄</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sgp/13.appendix_06/" rel="next" title="SGP初级使用教程 附录6：Lǒvの钟点工编写的SGP的调焦OFFSET设置">
+                <i class="fa fa-chevron-left"></i> SGP初级使用教程 附录6：Lǒvの钟点工编写的SGP的调焦OFFSET设置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/mdl/index/" rel="prev" title="Maxim DL(MDL)拍摄流程 目录">
+                Maxim DL(MDL)拍摄流程 目录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://bestxtech.com/wp-content/themes/NexT/statics/images/avatar.jpg" alt="Terry">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">不喜欢星空的程序猿不是好厨子</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">95</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://www.miitbeian.gov.cn" rel="noopener" target="_blank">沪ICP备16052040号-1 </a>&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'NFc63kU1QBVdljmdimx4m4yH-gzGzoHsz',
+    appKey: 'mPDe95SAhi8aU0eD2k9gVuRn',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+
+  //新增以下代码，可以移除.info下所有子节点。
+var infoEle = document.querySelector('#comments .info');
+if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+  infoEle.childNodes.forEach(function(item) {
+    item.parentNode.removeChild(item);
+  });
+}
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
