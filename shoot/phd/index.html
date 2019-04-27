@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-pi.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-pi.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-pi.png?v=7.0.1">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="安装好后打开，出现以下界面。  这是 PHD2 最常用的功能，下面将一一讲解。 一、设备连接设置，该功能将连接你的设备(含导星相机，赤道仪，AO)。按住 Shift 键点击该图标，将连接系统保存的，上次使用的设备。 点击该图标后，显示以下界面：  * 相机可以根据自己的设备类型来选择合适的驱动。  可以选择直连驱动如：QHY5-II/QHY5L-II/ZWO ASI Camera 等。  也可以">
+<meta name="keywords" content="天文摄影,拍摄,PHD Guiding,PHD,导星">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHD Guiding导星教程">
+<meta property="og:url" content="http://pi.bestxtech.com/shoot/phd/index.html">
+<meta property="og:site_name" content="星空π对">
+<meta property="og:description" content="安装好后打开，出现以下界面。  这是 PHD2 最常用的功能，下面将一一讲解。 一、设备连接设置，该功能将连接你的设备(含导星相机，赤道仪，AO)。按住 Shift 键点击该图标，将连接系统保存的，上次使用的设备。 点击该图标后，显示以下界面：  * 相机可以根据自己的设备类型来选择合适的驱动。  可以选择直连驱动如：QHY5-II/QHY5L-II/ZWO ASI Camera 等。  也可以">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/001.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/002.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/003.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/004.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/005.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/006.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/007.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/008.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/009.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/010.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/011.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/012.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/013.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/014.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/015.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/016.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/017.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/018.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/phd/019.png">
+<meta property="og:updated_time" content="2019-04-27T07:46:51.041Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHD Guiding导星教程">
+<meta name="twitter:description" content="安装好后打开，出现以下界面。  这是 PHD2 最常用的功能，下面将一一讲解。 一、设备连接设置，该功能将连接你的设备(含导星相机，赤道仪，AO)。按住 Shift 键点击该图标，将连接系统保存的，上次使用的设备。 点击该图标后，显示以下界面：  * 相机可以根据自己的设备类型来选择合适的驱动。  可以选择直连驱动如：QHY5-II/QHY5L-II/ZWO ASI Camera 等。  也可以">
+<meta name="twitter:image" content="http://qiniucdn.bestxtech.com/phd/001.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/shoot/phd/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>PHD Guiding导星教程 | 星空π对</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-1987602-8');
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!-- Google AdSense start -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3582293014438569",
+          enable_page_level_ads: true
+     });
+</script>
+  <!-- Google AdSense end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">星空π对</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">有关天文的那些事儿</p>
+      
+    
+    
+      <a>
+        <img class="custom-logo-image" src="/images/favicon-32x32-pi.png" alt="星空π对">
+      </a>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-pi">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-image"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-mdl">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/mdl/index/" rel="section"><i class="menu-item-icon fa fa-fw fa-magic"></i> <br>Maxim DL(MDL)教程</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sgp">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sgp/index/" rel="section"><i class="menu-item-icon fa fa-fw fa-magic"></i> <br>SGP教程</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-shoot">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/shoot/index/" rel="section"><i class="menu-item-icon fa fa-fw fa-camera"></i> <br>拍摄技巧</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/shoot/phd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="不喜欢星空的程序猿不是好厨子">
+      <meta itemprop="image" content="http://bestxtech.com/wp-content/themes/NexT/statics/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="星空π对">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHD Guiding导星教程
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <a href="/about/">Linkage</a>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-27 15:16:09" itemprop="dateCreated datePublished" datetime="2019-04-27T15:16:09+08:00">2019-04-27</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/shoot/phd/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/shoot/phd/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://qiniucdn.bestxtech.com/phd/001.png" alt="001"></p>
+<p>安装好后打开，出现以下界面。</p>
+<p><img src="http://qiniucdn.bestxtech.com/phd/002.png" alt="002"></p>
+<p><img src="http://qiniucdn.bestxtech.com/phd/003.png" alt="003"><br>这是 PHD2 最常用的功能，下面将一一讲解。</p>
+<h2 id="一、设备连接设置"><a href="#一、设备连接设置" class="headerlink" title="一、设备连接设置"></a>一、设备连接设置</h2><p><img src="http://qiniucdn.bestxtech.com/phd/004.png" alt="004">，该功能将连接你的设备(含导星相机，赤道仪，AO)。按住 Shift 键点击该图标，将连接系统保存的，上次使用的设备。</p>
+<p>点击该图标后，显示以下界面：</p>
+<p><img src="http://qiniucdn.bestxtech.com/phd/005.png" alt="005"></p>
+<h3 id="相机"><a href="#相机" class="headerlink" title="* 相机"></a>* 相机</h3><p>可以根据自己的设备类型来选择合适的驱动。</p>
+<ol>
+<li><p>可以选择直连驱动如：QHY5-II/QHY5L-II/ZWO ASI Camera 等。</p>
+</li>
+<li><p>也可以选择”ASCOM  Camera  Chooser”， 选择对应的导星相机ASCOM 驱动。</p>
+</li>
+<li><p>如果已经安装了导星相机(如:QHY5L-II)的 ASCOM 驱动，那么在此列表中会出现”CMOS QHY5LII Camera(ASCOM)”的选项。效果等同于 2。</p>
+</li>
+</ol>
+<p>注：此处 Simulator 为虚拟相机，仅供测试软件功能，正常使用时请勿选取。</p>
+<h3 id="赤道仪"><a href="#赤道仪" class="headerlink" title="* 赤道仪"></a>* 赤道仪</h3><p>根据赤道仪的不同，以及连接方法的不同，需要选择合适的设备。</p>
+<ol>
+<li><p>如果导星相机带有 ST-4 接口，并且你的导星线已经正确的连接相机 ST-4 接口和赤道仪上的 ST-4(或者 Guide)口，那么，可以选择“On-camera”即可。</p>
+</li>
+<li><p>如果导星相机没有 ST-4 接口，或者你希望使用串口进行导星。那么，请在此处选择”ASCOM Telescope Chooser”，选择对应的赤道仪 ASCOM 驱动。</p>
+</li>
+<li><p>如果已经安装了赤道仪的 ASCOM 驱动(如:iOptron 赤道仪)，那么在此列表中会出现”iOptron Telescope .NET ASCOM”字样(注：该名称会根据艾顿赤道仪 ascom 驱动的版本变化而变化，请仔细核对)</p>
+</li>
+<li><p>如果有多个软件需要共享连接赤道仪，必须选择 Generic Hub 或者 PothHub 方式，并且要在 Hub 设置中，正确的连接赤道仪。</p>
+</li>
+</ol>
+<h3 id="AO"><a href="#AO" class="headerlink" title="* AO"></a>* AO</h3><p>自适应光学设备，通常我们无需使用，选择“None”即可。</p>
+<p>全部正确选择后，可以分别点击右侧的“连接”按钮，或者点击下部的“连接所有设备”按钮进行设备的连接。</p>
+<p>正常连接后，软件下部状态栏会有相应字样显示：</p>
+<p><img src="http://qiniucdn.bestxtech.com/phd/006.png" alt="006"></p>
+<p>好了，设备连接完毕，现在可以开始找导星了。</p>
+<h2 id="二、导星"><a href="#二、导星" class="headerlink" title="二、导星"></a>二、导星</h2><p><img src="http://qiniucdn.bestxtech.com/phd/007.png" alt="007">，点击此按钮，可以让导星相机开始工作。会出现类似以下界面：</p>
+<p><img src="http://qiniucdn.bestxtech.com/phd/008.png" alt="008"></p>
+<ol>
+<li><p>若导星镜未与导星相机合焦，可以在此处利用该界面完成。</p>
+</li>
+<li><p>若未能找到星点，可以尝试增加曝光时间。 <img src="http://qiniucdn.bestxtech.com/phd/009.png" alt="009"></p>
+</li>
+<li><p>若觉得背景噪点过多，可以调整灰度显示(越往右侧， 背景越黑) 。</p>
+<p> <img src="http://qiniucdn.bestxtech.com/phd/010.png" alt="010"></p>
+</li>
+<li><p>若想停止该过程，可以停止。<img src="http://qiniucdn.bestxtech.com/phd/011.png" alt="011"></p>
+</li>
+</ol>
+<p>若一切就绪，可以准备下一步了。</p>
+<p>先在鼠标左键在界面上选择一个星点：</p>
+<p><img src="http://qiniucdn.bestxtech.com/phd/012.png" alt="012"></p>
+<p>选中星点后，<img src="http://qiniucdn.bestxtech.com/phd/013.png" alt="013">图标将变亮，点击即可开始导星。<br>若之前未校准过，PHD 将会自动开始校准(需要等待几分钟时间)，按住shift键点击该图标可以强制校准。校准时会出现类似以下界面：</p>
+<p><img src="http://qiniucdn.bestxtech.com/phd/014.png" alt="014"></p>
+<p>校准完毕后自动开始导星。若之前已校准，PHD 将会自动开始导星。将会出现以下类似界面：</p>
+<p><img src="http://qiniucdn.bestxtech.com/phd/015.png" alt="015"></p>
+<p>开始导星后，可以在软件顶部菜单的“查看”中，选择“显示图形”，“显示星点图”，“显示散点图”，将出现以下类似界面：</p>
+<p><img src="http://qiniucdn.bestxtech.com/phd/016.png" alt="016"></p>
+<p>开始导星以后，我们希望看到的导星曲线如下所示：(此功能可以使用菜单中的“查看”-&gt;“显示图形”来打开)</p>
+<p><img src="http://qiniucdn.bestxtech.com/phd/017.png" alt="017"></p>
+<p>有人会觉得显示的东西过多，看起来很凌乱，有点无从下手。下面，将详细解释：</p>
+<ol>
+<li><p>x:100 ： 此处可以选择图形的历史周期， 默认为 100 ， 可选为：</p>
+<p> 50/100/200/400，可以根据各人须要来选择。</p>
+</li>
+<li><p>y:+/-4：此处是图形中的 Y 坐标的范围值，默认为 4，可选为：1/2/4/8/16。</p>
+</li>
+<li><p>设置：此处可以选择坐标轴的内容，Y 轴坐标的类型(像素 或 角秒)，以及曲线颜色等。默认情况下是无法选择 Y 轴坐标为角秒的，须要在高级参数中设置后才能选择。</p>
+</li>
+<li><p>清除：用来清除历史数据，让图形重新开始。</p>
+</li>
+<li><p>趋势线：用来显示图形数据的趋势线，仅供参考。(通常无需显示)</p>
+</li>
+<li><p>修正：用来显示发送给赤道仪的命令，仅供参考。可选显示。</p>
+</li>
+<li><p>RMS：用来显示导星误差的均方根值。</p>
+<p> a. 通常来说，这个值应该越小越好。越小，表明越平滑，可以获得更好的导星效果。(注：该值有一定的下限，不能无限小，和使用的导星相机，导星镜的焦距，是否bin2x2 等有关)</p>
+<p> b. 通常来说，在极轴准确的情况下，赤纬的 RMS 相比赤经来说要小一些。原因是赤纬本身只是辅助修正，主要的修正在赤经上。若发现赤纬波动较大，应首先考虑极轴是否精准。</p>
+<p> c. 若设置了正确的导星相机参数以及导星镜焦距，将会同时显示角秒数据， 导星曲线是良好，应该以角秒数据来对比。</p>
+</li>
+<li><p>RA OSC：用来显示赤经导星曲线振荡。正常应该在 0.16～0.59 之间。</p>
+</li>
+<li><p>赤经：</p>
+<p> a. 修：修正强度，默认为 100%。若发现曲线过于波动，可以考虑减少该值。比如 50%</p>
+<p> b. 滞：导星数据参与计算度，默认为 10%。即之前导星数据的 10%将参与本次导星计算。该值适当调增/调减，可有利于平滑曲线。但须要结合a)一起使用，勿暴力使用。</p>
+<p> c. 侦测：侦测星点移动的像素，默认为 0.20 像素。若曲线波动过大，可以适当调低该数值。</p>
+</li>
+<li><p>赤纬</p>
+<p>a. Min Mo: 侦测星点移动的像素，默认为 0.20 像素。若曲线波动过大， 可以适当调低该数值。</p>
+</li>
+<li><p>赤道仪</p>
+<p>a. Max RA：赤经最大导星脉冲时间，默认为 1000 毫秒。通常可以无需改动。</p>
+<p>b. Max DEC：赤纬最大导星脉冲时间，默认为 1000 毫秒。因赤纬只是辅助导星，通常波动较小，在视宁度较差时，可以适当调低(如 50~200ms)， 降低赤纬波动。(此处需慎重，可能有反效果)</p>
+</li>
+<li><p>赤纬导星算法，默认为自动，可以选择“无”，“北向”，“南向”算法。通常使用自动即可。使用单轴可导星的赤道仪时，此处应选成“无”。</p>
+</li>
+<li><p>星点图</p>
+<p><img src="http://qiniucdn.bestxtech.com/phd/018.png" alt="018"></p>
+<p>显示星点的半波宽，是否移动等，仅供参考。</p>
+</li>
+<li><p>散点图</p>
+<p><img src="http://qiniucdn.bestxtech.com/phd/019.png" alt="019"></p>
+<p>显示导星数据的波动情况，点越聚拢，通常效果就越好。</p>
+<p>注意：默认单位为像素，须要转换为角秒值(须要在高级设置中配置)，才有和别人相比的意义。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/天文摄影/" rel="tag"># 天文摄影</a>
+          
+            <a href="/tags/拍摄/" rel="tag"># 拍摄</a>
+          
+            <a href="/tags/PHD-Guiding/" rel="tag"># PHD Guiding</a>
+          
+            <a href="/tags/PHD/" rel="tag"># PHD</a>
+          
+            <a href="/tags/导星/" rel="tag"># 导星</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/mdl/002/" rel="next" title="Maxim DL(MDL)拍摄流程（二） 拍摄流程">
+                <i class="fa fa-chevron-left"></i> Maxim DL(MDL)拍摄流程（二） 拍摄流程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://bestxtech.com/wp-content/themes/NexT/statics/images/avatar.jpg" alt="Terry">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">不喜欢星空的程序猿不是好厨子</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">96</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://www.miitbeian.gov.cn" rel="noopener" target="_blank">沪ICP备16052040号-1 </a>&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'NFc63kU1QBVdljmdimx4m4yH-gzGzoHsz',
+    appKey: 'mPDe95SAhi8aU0eD2k9gVuRn',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+
+  //新增以下代码，可以移除.info下所有子节点。
+var infoEle = document.querySelector('#comments .info');
+if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+  infoEle.childNodes.forEach(function(item) {
+    item.parentNode.removeChild(item);
+  });
+}
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
