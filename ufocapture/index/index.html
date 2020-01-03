@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-pi.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-pi.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-pi.png?v=7.0.1">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文档包含使用UFOCaptureHD2建立高清运动检测时移视频记录系统的分步指南。 有关详细信息，请参阅UFOCaptureHD2日语手册或UFOCaptueV2英文手册。 1. 高清夜空观测设备高清系统 标清系统  相机 高清(如: 1920x1080/60i )连续实时视频信号输出。 使用Windows PC兼容接口（例如HD-SDI，HDMI）。 ISO12800或更高（数码相机），或0.">
+<meta name="keywords" content="流星监控,UFOCaptureHD2,UFOCapture,流星">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UFOCaptureHD2 快速指南">
+<meta property="og:url" content="http://pi.bestxtech.com/ufocapture/index/index.html">
+<meta property="og:site_name" content="星空π对">
+<meta property="og:description" content="本文档包含使用UFOCaptureHD2建立高清运动检测时移视频记录系统的分步指南。 有关详细信息，请参阅UFOCaptureHD2日语手册或UFOCaptueV2英文手册。 1. 高清夜空观测设备高清系统 标清系统  相机 高清(如: 1920x1080/60i )连续实时视频信号输出。 使用Windows PC兼容接口（例如HD-SDI，HDMI）。 ISO12800或更高（数码相机），或0.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/0301C17C-FDDF-4230-9D77-2D9855F9E2C4.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/8B372730-1285-4E62-AF60-E36C549B1A61.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/1C8278D2-F853-47F4-B2F8-9811050F5004.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/224CD0D8-5841-45DF-972B-3CF99889C9FD.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/ABF7474F-A4F5-4A73-A135-A7533C1C46B8.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/D105465B-63E8-4B18-B6E8-BCC981FFF187.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/4092A0C5-5D96-4549-948D-6F0634DCA888.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/80ED4447-945A-4EF4-9240-1EB2FC86C80B.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/8FE5F623-A792-498F-A52F-7FDE28C1ED6E.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/84F960AA-C31E-41D5-B743-16BAE332C49D.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/B70EA775-6B2A-444D-A3D6-81EA8C4C8B62.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/65754F37-7138-4572-9E3B-F8D6B77F1E0A.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/91DD75AF-7A0B-4DB5-B277-0B8DD38EF811.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/D3EFC247-7062-4258-B7CF-C342AD6E8BB2.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/C23459F5-CEAF-4437-AF09-C42B4F7D9EDD.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/E48C9F79-5C5F-4499-8F16-5B0A8F9A333B.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/BF546526-706B-45A5-8CBC-4327E7E3A0F5.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/879E4216-8501-4466-9495-13019234D782.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/42FCCCF1-763E-4EB0-99A1-7044083EE77B.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/E0FF8F35-D7E8-44BE-AA35-45E41593A126.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/8E5924EA-21A3-422B-B1C4-B380329D75E6.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/BA8D363B-E233-47F4-A206-38739D90951F.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/C25F9156-6919-4EFF-B2CC-9B3F7CF5F001.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/66AC5BA6-6D93-4C3A-8467-9FCC04FD75B9.png">
+<meta property="og:image" content="http://qiniucdn.bestxtech.com/ufocapture/9B59CA5F-5065-4D1A-B64A-F8788DEDD3B9.png">
+<meta property="og:updated_time" content="2020-01-03T06:27:57.250Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UFOCaptureHD2 快速指南">
+<meta name="twitter:description" content="本文档包含使用UFOCaptureHD2建立高清运动检测时移视频记录系统的分步指南。 有关详细信息，请参阅UFOCaptureHD2日语手册或UFOCaptueV2英文手册。 1. 高清夜空观测设备高清系统 标清系统  相机 高清(如: 1920x1080/60i )连续实时视频信号输出。 使用Windows PC兼容接口（例如HD-SDI，HDMI）。 ISO12800或更高（数码相机），或0.">
+<meta name="twitter:image" content="http://qiniucdn.bestxtech.com/ufocapture/0301C17C-FDDF-4230-9D77-2D9855F9E2C4.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://pi.bestxtech.com/ufocapture/index/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>UFOCaptureHD2 快速指南 | 星空π对</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-1987602-8');
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <!-- Google AdSense start -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3582293014438569",
+          enable_page_level_ads: true
+     });
+</script>
+  <!-- Google AdSense end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">星空π对</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">有关天文的那些事儿</p>
+      
+    
+    
+      <a>
+        <img class="custom-logo-image" src="/images/favicon-32x32-pi.png" alt="星空π对">
+      </a>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-pi">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-image"></i> <br>PixInsight入门到精通</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-mdl">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/mdl/index/" rel="section"><i class="menu-item-icon fa fa-fw fa-magic"></i> <br>Maxim DL(MDL)教程</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sgp">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sgp/index/" rel="section"><i class="menu-item-icon fa fa-fw fa-magic"></i> <br>SGP教程</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-shoot">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/shoot/index/" rel="section"><i class="menu-item-icon fa fa-fw fa-camera"></i> <br>拍摄技巧</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-software">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/software/index/" rel="section"><i class="menu-item-icon fa fa-fw fa-camera"></i> <br>常用软件</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-ufocapture menu-item-active">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/ufocapture/index/" rel="section"><i class="menu-item-icon fa fa-fw fa-camera"></i> <br>流星监控(UFOCaptureHD2使用手册)</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pi.bestxtech.com/ufocapture/index/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry">
+      <meta itemprop="description" content="不喜欢星空的程序猿不是好厨子">
+      <meta itemprop="image" content="http://bestxtech.com/wp-content/themes/NexT/statics/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="星空π对">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">UFOCaptureHD2 快速指南
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <a href="/about/">Terry</a>
+              
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-03 00:00:00" itemprop="dateCreated datePublished" datetime="2020-01-03T00:00:00+08:00">2020-01-03</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/ufocapture/index/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/ufocapture/index/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/ufocapture/index/" class="leancloud_visitors" data-flag-title="UFOCaptureHD2 快速指南">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文档包含使用UFOCaptureHD2建立高清运动检测时移视频记录系统的分步指南。</p>
+<p>有关详细信息，请参阅UFOCaptureHD2日语手册或UFOCaptueV2英文手册。</p>
+<h2 id="1-高清夜空观测设备"><a href="#1-高清夜空观测设备" class="headerlink" title="1. 高清夜空观测设备"></a>1. 高清夜空观测设备</h2><p><img src="http://qiniucdn.bestxtech.com/ufocapture/0301C17C-FDDF-4230-9D77-2D9855F9E2C4.png" alt="0301C17C-FDDF-4230-9D77-2D9855F9E2"><br>高清系统</p>
+<p><img src="http://qiniucdn.bestxtech.com/ufocapture/8B372730-1285-4E62-AF60-E36C549B1A61.png" alt="8B372730-1285-4E62-AF60-E36C549B1A61"><br>标清系统</p>
+<ul>
+<li>相机<ul>
+<li>高清(如: 1920x1080/60i )连续实时视频信号输出。</li>
+<li>使用Windows PC兼容接口（例如HD-SDI，HDMI）。</li>
+<li>ISO12800或更高（数码相机），或0.01lux或更高的感光度（摄像机）。</li>
+<li>S/N 30db或更高。</li>
+<li>正常的固定快门速度和固定的帧率。</li>
+<li>不要使用慢速快门或帧堆叠相机。</li>
+</ul>
+</li>
+<li>镜头<ul>
+<li>为ISO12800装备F1.0或更大的光圈，1/60秒的快门。</li>
+<li>手动对焦或无限远景固定模式。</li>
+<li>*镜头不能太广（必须至少能够在视频上识别出2等星）。</li>
+</ul>
+</li>
+<li>相机支架和外壳。</li>
+<li>视频线<ul>
+<li>HDMI 线缆 &lt;= 5米.</li>
+<li>HD-SDI（75欧姆单同轴电缆）可以延长20m或更长。</li>
+</ul>
+</li>
+<li>Windows的未压缩高清视频捕获设备。<ul>
+<li>捕获设备不得使用mpeg或H264之类的压缩方式。</li>
+<li>与Windows Direct Show未压缩的视频捕获接口兼容。</li>
+</ul>
+</li>
+<li>无损编解码器程序（可选）<ul>
+<li>可以使用无损编解码器（检测后）进行编码，例如Huffyuv。</li>
+<li>它们能够将必要的带宽和存储大小减小到1/3。</li>
+</ul>
+</li>
+<li>电脑<ul>
+<li>Windows Xp/7/8、32/64位，任何语言版本。<ul>
+<li>UFOCaptureHD2与所有版本的Windows兼容，但请注意捕获设备。<ul>
+<li>大多数硬件制造商的设备驱动程序都具有Windows版本的依赖性。</li>
+<li>IEEE1394 SD捕获设备对所有Windows都具有完全兼容性，因为Windows中已包含它。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>4核及以上的多核CPU，大于等于2.0GHz的时钟频率。</li>
+<li>200 MB/秒的存储写入速度，用于未压缩的1920x1080/60i视频记录。<ul>
+<li>例如：4块7200转 SATA接口的机械硬盘并使用Raid0</li>
+<li>一段视频影像 (2秒，1080p，60帧/s )大约需要400MB存储空间，一晚大约需要150GB的可用存储空间。</li>
+</ul>
+</li>
+<li>使用Huffyuv编码，需要的录制速度约为70MB/秒。<ul>
+<li>例如：单块固态硬盘，或者两块机械硬盘做Raid0</li>
+<li>一段视频影像 (2秒，1080p，60帧/s )大约需要150MB的存储空间，一晚大约需要50GB的可用存储空间。</li>
+</ul>
+</li>
+<li>采集设备接口<ul>
+<li>用于HD-SDI或HDMI捕获设备的PCI-Ex x1总线（不建议使用USB3.0，尚有兼容性问题）。</li>
+<li>GigE，IEEE1394b：待确认。</li>
+<li>Thunderbolt：被期待</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>高清暗夜拍摄系统示例 @更新于2012年11月<ul>
+<li>相机：松下Panasonic DMC-GH3（ISO6400，l / 60s，即时取景模式1920x1080 / 60i HDMI输出，连续的HDMI即时取景输出需要通过释放电缆进行快门锁定）。</li>
+<li>镜头：Nokton 25毫米F0.95 4/3系统。</li>
+<li>转换器：BalckMagicDesign HDMI HD-SDI转换器。</li>
+<li>采集卡 : BlackMagicDesign Decklink SDI（PCI-EX x1）</li>
+<li>编解码器 : Huffyuv</li>
+<li>PC: Windows 8 64bit, Core i7 3770s, 240GB SATA6G-SSD</li>
+</ul>
+</li>
+<li>标清暗夜拍摄系统示例 @更新于2012年11月<ul>
+<li>相机&amp;镜头:<ul>
+<li>Watec 902H2 Ultimate（NTSC或PAL）+ CBC 8mm F0.8（二手市场）</li>
+<li>Watec 902H3 Ultimate（NTSC或PAL）+ FUJINON YV2.7x2.9LR4D-SA2</li>
+</ul>
+</li>
+<li>采集卡 : Canopus ADVC55(IEEE1394)</li>
+<li>PC: Windows 8 64bit, 大于2.0GHz的多核CPU , 7200转 2TB SATA 机械硬盘</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-设备测试"><a href="#2-设备测试" class="headerlink" title="2. 设备测试"></a>2. 设备测试</h2><ul>
+<li>请先进行设备测试。<ul>
+<li>安装设备驱动程序和采集卡的附加软件，并进行实际记录测试。</li>
+<li>确认存储的avi文件的配置：分辨率，帧速率和比特率。</li>
+<li>播放并确认是否能够平滑播放（不卡）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-下载UFOCaptureHD2"><a href="#3-下载UFOCaptureHD2" class="headerlink" title="3. 下载UFOCaptureHD2"></a>3. 下载UFOCaptureHD2</h2><ul>
+<li>官网地址 SonotaCo.com (<a href="http://sonotaco.com/soft/e_index.html" target="_blank" rel="noopener">http://sonotaco.com/soft/e_index.html</a>)</li>
+<li>右键打开下载好的 UFOHD2_xxx.zip文件属性，如果有下图这样的提示，点击这个按钮，否则可能无法打开这个文件。</li>
+</ul>
+<p><img src="http://qiniucdn.bestxtech.com/ufocapture/1C8278D2-F853-47F4-B2F8-9811050F5004.png" alt="1C8278D2-F853-47F4-B2F8-9811050F5004"></p>
+<h2 id="4-新建文件夹"><a href="#4-新建文件夹" class="headerlink" title="4. 新建文件夹"></a>4. 新建文件夹</h2><ul>
+<li>为UFO系列软件新建文件夹（推荐使用”C:\UFO “，当然，不一定非要是C盘）。<ul>
+<li>此目录的路径名中不得包含2个字节的字符。</li>
+<li>不得位于“桌面”或“用户”下。</li>
+<li>不应是驱动器根目录本身。</li>
+</ul>
+</li>
+<li>展开UFOHD2_xxx.zip软件包，并将UFOHD2目录放置到上面创建的UFO目录中。</li>
+<li>确认UFOHD2目录的内容，如图所示。</li>
+<li>为录像视频创建根目录（捕获的录像视频文件的根目录）<ul>
+<li>例如D:\HD-CAP，或者C:\SSD-CAP</li>
+<li>年、月、日子目录将由UFOCaptureHD2自动生成。</li>
+<li>所在的硬盘应具有足够的写入速度和可用空间（请参阅1.）。</li>
+<li>在运行UFOCaptureHD2时，其他程序或任务不应使用目录所在的硬盘。<ul>
+<li>例如：索引编制、自动备份、病毒扫描等都应禁用。</li>
+<li>Windows更新应设置为不自动安装，而只需发出更新通知即可。</li>
+</ul>
+</li>
+<li>不要将其他文件放在此目录下。手动创建的文件可能会引起不必要的麻烦。</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://qiniucdn.bestxtech.com/ufocapture/224CD0D8-5841-45DF-972B-3CF99889C9FD.png" alt="224CD0D8-5841-45DF-972B-3CF99889C9FD"></p>
+<h2 id="5-通过UFOHD2-REG-exe进行系统注册"><a href="#5-通过UFOHD2-REG-exe进行系统注册" class="headerlink" title="5. 通过UFOHD2_REG.exe进行系统注册"></a>5. 通过UFOHD2_REG.exe进行系统注册</h2><ul>
+<li>首先运行UFOHD2_REG.exe<ul>
+<li>UFOHD2_REG为Windows系统执行activeX模块注册。</li>
+<li>UFOCaptureHD2许可证注册可以同时进行。</li>
+<li>如果出现下图这样的UAC对话框，请按“Yes”。<br><img src="http://qiniucdn.bestxtech.com/ufocapture/ABF7474F-A4F5-4A73-A135-A7533C1C46B8.png" alt="ABF7474F-A4F5-4A73-A135-A7533C1C46B8"></li>
+</ul>
+</li>
+<li>确认”Module placement”部分(对话框的下半部分)正确指示了已安装目录中的模块。</li>
+<li>如果有，请输入UFOCaptureHD2序列号和许可证密钥，然后按注册按钮。<ul>
+<li>许可证注册可以稍后进行。<ul>
+<li>在“注册前”状态下，检测持续时间限制为30分钟。没有其他限制。</li>
+</ul>
+</li>
+<li>使用空白序列号注册会导致现有许可证的注销。<br><img src="http://qiniucdn.bestxtech.com/ufocapture/D105465B-63E8-4B18-B6E8-BCC981FFF187.png" alt="D105465B-63E8-4B18-B6E8-BCC981FFF187"></li>
+</ul>
+</li>
+<li>成功注册许可证后，你将收到如下图所示的“ —REGISTERED—”消息。<br><img src="http://qiniucdn.bestxtech.com/ufocapture/4092A0C5-5D96-4549-948D-6F0634DCA888.png" alt="4092A0C5-5D96-4549-948D-6F0634DCA888"></li>
+</ul>
+<h2 id="6-检查Windows设置"><a href="#6-检查Windows设置" class="headerlink" title="6. 检查Windows设置"></a>6. 检查Windows设置</h2><ul>
+<li>禁用硬盘自动关闭的设置！ （在所有Windows系统中这都是必不可少的）<ul>
+<li>控制面板-&gt;电源选项-&gt;更改计划设置-&gt;更改高级电源设置-&gt;硬盘-&gt;之后关闭硬盘-&gt;从不</li>
+</ul>
+</li>
+<li>禁用睡眠！<ul>
+<li>控制面板-&gt;电源选项-&gt;更改计划设置-&gt;更改高级电源设置-&gt;睡眠-&gt;之后睡眠-&gt;从不</li>
+</ul>
+</li>
+<li>停止一切可能会在后台使用存储目录所在硬盘的程序<ul>
+<li>检查索引编制、自动备份、病毒扫描或其他可能同时运行的程序，以免干扰UFOCaptureHD2存储硬盘的使用。</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-UFOCaptureHD2的初始设置"><a href="#7-UFOCaptureHD2的初始设置" class="headerlink" title="7. UFOCaptureHD2的初始设置"></a>7. UFOCaptureHD2的初始设置</h2><ul>
+<li>UFOCaptureHD2具有用于夜空高清观测的默认基本设置<ul>
+<li>对于标清格式，你可以在下面读取存储的预设文件。<ul>
+<li>NF640x480N.ufi – 夜间，640x480 NTSC</li>
+<li>NF720x480N.ufi – 夜间，720x480 NTSC</li>
+<li>NF720x480D.ufi – 白天，720x480 NTSC</li>
+<li>NF320x240D.ufi – 白天，320x240 NTSC</li>
+<li>PF720x576N.ufi – 夜间，720x576 PAL</li>
+<li>PH320x240D.ufi – 白天，320x240 PAL</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>初始基本设置<ul>
+<li>选择视频捕获设备（输入表中的视频组合框）<ul>
+<li>PC上已准备好视频采集设备的名称<ul>
+<li>事先连接并向采集设备提供视频信号，以在此处显示其名称。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>精确设置Xi、Yi、Fps<ul>
+<li>如果此设置不正确，则将在预览开始时显示“媒体类型不匹配(Media type not matched)”消息。</li>
+<li>注意格式名称并不总是显示正确的Fps，例如。 29.97和30.0 fps都称为60i或30p。检查并测试相机和采集设备的正确设置。</li>
+</ul>
+</li>
+<li>如果使用隔行视频格式（例如1920x1080 / 60i，NTSC，PAL），则将隔行复选框设置为ON。<ul>
+<li>一组f用于渐进式格式，例如1920x1080 / 30p，24p。</li>
+</ul>
+</li>
+<li>将捕获设备的“底场优先(Bottom Field First)”复选框设置为“ ON”，以使包含底部栅格的隔行扫描场作为时间上的前一个场。如果使用IEEE1394则此处应该为ON，而其他接口(如：USB接口等)应该为OFF。</li>
+<li>选择编解码器及其后缀。<ul>
+<li>对于UFOAnalyzer的后期处理，应使用AVI（未压缩）或无损编解码器以及后缀“ .avi”。</li>
+</ul>
+</li>
+<li>将视频录像的根目录设置到数据库表的数据库(DB)文本框中。</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://qiniucdn.bestxtech.com/ufocapture/80ED4447-945A-4EF4-9240-1EB2FC86C80B.png" alt="80ED4447-945A-4EF4-9240-1EB2FC86C80B"></p>
+<p><img src="http://qiniucdn.bestxtech.com/ufocapture/8FE5F623-A792-498F-A52F-7FDE28C1ED6E.png" alt="8FE5F623-A792-498F-A52F-7FDE28C1ED6E"></p>
+<h2 id="8-预览测试"><a href="#8-预览测试" class="headerlink" title="8. 预览测试"></a>8. 预览测试</h2><ul>
+<li>向系统提供视频信号，并在”实时显示(Live)”窗口上按“预览(Preview)”按钮，状态栏（窗口顶部）将从黄色变为浅蓝色，实时视频将显示下面的窗口中。<ul>
+<li>如果出现“媒体类型不匹配”消息，请检查Xi，Yi和Fps或视频编解码器选择。</li>
+<li>如果出现“无法运行图形”消息，请首先尝试使用AVI（未压缩）作为编解码器。</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://qiniucdn.bestxtech.com/ufocapture/84F960AA-C31E-41D5-B743-16BAE332C49D.png" alt="84F960AA-C31E-41D5-B743-16BAE332C49D"></p>
+<ul>
+<li>如果捕获设备具有可选输入，并且出现了仅带有附加文本的黑屏，请尝试通过设备名称右侧的下拉框更改输入配置的名称。</li>
+<li>如果捕获设备具有格式设置或其他独特控件，则在预览时按设备名称右侧的“设置”按钮对其进行调整。</li>
+</ul>
+<p><img src="http://qiniucdn.bestxtech.com/ufocapture/B70EA775-6B2A-444D-A3D6-81EA8C4C8B62.png" alt="B70EA775-6B2A-444D-A3D6-81EA8C4C8B62"></p>
+<p><img src="http://qiniucdn.bestxtech.com/ufocapture/65754F37-7138-4572-9E3B-F8D6B77F1E0A.png" alt="65754F37-7138-4572-9E3B-F8D6B77F1E0A"></p>
+<ul>
+<li>你可以在输入页的底部更改视频附加文本的设置，并在预览时查看其结果。<ul>
+<li>“视频附加文本”中可以使用以下特殊字符。<ul>
+<li>％T：日期和时间，例如“ 2005/12/31 23:59:59”</li>
+<li>％t：日期和时间，例如“ 31 / Dec / 2005 23:59:59”</li>
+<li>％M：毫秒的时间。</li>
+<li>％m：100毫秒的时间。</li>
+<li>％C：从检测开始的剪辑编号</li>
+<li>％F：帧号</li>
+<li>％L：检测尺寸，检测水平和检测标记</li>
+<li>％I：在“配置”页中配置的LocationID和CameraID</li>
+<li>％i：在“配置”页中配置的相机名称和镜头名称</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在Windows的任务管理器或资源监视器预览时检查CPU负载。<ul>
+<li>确认最大的线程负载不超过90％。</li>
+<li>如果一个核心/线程的CPU负载达到100％，则系统变得不稳定，即使平均CPU负载很低，也会存储损坏的视频文件。</li>
+</ul>
+</li>
+<li><p>按“实时显示(Live)”页面上的停止(Stop)按钮可停止预览。</p>
+<h2 id="9-录像测试"><a href="#9-录像测试" class="headerlink" title="9. 录像测试"></a>9. 录像测试</h2></li>
+<li><p>按“实时显示(Live)”页面上预览(Preview)按钮，再按录制(Rec)按钮以开始录制，此时状态栏将变为红色。</p>
+</li>
+</ul>
+<p><img src="http://qiniucdn.bestxtech.com/ufocapture/91DD75AF-7A0B-4DB5-B277-0B8DD38EF811.png" alt="91DD75AF-7A0B-4DB5-B277-0B8DD38EF811"></p>
+<ul>
+<li>按RecOff停止录制。</li>
+</ul>
+<p><img src="http://qiniucdn.bestxtech.com/ufocapture/D3EFC247-7062-4258-B7CF-C342AD6E8BB2.png" alt="D3EFC247-7062-4258-B7CF-C342AD6E8BB2"></p>
+<ul>
+<li>录制的视频剪辑将显示在数据库(DB)页面的剪辑列表中。</li>
+</ul>
+<p><img src="http://qiniucdn.bestxtech.com/ufocapture/C23459F5-CEAF-4437-AF09-C42B4F7D9EDD.png" alt="C23459F5-CEAF-4437-AF09-C42B4F7D9EDD"></p>
+<h2 id="10-回放测试"><a href="#10-回放测试" class="headerlink" title="10. 回放测试"></a>10. 回放测试</h2><ul>
+<li>在数据库页面的剪辑列表中，单击剪辑名称以选择一个剪辑。 然后，静止图像（峰值保持或快照）将显示在回放页面中。</li>
+<li>单击屏幕或“&gt;”按钮在“回放”页面上播放视频。</li>
+<li>检查视频是否流畅播放。<ul>
+<li>如果不流畅，请尝试按帧步进按钮“&gt;||” 确认是否记录了所有帧图像。<ul>
+<li>如果在录制中帧跳动或错过，请上面第一部分的内容确认存储写入速度。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="11-检测测试"><a href="#11-检测测试" class="headerlink" title="11. 检测测试"></a>11. 检测测试</h2><ul>
+<li>按下“实时显示(Live)”页面上的“检测(Detect)”按钮，状态栏将在几秒钟内变为蓝色，然后开始检测。</li>
+</ul>
+<p><img src="http://qiniucdn.bestxtech.com/ufocapture/E48C9F79-5C5F-4499-8F16-5B0A8F9A333B.png" alt="E48C9F79-5C5F-4499-8F16-5B0A8F9A333B"></p>
+<ul>
+<li>给画面做一些大的改变（例如盖镜头或在镜头中放一束光），此时状态栏将变为红色，并开始录制，而在停止上述改变后1秒钟录制将停止，并重新变回检测状态。</li>
+<li>按停止按钮，进入数据库(DB)页面并检查存储的视频剪辑。</li>
+</ul>
+<h2 id="12-视频录像剪辑的选择和删除"><a href="#12-视频录像剪辑的选择和删除" class="headerlink" title="12. 视频录像剪辑的选择和删除"></a>12. 视频录像剪辑的选择和删除</h2><ul>
+<li>视频剪辑应该是如下面的一组文件。如果使用剪辑列表的删除功能，具有相同时间id的文件都将被同时删除。<ul>
+<li>M * avi：在”输入”页面中配置了后缀的视频文件。</li>
+<li>M <em> P.jpg/bmp 或 M </em> S.jpg/bmp：峰值保持或快照静态图像。</li>
+<li>M * T.jpg：缩略图图像。</li>
+<li>M * M.bmp：地图文件（包含UFOAnalyzer的蒙版和平均亮度信息的图像）</li>
+<li>M * .xml：供UFOAnalyzer使用的配置信息文件。</li>
+</ul>
+</li>
+<li>在“数据库”页面按”Detele a clip”按钮，可以删除一个列表中高亮选择的视频剪辑文件。</li>
+<li>按”Delete Cs”按钮则会删除一个被勾选的视频剪辑文件。<ul>
+<li>“allCon”按钮可以一次性勾选所有文件。</li>
+<li>“allCoff”按钮可以一次性取消所有文件的勾选。</li>
+<li>“=Con”按钮会勾选所有文件名中带有“=”的视频剪辑 (使用定时触发录制的视频剪辑).</li>
+<li>“C on”按钮会勾选上高亮选择的剪辑，并高亮选择下一个视频剪辑。</li>
+<li>“C off”按钮会取消勾选高亮选择的剪辑，并高亮选择下一个视频剪辑。 </li>
+<li>“Next”按钮会高亮选择下一个视频剪辑 button to move selection to next clip.</li>
+<li>“Prev”按钮会高亮选择上一个视频剪辑。</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://qiniucdn.bestxtech.com/ufocapture/BF546526-706B-45A5-8CBC-4327E7E3A0F5.png" alt="BF546526-706B-45A5-8CBC-4327E7E3A0F5"></p>
+<hr>
+<blockquote>
+<ul>
+<li>基本设置和测试到此结束。</li>
+<li>单击窗口右上方的X按钮将UFOCaptureHD2关闭一次，以便将所有设置保存到UFOHD2目录中的“ Settings.ufi”文件中。</li>
+<li>现在，UFOCaptureHD2已准备好进行检测。</li>
+<li>但是，继续阅读步骤13-19，对于后续的观测非常重要。</li>
+<li>强烈建议完成所有步骤。</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="13-配置文件设置"><a href="#13-配置文件设置" class="headerlink" title="13. 配置文件设置"></a>13. 配置文件设置</h2><p><img src="http://qiniucdn.bestxtech.com/ufocapture/879E4216-8501-4466-9495-13019234D782.png" alt="879E4216-8501-4466-9495-13019234D782"></p>
+<ul>
+<li>“配置文件”页中的经纬度信息用于计算日出日落时间，并通过xml文件传递给后期分析流程。<ul>
+<li>观察者名称：任意字符，最大不超过32个。</li>
+<li>国家/地区代码：留空，或者使用ISO316601 alpha-2中定义的2个字母的国家/地区代码。</li>
+<li>位置ID：最大12字符，您观测设备所在位置的唯一标识符（在一个国家或地区应该是唯一的）。</li>
+<li>经度：WGS84系统(<a href="https://baike.baidu.com/item/WGS84)上的经度。" target="_blank" rel="noopener">https://baike.baidu.com/item/WGS84)上的经度。</a><ul>
+<li>使用浮点数表示，精确到小数点后4位（不要使用度分秒表示法）</li>
+<li>东方为正，西方为负。</li>
+</ul>
+</li>
+<li>纬度：WGS84系统(<a href="https://baike.baidu.com/item/WGS84)上的纬度。" target="_blank" rel="noopener">https://baike.baidu.com/item/WGS84)上的纬度。</a><ul>
+<li>使用浮点数表示，精确到小数点后4位（不要使用度分秒表示法）</li>
+<li>北方为正，南方为负。</li>
+</ul>
+</li>
+<li>海拔：海拔高度（米）。</li>
+<li>相机ID: 最大两个字符，需要保证在同一个观测点内该ID是唯一的。</li>
+<li>相机名称、镜头名称：最大20个字符，能被“输入(Input)”页的附加文本引用。</li>
+<li>采集卡名称：设置采集卡的名称</li>
+<li>备注 : 最大80个任意字符</li>
+</ul>
+</li>
+</ul>
+<h2 id="14-时间表设定"><a href="#14-时间表设定" class="headerlink" title="14. 时间表设定"></a>14. 时间表设定</h2><p><img src="http://qiniucdn.bestxtech.com/ufocapture/42FCCCF1-763E-4EB0-99A1-7044083EE77B.png" alt="42FCCCF1-763E-4EB0-99A1-7044083EE77B"></p>
+<ul>
+<li>通过选中“自动调整到太阳”复选框以及“操作(Operation)”页中“检测计划”部分的第二个复选框，检测将在夜间自动开始和停止。</li>
+<li>可以通过点击设置(Settings)按钮弹出的对话框，来检查当前的经纬度、日出日落时间是否准确，然后通过对话框下半部分来设置相对于日出日落时间的偏移量，软件将在日出日落时间上叠加相应的偏移量来执行启动和终止软件的检测。</li>
+</ul>
+<h2 id="15-区域遮罩设置"><a href="#15-区域遮罩设置" class="headerlink" title="15. 区域遮罩设置"></a>15. 区域遮罩设置</h2><ul>
+<li>如果在监视区域中有地景或其它干扰不希望被检测到其变化，则可以使用区域遮罩对其进行遮盖，从而将其从移动物体检测中排除。<ul>
+<li>这样即使在监测画面中出现地景变化时，也可以将其忽略（例如打开车窗灯）。</li>
+</ul>
+</li>
+<li>区域遮罩可以通过区域遮罩编辑器在实际FOV图像上进行编辑。<ul>
+<li>首先，点击“预览”按钮，当出现观测图像时，点击“停止”按钮，该图像将作为后续制作遮罩的参考背景。</li>
+<li>在视频触发(Video Trigger)部分，点击检测区域(Detect Area)旁边的编辑(Edit)按钮，打开区域遮罩编辑器。</li>
+<li>编辑器上有颜色和形状选择。</li>
+<li>在区域遮罩编辑器中，可以通过用“遮罩”部分（红色）涂抹“检测”部分（背景图像是可见的）来设置遮罩区域。</li>
+<li>在区域蒙版编辑器中，可以在“蒙版颜色”和“检测颜色”这两种颜色之间切换，切换矩形，直线，点的笔刷形状，并选择笔刷大小。 现在，用蒙版颜色填充不希望被检测的区域。</li>
+<li>另外，建议使用区域遮罩填充一些边缘区域，因为视频信号在左右两端可能不稳定，并且由于该部分的亮度差异，可能会不必要地触发闪烁检测。</li>
+<li>使用区域遮罩编辑器完成编辑后，请按保存按钮进行保存。 保存的文件名将显示在“检测区域(Detect Area)”后面的文本框中，后续检测时将使用这个遮罩。</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://qiniucdn.bestxtech.com/ufocapture/E0FF8F35-D7E8-44BE-AA35-45E41593A126.png" alt="E0FF8F35-D7E8-44BE-AA35-45E41593A126"></p>
+<ul>
+<li>以下是排除地景的区域遮罩的示例：可以通过选中左下角“预览(Preview)”选项的“区域”复选框在视频上叠加遮罩来检查区域遮罩的状态。（由于区域遮罩在录像时会被叠加到静态图像上，因此通常建议在遮罩调试完成以后，不要勾选“区域”复选框。此时遮罩虽不可见，但仍然生效）</li>
+</ul>
+<p><img src="http://qiniucdn.bestxtech.com/ufocapture/8E5924EA-21A3-422B-B1C4-B380329D75E6.png" alt="8E5924EA-21A3-422B-B1C4-B380329D75E6"></p>
+<h2 id="16-调整闪烁屏蔽"><a href="#16-调整闪烁屏蔽" class="headerlink" title="16. 调整闪烁屏蔽"></a>16. 调整闪烁屏蔽</h2><p><img src="http://qiniucdn.bestxtech.com/ufocapture/BA8D363B-E233-47F4-A206-38739D90951F.png" alt="BA8D363B-E233-47F4-A206-38739D90951F"></p>
+<ul>
+<li>闪烁遮罩的功能是通过从夜空中的视频中检测出星星图像并自动设置闪烁遮罩来显着提高夜空中移动物体的检测灵敏度。</li>
+<li>SMlevel是决定星点图像的检测灵敏度的参数，数值越大，则闪烁遮罩越小，数值越小，闪烁遮罩的数量越多。</li>
+<li>如果打开“预览”选项SMw，则可以在画面中以白点在屏幕上显示闪烁遮罩的状态。打开SMw并在有很多星星的晴朗夜晚进行调整。</li>
+<li>如果SMlevel的值太小，如下图左侧所示，即使像素灵敏度的微小差异也会被掩盖，并且将设置许多不必要的遮罩。</li>
+<li>调整SMlevel的值达到最佳状态，做到仅遮盖屏幕上的真实星点图像，如下图右侧所示。</li>
+<li>该闪烁遮罩的位置通过M * M.bmp文件传递到后续的分析处理程序，并用作提示以指示恒星的位置。</li>
+<li>闪烁遮罩处理可以检测在屏幕上几乎不可见的低亮度恒星，并通过对运动图像进行实时图像处理来识别其位置。</li>
+<li>通常，如果屏幕上约有20至30个星点遮罩，则可以进行足够准确的测量，以此作为调整SM等级的指南。</li>
+</ul>
+<h2 id="17-调整慢速物体遮罩"><a href="#17-调整慢速物体遮罩" class="headerlink" title="17. 调整慢速物体遮罩"></a>17. 调整慢速物体遮罩</h2><p><img src="http://qiniucdn.bestxtech.com/ufocapture/C25F9156-6919-4EFF-B2CC-9B3F7CF5F001.png" alt="C25F9156-6919-4EFF-B2CC-9B3F7CF5F001"></p>
+<ul>
+<li>慢速物体遮罩可以将缓慢移动并长时间停留在屏幕上的物体（例如飞机和人造卫星）从检测目标中排除，您可以指定移动速度和要遮盖区域的大小。根据实际观察的情况调整设置。<ul>
+<li>移动速度：在“像素/秒”字段中以像素/秒为单位设置移动速度的上限。<ul>
+<li>要设置的移动速度必须低于要捕获的目标的移动速度。</li>
+<li>经验表明，如果水平视场（FOVh）约为45度，且为SD标清视频（640至720像素宽度），则该值设为16；而1080p的HD高清视频则可设置为30至40</li>
+</ul>
+</li>
+<li>在SOsize字段中以像素为单位设置慢对象的蒙版大小。对于SD图像，建议大约16；对于HD图像，建议大约36。</li>
+</ul>
+</li>
+<li>如果选中Super Impose部分的Preview列中的SO复选框，则当慢速对象蒙版起作用时，将在屏幕上显示一个方形框，您可以看到慢速对象蒙版的状态。（调试好后请去掉勾选，因为它会大幅提高CPU的负载）</li>
+<li>慢速遮罩会减少飞机等的慢速物体的捕获，但并非所有飞机都可以忽略。<ul>
+<li>如果飞机以高速或短途飞行，视频中的速度可能会增加并且可能不会被掩盖。</li>
+<li>飞机识别灯的闪烁光束可能很大，如果大于遮罩尺寸，光线可能会从遮罩中突出出来，成为触发源。</li>
+</ul>
+</li>
+</ul>
+<h2 id="18-调整检测阈值"><a href="#18-调整检测阈值" class="headerlink" title="18. 调整检测阈值"></a>18. 调整检测阈值</h2><p><img src="http://qiniucdn.bestxtech.com/ufocapture/66AC5BA6-6D93-4C3A-8467-9FCC04FD75B9.png" alt="66AC5BA6-6D93-4C3A-8467-9FCC04FD75B9"></p>
+<ul>
+<li>如果在使用各种遮罩后，视频中亮度变化超过帧之间的“检测水平”的像素数大于视频中的“检测大小”，则UFOCaptureHD2确定运动对象是正常的。</li>
+<li>当在无人值守的情况下使用普通相机时，由于天气等因素的影响，相机的灵敏度（噪点）将发生显着变化，因此Detect Lev将自动确定何时打开检测水平噪声跟踪(Detect Level Noise Tracking)功能。</li>
+<li>因此，正常运动检测灵敏度会调整下图中红色圆圈所示的项目。目的是在不丢失要记录的对象的情况下，尽可能减少由于噪声等引起的异常触发采集</li>
+<li>UFOCaptureHD2有3个与视频触发相关的阈值参数。<ul>
+<li>1) 检测水平<ul>
+<li>“检测水平”是同一像素的两帧之间的亮度差值。</li>
+<li>在“帧移位(Frame Shift)”中设置“差异(Diff)”数</li>
+<li>用于“检测水平”比较的两个差异帧将从当前帧，及Diff指定的N帧之前各取一帧，进行比较。</li>
+<li>“检测水平”通常由“检测水平噪音跟踪”功能自动控制。<ul>
+<li>DLratio 110是默认值，表示检测水平= 1.1 *噪声水平。</li>
+<li>DLratio 105可用于非常灵敏的检测。</li>
+<li>MinDL是自动控制中设置分最低“检测水平”。<ul>
+<li>MinDL对于噪声极低的系统非常有效，以使“检测水平”不要太小。</li>
+</ul>
+</li>
+<li>MinL-N是“检测水平”和噪声水平之间的最小差。<ul>
+<li>MinL-N = 5（用于非常敏感的系统）。</li>
+<li>对于噪声非常高的系统，MinL-N = 10或更高，以避免触发过多。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2) 检测尺寸<ul>
+<li>“检测尺寸”是指变化程度大于“检测水平”的像素数。</li>
+<li>“检测尺寸”设为3是流星检测的标准灵敏度。</li>
+<li>“检测尺寸”设为2可用于流星检测，但可能会对噪声更加敏感。</li>
+<li>如果目的仅是TLE，那么50或更多将有效消除其他事件。</li>
+</ul>
+</li>
+<li>3) 变化持续的时间<ul>
+<li>Min（frm）是用于触发视频录制的连续变化帧数。<ul>
+<li>3是流星监测的典型值。</li>
+<li>2可用于TLE观察。</li>
+</ul>
+</li>
+<li>EXsize可以覆盖Min（frm）设置。<ul>
+<li>“检测大小”&gt;“ EXsize”的事件即使仅一帧，也将导致视频触发。</li>
+<li>这可以用于在正常的流星监测系统中，设置TLE例外。</li>
+<li>EXsize = 0 将会禁用这个例外设置。闪电闪光过多时，应将其设为0。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>有关正常FOV（非全景）且无噪声（S/N 30db或更高）系统的建议。<ul>
+<li>对于流星监测和TLE：检测大小= 3，最小（frm）= 2，EXsize = 50。</li>
+<li>仅适用于流星监测：检测大小= 2，最小（frm）= 2，EXsize = 0。</li>
+<li>仅适用于TLE：检测大小= 50，最小（frm）= 2，EXsize = 50。</li>
+</ul>
+</li>
+</ul>
+<h2 id="19-通过NightScheduler自动启动UFOCaptureHD2"><a href="#19-通过NightScheduler自动启动UFOCaptureHD2" class="headerlink" title="19. 通过NightScheduler自动启动UFOCaptureHD2"></a>19. 通过NightScheduler自动启动UFOCaptureHD2</h2><p><img src="http://qiniucdn.bestxtech.com/ufocapture/9B59CA5F-5065-4D1A-B64A-F8788DEDD3B9.png" alt="9B59CA5F-5065-4D1A-B64A-F8788DEDD3B9"></p>
+<ul>
+<li>NightScheduler是Windows上的一个由SonotaCo开发的程序启动器，可以用于设置相对于日出/日落时间的偏移时间。</li>
+<li>NightScheduler的下载地址：<a href="http://sonotaco.com/soft/download/NS001.ZIP" target="_blank" rel="noopener">http://sonotaco.com/soft/download/NS001.ZIP</a></li>
+<li>你可以使用NightScheduler在日落前后的相对偏移时间启动UFOCaptureHD2。</li>
+<li>NightScheduler还可有效避免Windows Vista的低优先级I/O特性。<ul>
+<li>低I/O优先级特性让通过Windows启动的程序的I/O（例如HDD写入）速度变得非常慢。</li>
+<li>因此，您不应将UFOCaptureHD2注册为Windows的启动程序，而应注册NightScheduler并由NightScheduler激活UFOCaptureHD2。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/流星监控/" rel="tag"># 流星监控</a>
+          
+            <a href="/tags/UFOCaptureHD2/" rel="tag"># UFOCaptureHD2</a>
+          
+            <a href="/tags/UFOCapture/" rel="tag"># UFOCapture</a>
+          
+            <a href="/tags/流星/" rel="tag"># 流星</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/software/index/" rel="next" title="常用软件">
+                <i class="fa fa-chevron-left"></i> 常用软件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://bestxtech.com/wp-content/themes/NexT/statics/images/avatar.jpg" alt="Terry">
+            
+              <p class="site-author-name" itemprop="name">Terry</p>
+              <p class="site-description motion-element" itemprop="description">不喜欢星空的程序猿不是好厨子</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">99</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://www.miitbeian.gov.cn" rel="noopener" target="_blank">沪ICP备16052040号-1 </a>&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'NFc63kU1QBVdljmdimx4m4yH-gzGzoHsz',
+    appKey: 'mPDe95SAhi8aU0eD2k9gVuRn',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true
+  });
+
+  //新增以下代码，可以移除.info下所有子节点。
+var infoEle = document.querySelector('#comments .info');
+if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+  infoEle.childNodes.forEach(function(item) {
+    item.parentNode.removeChild(item);
+  });
+}
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
