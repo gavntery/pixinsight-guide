@@ -550,6 +550,39 @@
       
 
       
+        
+          
+        
+        
+          <div>
+            <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+          </div>
+        
         <p>说明：原著本段是采用收费的PinPoint为解析工具，因为在国内估计不太会有人如此破费，所以改为了SGP最新版本推荐使用的PlateSolve2。</p>
 <p>PlateSolve2解析速度较快，但对于偏差稍大（1度左右）的照片解析效果不佳，和Pinpoint类似，故建议大家可以先使用TheSkyX或AT盲解减小误差后再回到SGP来。</p>
 <p>大家选择SGP最看重的就是它可以自动对准目标、校准、自动中天翻转，还可以傻瓜式地制定马赛克计划并执行，所有上述功能都依赖于解析。所谓解析，就是用程序对照片进行分析，找到照片上的星点，基于其收录的星图数据库分析这些星点在天空中的精确位置。当完成解析后，解析程序就会知道拍摄时望远镜指向了星空的哪个位置，以及相机的角度和分辨率 (即每个像素的角秒值，一般称为Scale，单位是arcsec/pixel或 ”/px)。</p>

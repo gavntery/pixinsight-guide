@@ -553,6 +553,39 @@
       
 
       
+        
+          
+        
+        
+          <div>
+            <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持是对我最大的鼓励</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Terry 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Terry 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+          </div>
+        
         <p><img src="http://qiniucdn.bestxtech.com/15398784006645/PI-1_Linear-1-0003.png" alt="PI-1_Linear-1-0003-w512"><br>我们重新打开这张NGC4536的线性明度图像，前面我们已经对其进行了反卷积处理。这张图在视频教程的第一章DVD与我们的网站上都可以找到。让我们接着上一节说下去。</p>
 <a id="more"></a>
 <p>当图像的线性明度部分经过反卷积，并且线性RGB部分经过色校准后，就应该进入非线性处理阶段了。但是在用ATrousWavelet或者MultiscaleMedianTransfer进行随意的降噪之前，线性降噪将是一个典型线性处理流程的最后一步。</p>
