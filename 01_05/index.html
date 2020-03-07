@@ -121,7 +121,7 @@
 <meta property="og:image" content="http://qiniucdn.bestxtech.com/15387487187610/PI-5_Primer-5-0184.png">
 <meta property="og:image" content="http://qiniucdn.bestxtech.com/15387487187610/PI-5_Primer-5-0186.png">
 <meta property="og:image" content="http://qiniucdn.bestxtech.com/15387487187610/PI-5_Primer-5-0187.png">
-<meta property="og:updated_time" content="2019-03-12T02:35:02.117Z">
+<meta property="og:updated_time" content="2020-03-07T08:24:06.219Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PixInsight入门到精通 第一章 基础知识 第五节 蒙版 &amp; 图像容器 &amp; 进程容器">
 <meta name="twitter:description" content="回来继续介绍蒙版(mask)和第四课介绍的明度蒙版（Luminance mask）的一个变形。">
@@ -601,7 +601,7 @@
 <p><img src="http://qiniucdn.bestxtech.com/15387487187610/PI-5_Primer-5-0172.png" alt="PI-5_Primer-5-0172-w512"><br>满意之后，把范围选择进程(RangeSelection) 直接应用在图像上，这样我们就得到了蒙版。</p>
 <p><img src="http://qiniucdn.bestxtech.com/15387487187610/PI-5_Primer-5-0171.png" alt="PI-5_Primer-5-0171-w512"><br>还记得怎么使用蒙版吗？选定你的图像，选择蒙版。你在这里可以根据你的需要选择反转蒙版。就这么简单。记住，你可以选择显示或者隐藏它，启用或者不启用它反转他，移除它。只要蒙版图像保持打开，你可以反复用它。</p>
 <p><img src="http://qiniucdn.bestxtech.com/15387487187610/PI-5_Primer-5-0173.png" alt="PI-5_Primer-5-0173-w512"><br>你也可以用范围（RangeSelection）选择创建星点(star mask),处理星点有一个专门的工具，叫做星点蒙版(StarMask)。和许多PI进程一样，用默认的参数效果就挺好。要包含亮星，我经常把默认的Scale参数提升到8。这里有很多参数可以慢慢试验，但是他们都有很好的说明。再强调一遍，每一个进程把鼠标放在参数上都能看到相应的说明。</p>
-<p><img src="http://qiniucdn.bestxtech.com/15387487187610/PI-5_Primer-5-0174.png" alt="PI-5_Primer-5-0174-w512"><br>这里有一个很好的小技巧来评估星点蒙版好不好。让图像和相应的蒙版缩放比例一致，然后把蒙版直接拖到图像上并别放来鼠标，蒙版保持半透明状态，能够让你看清蒙版是不是包含了下面的所有星点。</p>
+<p><img src="http://qiniucdn.bestxtech.com/15387487187610/PI-5_Primer-5-0174.png" alt="PI-5_Primer-5-0174-w512"><br>这里有一个很好的小技巧来评估星点蒙版好不好。让图像和相应的蒙版缩放比例一致，然后把蒙版直接拖到图像上，此时，不放开鼠标，并来回拖移蒙板图像，蒙版会保持半透明状态，能够让你看清蒙版是不是包含了下面的所有星点。</p>
 <p><img src="http://qiniucdn.bestxtech.com/15387487187610/PI-5_Primer-5-0175.png" alt="PI-5_Primer-5-0175-w512"><br>最后是内置蒙版，我们会在介绍ACDNR (Adaptive Contrast-Driven Noise Reduction)的时候接触到一个。我们在整个系列中不停地建立和介绍蒙版。</p>
 <p>目前为止，我们介绍了把单一的进程应用在单一的图像上。当我们介绍预处理的时候，我们会利用几个不同的进程来批量处理图像。</p>
 <p><img src="http://qiniucdn.bestxtech.com/15387487187610/PI-5_Primer-5-0176.png" alt="PI-5_Primer-5-0176-w512"><br>但是，对其它进程和图像，PI有ImageContainer（图像容器）和ProcessContainer（进程容器）。 </p>
